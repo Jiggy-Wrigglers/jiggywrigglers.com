@@ -23,6 +23,24 @@
     color: var(--white);
 }
 
+.footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.footer-text h2 {
+    font-size: var(--font-size-h3);
+    color: var(--white);
+}
+
+.footer-text h3,
+.footer-text h4,
+.footer-text h5,
+.footer-text h6 {
+    color: var(--white);
+}
+
 .footer-text p,
 .footer-text a,
 .footer-text li {
@@ -47,7 +65,7 @@
 .footer-copyright {
     background: var(--white);
     padding: var(--space-4) 0;
-    text-align: center;
+    text-align: left;
 }
 
 .footer-copyright a {

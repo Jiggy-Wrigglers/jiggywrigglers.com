@@ -76,7 +76,7 @@ $footer_4_button_2  = get_field( 'footer_4_button_2', 'option' );
 
 <div class="footer-copyright">
     <div class="wrap">
-        <a href="https://www.modcommslimited.com/privacypolicy.php">Copyright Jiggy Wrigglers Ltd</a>
+        <a href="https://www.modcommslimited.com/privacypolicy.php">&copy; Copyright Jiggy Wrigglers Ltd</a>
     </div>
 </div>
 
