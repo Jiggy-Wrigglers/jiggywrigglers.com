@@ -23,6 +23,7 @@ jobs:
             git reset --hard origin/main
             git clean -fd
             echo "Deployed: $(date)"
+
       - name: Purge Cloudflare cache
         continue-on-error: true
         run: curl -s "${{ secrets.SWCFPC_PURGE_URL }}" -o /dev/null
