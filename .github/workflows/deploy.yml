@@ -18,7 +18,7 @@ jobs:
           script: |
             set -e
             cd /home/jiggywrigglers/jiggywrigglers.on-forge.com/public/wp-content/themes/jiggy-wrigglers-theme
-            git remote set-url origin git@github.com:DanielThresher0/jiggywrigglers.com.git
+            git remote set-url origin git@github.com:Jiggy-Wrigglers/jiggywrigglers.com.git
             git fetch origin
             git reset --hard origin/main
             git clean -fd
