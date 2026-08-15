@@ -1,0 +1,74 @@
+/* Footer CSS file */
+/* ------------------------------------------------- */
+
+.footer {
+    background: var(--blue);
+    color: var(--white);
+    padding: var(--space-9) 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: var(--space-7);
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.footer h3 {
+    color: var(--white);
+}
+
+.footer-text p,
+.footer-text a,
+.footer-text li {
+    color: var(--white);
+}
+
+.footer-menu li + li {
+    margin-top: var(--space-2);
+}
+
+.footer-menu a {
+    color: var(--white);
+}
+
+.footer-menu a:hover {
+    color: var(--yellow);
+}
+
+/* Copyright Bar */
+/* ------------------------------------------------- */
+
+.footer-copyright {
+    background: var(--white);
+    padding: var(--space-4) 0;
+    text-align: center;
+}
+
+.footer-copyright a {
+    color: var(--purple);
+}
+
+.footer-copyright a:hover {
+    color: var(--orange);
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}

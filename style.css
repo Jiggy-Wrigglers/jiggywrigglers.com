@@ -4,7 +4,7 @@ Theme URI: https://jiggywrigglers.com
 Author: Jiggy Wrigglers
 Author URI: https://jiggywrigglers.com
 Description: Welcome to Jiggy Wrigglers, award-winning, pay-as-you-go, music, movement and sensory developmental classes for babies, toddlers and preschoolers. Our classes opened in 2008 and today we are one of the leading baby and pre-school development providers in the UK. Jiggy Wrigglers Children music classes also offer sensory and development support we offer an engaging combination of upbeat music, dance and creative toddler activities, designed to stimulate and entertain adults and children.
-Version: 2.1.0
+Version: 2.2.0
 Requires PHP: 7.4+
 Text Domain: jiggywrigglers
 License: GNU General Public License v2 or later
@@ -12,24 +12,471 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 :root {
+    /* Colours */
+    --orange: #FA8334;
+    --purple: #662483;
+    --blue: #43B3D9;
+    --pink: #FF4D80;
+    --yellow: #F6EE2D;
+    --peach: #F6E8EA;
     --white: #fff;
     --black: #000;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: clamp(16px, 2.4vw, 24px);
+    --space-6: clamp(20px, 3.2vw, 32px);
+    --space-7: clamp(28px, 4.8vw, 48px);
+    --space-8: clamp(36px, 6.4vw, 64px);
+    --space-9: clamp(44px, 8vw, 80px);
+    --space-10: clamp(56px, 12vw, 120px);
+    --space-11: clamp(72px, 16vw, 160px);
+    --space-12: clamp(96px, 24vw, 240px);
+
+    /* Animation */
+    --animation-duration: 0.8s;
+    --animation-easing: cubic-bezier(0, 0, 0.2, 1);
+    --animation-distance: 60px;
+    --animation-scale: 0.95;
+    --animation-delay-step: 0.1s;
+
+    /* Typography */
+    --font-heading: 'M PLUS Rounded 1c', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+
+    --font-size-12: 12px;
+    --font-size-14: 14px;
+    --font-size-16: 16px;
+
+    --font-size-h1: clamp(38px, 6vw, 72px);
+    --font-size-h2: clamp(32px, 5vw, 56px);
+    --font-size-h3: clamp(26px, 4vw, 42px);
+    --font-size-h4: clamp(22px, 3.2vw, 32px);
+    --font-size-h5: clamp(19px, 2.4vw, 26px);
+    --font-size-h6: clamp(17px, 2vw, 20px);
+    --font-size-body: clamp(15px, 1.1vw, 17px);
 }
 
 html {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+    color: var(--black);
+    background: var(--white);
 }
 
 .wrap {
     max-width: 1440px;
     margin: auto;
     width: 90vw;
+}
+
+/* Element Defaults */
+/* ------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6, p, a, ul, ol, span, ul li, ol li {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--black);
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+}
+
+h4 {
+    font-size: var(--font-size-h4);
+}
+
+h5 {
+    font-size: var(--font-size-h5);
+}
+
+h6 {
+    font-size: var(--font-size-h6);
+}
+
+p, a {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--black);
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--purple);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Typography Utilities */
+/* ------------------------------------------------- */
+
+.heading-1 {
+    font-size: var(--font-size-h1);
+    line-height: 1.2;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--black);
+}
+
+.heading-2 {
+    font-size: var(--font-size-h2);
+    line-height: 1.2;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--black);
+}
+
+.heading-3 {
+    font-size: var(--font-size-h3);
+    line-height: 1.2;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--black);
+}
+
+.heading-4 {
+    font-size: var(--font-size-h4);
+    line-height: 1.2;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--black);
+}
+
+.heading-5 {
+    font-size: var(--font-size-h5);
+    line-height: 1.2;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--black);
+}
+
+.heading-6 {
+    font-size: var(--font-size-h6);
+    line-height: 1.2;
+    font-weight: 500;
+    font-family: var(--font-heading);
+    color: var(--black);
+}
+
+.body-medium, p, a {
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--black);
+}
+
+.content-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+/* Buttons */
+/* ------------------------------------------------- */
+
+.button,
+a.button,
+span.button,
+button.button {
+    background: var(--purple);
+    border-radius: 6px;
+    padding: 10px 15px;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-family: inherit;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    transition: ease 0.4s;
+    cursor: pointer;
+    border: solid 2px var(--purple);
+}
+
+.button:hover,
+a.button:hover,
+span.button:hover,
+button.button:hover {
+    background: transparent;
+    color: var(--purple);
+}
+
+.button-blue,
+a.button-blue,
+span.button-blue,
+button.button-blue {
+    background: var(--blue);
+    border-color: var(--blue);
+}
+
+.button-blue:hover,
+a.button-blue:hover,
+span.button-blue:hover,
+button.button-blue:hover {
+    background: transparent;
+    color: var(--blue);
+}
+
+.button-pink,
+a.button-pink,
+span.button-pink,
+button.button-pink {
+    background: var(--pink);
+    border-color: var(--pink);
+}
+
+.button-pink:hover,
+a.button-pink:hover,
+span.button-pink:hover,
+button.button-pink:hover {
+    background: transparent;
+    color: var(--pink);
+}
+
+.button-purple,
+a.button-purple,
+span.button-purple,
+button.button-purple {
+    background: var(--purple);
+    border-color: var(--purple);
+}
+
+.button-purple:hover,
+a.button-purple:hover,
+span.button-purple:hover,
+button.button-purple:hover {
+    background: transparent;
+    color: var(--purple);
+}
+
+.button-orange,
+a.button-orange,
+span.button-orange,
+button.button-orange {
+    background: var(--orange);
+    border-color: var(--orange);
+}
+
+.button-orange:hover,
+a.button-orange:hover,
+span.button-orange:hover,
+button.button-orange:hover {
+    background: transparent;
+    color: var(--orange);
+}
+
+.button-yellow,
+a.button-yellow,
+span.button-yellow,
+button.button-yellow {
+    background: var(--yellow);
+    border-color: var(--yellow);
+    color: var(--black);
+}
+
+.button-yellow:hover,
+a.button-yellow:hover,
+span.button-yellow:hover,
+button.button-yellow:hover {
+    background: transparent;
+    color: var(--black);
+}
+
+.button-peach,
+a.button-peach,
+span.button-peach,
+button.button-peach {
+    background: var(--peach);
+    border-color: var(--peach);
+    color: var(--black);
+}
+
+.button-peach:hover,
+a.button-peach:hover,
+span.button-peach:hover,
+button.button-peach:hover {
+    background: transparent;
+    color: var(--black);
+}
+
+/* Scroll Animation */
+/* ------------------------------------------------- */
+
+[data-animate] {
+    opacity: 0;
+}
+
+[data-animate="fade-up"] {
+    transform: translateY(var(--animation-distance));
+    will-change: opacity, transform;
+}
+
+[data-animate="fade-in"] {
+    will-change: opacity;
+}
+
+[data-animate="fade-left"] {
+    transform: translateX(calc(var(--animation-distance) * -1));
+    will-change: opacity, transform;
+}
+
+[data-animate="fade-right"] {
+    transform: translateX(var(--animation-distance));
+    will-change: opacity, transform;
+}
+
+[data-animate="scale-up"] {
+    transform: scale(var(--animation-scale));
+    will-change: opacity, transform;
+}
+
+[data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+    transition: opacity var(--animation-duration) var(--animation-easing), transform var(--animation-duration) var(--animation-easing);
+}
+
+[data-animate="fade-in"].is-visible {
+    transform: none;
+}
+
+[data-animate-delay="1"] { transition-delay: calc(var(--animation-delay-step) * 1); }
+[data-animate-delay="2"] { transition-delay: calc(var(--animation-delay-step) * 2); }
+[data-animate-delay="3"] { transition-delay: calc(var(--animation-delay-step) * 3); }
+[data-animate-delay="4"] { transition-delay: calc(var(--animation-delay-step) * 4); }
+[data-animate-delay="5"] { transition-delay: calc(var(--animation-delay-step) * 5); }
+[data-animate-delay="6"] { transition-delay: calc(var(--animation-delay-step) * 6); }
+
+[data-parallax] {
+    will-change: transform;
+}
+
+/* Pagination */
+/* ------------------------------------------------- */
+
+.pagination {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-7);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.pagination-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.pagination-pages {
+    display: flex;
+    gap: var(--space-1);
+}
+
+.pagination-btn {
+    padding: var(--space-2) var(--space-4);
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: var(--black);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-size-14);
+    font-weight: 400;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled):not(.is-disabled) {
+    border-color: var(--purple);
+    color: var(--purple);
+}
+
+.pagination-btn:disabled,
+.pagination-btn.is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-page {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: var(--black);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-size-14);
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pagination-page:hover {
+    border-color: var(--purple);
+    color: var(--purple);
+}
+
+.pagination-page.is-active {
+    background: var(--purple);
+    color: var(--white);
+    border-color: var(--purple);
+}
+
+.pagination-info {
+    color: rgba(0, 0, 0, 0.55);
+    font-size: var(--font-size-14);
 }

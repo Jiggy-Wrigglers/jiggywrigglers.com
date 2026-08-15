@@ -1,0 +1,320 @@
+/* Single Product CSS file */
+/* ------------------------------------------------- */
+
+.product-content {
+    padding: calc(var(--space-9) * 2) 0 var(--space-11);
+}
+
+.product-content .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+/* SureCart Brand Overrides */
+/* ------------------------------------------------- */
+
+.product-content {
+    --sc-color-primary-500: var(--black);
+    --sc-color-primary: var(--black);
+    --sc-color-primary-hover: rgba(0, 0, 0, 0.8);
+    --sc-color-primary-text: var(--white);
+    --sc-focus-ring-color-primary: var(--black);
+    --sc-input-border-color-focus: var(--black);
+    --sc-color-gray-900: var(--black);
+    --sc-color-gray-800: rgba(0, 0, 0, 0.9);
+    --sc-color-gray-700: rgba(0, 0, 0, 0.8);
+    --sc-color-gray-600: rgba(0, 0, 0, 0.7);
+    --sc-color-gray-500: rgba(0, 0, 0, 0.55);
+    --sc-color-gray-400: rgba(0, 0, 0, 0.4);
+    --sc-color-gray-300: rgba(0, 0, 0, 0.28);
+    --sc-color-gray-200: rgba(0, 0, 0, 0.16);
+    --sc-color-gray-100: rgba(0, 0, 0, 0.08);
+    --sc-color-gray-50: rgba(0, 0, 0, 0.04);
+    --sc-input-border-color: rgba(0, 0, 0, 0.16);
+    --sc-input-background-color: var(--white);
+    --sc-input-color: var(--black);
+    --sc-font-family: "Open Sans", sans-serif;
+    --sc-headings-font-family: "M PLUS Rounded 1c", sans-serif;
+    --sc-line-height-base: 1.6;
+    --sc-font-size-base: 16px;
+    --sc-font-weight: 400;
+    --sc-border-radius: 0;
+}
+
+/* Product Title */
+/* ------------------------------------------------- */
+
+.product-content h1.wp-block-surecart-product-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 5.6vw, 40px);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--black);
+}
+
+/* Product Price */
+/* ------------------------------------------------- */
+
+.product-content .wp-block-surecart-product-selected-price-amount {
+    font-size: clamp(22px, 2.8vw, 28px);
+    font-weight: 600;
+    color: var(--black);
+}
+
+/* Product Description */
+/* ------------------------------------------------- */
+
+.product-content .wp-block-surecart-product-description {
+    color: rgba(0, 0, 0, 0.7);
+    font-family: var(--font-body);
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.product-content .wp-block-surecart-product-description p {
+    margin-bottom: var(--space-3);
+}
+
+/* Typography */
+/* ------------------------------------------------- */
+
+.product-content h2,
+.product-content h3,
+.product-content h4,
+.product-content h5,
+.product-content h6 {
+    font-family: var(--font-heading);
+}
+
+.product-content p {
+    font-family: var(--font-body);
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Buy Buttons */
+/* ------------------------------------------------- */
+
+.product-content .wp-block-surecart-product-buy-buttons {
+    margin-top: var(--space-5);
+    gap: var(--space-3);
+}
+
+.product-content .wp-block-button__link.sc-button__link {
+    font-family: var(--font-body);
+    font-size: var(--font-size-14);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 0;
+    border: 1px solid var(--black);
+    background: var(--black);
+    color: var(--white);
+    transition: background 0.3s ease, color 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.product-content .wp-block-button__link.sc-button__link:hover {
+    background: transparent;
+    color: var(--black);
+}
+
+.product-content .wp-block-button__link.sc-button__link:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.product-content .is-style-outline--3 .wp-block-button__link.sc-button__link {
+    background: transparent;
+    color: var(--black);
+}
+
+.product-content .is-style-outline--3 .wp-block-button__link.sc-button__link:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.product-content .sc-button__link .sc-spinner {
+    display: none;
+}
+
+/* Variant Pills */
+/* ------------------------------------------------- */
+
+.product-content .sc-pill-option__button {
+    font-family: var(--font-body);
+    font-size: var(--font-size-14);
+    font-weight: 400;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 0;
+    background: var(--white);
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.product-content .sc-pill-option__button:hover {
+    border-color: var(--black);
+    color: var(--black);
+}
+
+.product-content .sc-pill-option__button--selected {
+    border-color: var(--black);
+    background: var(--black);
+    color: var(--white);
+}
+
+.product-content .sc-pill-option__button--selected:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(0, 0, 0, 0.8);
+    color: var(--white);
+}
+
+/* Quantity Input */
+/* ------------------------------------------------- */
+
+.product-content .sc-form-label {
+    font-family: var(--font-body);
+    font-size: var(--font-size-14);
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: var(--space-2);
+}
+
+.product-content .sc-form-control {
+    font-family: var(--font-body);
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 0;
+    color: var(--black);
+    background: var(--white);
+}
+
+.product-content .sc-form-control:focus {
+    outline: none;
+    border-color: var(--black);
+}
+
+/* Image Gallery */
+/* ------------------------------------------------- */
+
+.product-content .wp-block-surecart-product-media img {
+    border-radius: 0;
+}
+
+.product-content .sc-image-slider__thumbs img {
+    border-radius: 0;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.product-content .swiper-slide-thumb-active img {
+    border-color: var(--black);
+}
+
+/* Sale Badge */
+/* ------------------------------------------------- */
+
+.product-content .wp-block-surecart-product-sale-badge {
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-size: var(--font-size-12);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Related Products */
+/* ------------------------------------------------- */
+
+.product-content .wp-block-surecart-product-list-related {
+    margin-top: var(--space-10);
+}
+
+.product-content .wp-block-surecart-product-list-related h3.wp-block-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--black);
+}
+
+.product-content .wp-block-surecart-product-pagination a {
+    border-color: rgba(0, 0, 0, 0.28) !important;
+    border-radius: 0 !important;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.product-content .wp-block-surecart-product-pagination a:hover {
+    border-color: var(--black) !important;
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.product-content .sc-product-item > form > a {
+    text-decoration: none;
+}
+
+.product-content .sc-product-item .wp-block-group.has-border-color {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    border-radius: 0 !important;
+    transition: transform 0.3s ease;
+}
+
+.product-content .sc-product-item:hover .wp-block-group.has-border-color {
+    transform: translateY(-4px);
+}
+
+.product-content .sc-product-item .wp-block-cover {
+    border-radius: 0 !important;
+    aspect-ratio: 5/3;
+}
+
+.product-content .sc-product-item .wp-block-cover img {
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.product-content .sc-product-item:hover .wp-block-cover img {
+    transform: scale(1.05);
+}
+
+.product-content .sc-product-item h2.wp-block-surecart-product-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-16) !important;
+    font-weight: 500 !important;
+    color: var(--black);
+    margin: 0 !important;
+}
+
+.product-content .sc-product-item .wp-block-surecart-product-list-price {
+    font-family: var(--font-body);
+    font-size: var(--font-size-14) !important;
+    font-weight: 400 !important;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 650px) {
+    .product-content {
+        padding: var(--space-5) 0 var(--space-8);
+    }
+
+    .product-content .wrap {
+        padding: 0 var(--space-4);
+    }
+
+    .product-content .sc-product-template-columns-3 {
+        grid-template-columns: 1fr !important;
+    }
+}

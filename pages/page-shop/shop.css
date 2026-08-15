@@ -1,0 +1,294 @@
+/* Shop Listing CSS file */
+/* ------------------------------------------------- */
+
+.shop-listing {
+    padding: var(--space-11) 0;
+}
+
+.shop-listing-header {
+    max-width: 1080px;
+    margin: 0 0 var(--space-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.shop-listing-header .heading-2 {
+    color: var(--black);
+}
+
+.shop-listing-header .body-medium {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Search Row */
+/* ------------------------------------------------- */
+
+.shop-listing-search-row {
+    display: flex;
+    gap: var(--space-4);
+    align-items: stretch;
+}
+
+.shop-listing-search {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.shop-listing-search svg {
+    position: absolute;
+    left: var(--space-4);
+    pointer-events: none;
+}
+
+.shop-listing-search input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + var(--space-8));
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    font-family: inherit;
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--black);
+    background: var(--white);
+    transition: border-color 0.3s ease;
+}
+
+.shop-listing-search input::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.shop-listing-search input:focus {
+    outline: none;
+    border-color: var(--black);
+}
+
+.shop-listing-sort select {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    font-family: inherit;
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--black);
+    background: var(--white);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-3) center;
+    padding-right: calc(var(--space-3) + var(--space-5));
+}
+
+.shop-listing-sort select:focus {
+    outline: none;
+    border-color: var(--black);
+}
+
+/* Count */
+/* ------------------------------------------------- */
+
+.shop-listing-count {
+    color: rgba(0, 0, 0, 0.55);
+    font-size: var(--font-size-14);
+    font-weight: 400;
+    margin-bottom: var(--space-5);
+}
+
+/* Grid */
+/* ------------------------------------------------- */
+
+.shop-listing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+}
+
+.shop-listing-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.shop-listing-card:hover {
+    transform: translateY(-4px);
+}
+
+.shop-listing-card-image {
+    aspect-ratio: 5/3;
+    overflow: hidden;
+}
+
+.shop-listing-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.shop-listing-card:hover .shop-listing-card-image img {
+    transform: scale(1.05);
+}
+
+.shop-listing-card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.35);
+    font-size: var(--font-size-14);
+}
+
+.shop-listing-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5) 0 0;
+}
+
+.shop-listing-card-content .heading-5 {
+    color: var(--black);
+}
+
+.shop-listing-card-price {
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.shop-listing-card-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-14);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--black);
+    margin-top: auto;
+    margin-left: auto;
+}
+
+/* Empty State */
+/* ------------------------------------------------- */
+
+.shop-listing-empty {
+    text-align: center;
+    padding: var(--space-10) 0;
+}
+
+.shop-listing-empty .heading-5 {
+    color: var(--black);
+    margin-bottom: var(--space-2);
+}
+
+.shop-listing-empty .body-medium {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Pagination */
+/* ------------------------------------------------- */
+
+.shop-listing-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-7);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.shop-listing-pagination-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.shop-listing-pagination-btn {
+    padding: var(--space-2) var(--space-4);
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: var(--black);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-size-14);
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.shop-listing-pagination-btn:hover:not(:disabled) {
+    border-color: var(--black);
+    color: var(--black);
+}
+
+.shop-listing-pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.shop-listing-pagination-pages {
+    display: flex;
+    gap: var(--space-1);
+}
+
+.shop-listing-pagination-page {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: var(--black);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-size-14);
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.shop-listing-pagination-page:hover {
+    border-color: var(--black);
+    color: var(--black);
+}
+
+.shop-listing-pagination-page.is-active {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+}
+
+.shop-listing-pagination-info {
+    color: rgba(0, 0, 0, 0.55);
+    font-size: var(--font-size-14);
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 960px) {
+    .shop-listing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .shop-listing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shop-listing-search-row {
+        flex-direction: column;
+    }
+
+    .shop-listing-sort select {
+        width: 100%;
+    }
+}

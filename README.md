@@ -87,11 +87,14 @@ jiggywrigglers/
 ├── pages/                      # Page templates (auto-discovered)
 │   ├── page-home/              # Single page: Home
 │   ├── page-news/              # Single page: News listing
-│   └── template-article/       # Reusable template: Article grid
+│   ├── page-shop/              # Single page: Shop listing (SureCart products)
+│   ├── template-article/       # Reusable template: Article grid
+│   ├── template-product/       # SureCart single product wrapper
+│   └── template-policy/        # Reusable template: Policy pages
 ├── js/                         # Global JavaScript
 │   ├── navigation.js
 │   ├── customizer.js
-│   └── index.js
+│   └── index.js                # Lenis smooth scroll, parallax, focus trap
 ├── inc/                        # WordPress includes
 │   ├── customizer.php
 │   ├── template-functions.php
@@ -162,7 +165,10 @@ get_header();
 |--------|--------------|------|-------------|
 | `page-home/` | Home | Single page | Homepage with hero component |
 | `page-news/` | News | Single page | News listing using the default WP query loop with pagination |
+| `page-shop/` | Shop | Single page | SureCart product listing with client-side search, sorting, and pagination |
 | `template-article/` | Article | Reusable | Article grid using a custom `WP_Query` with pagination. Assign to any page that needs a post listing |
+| `template-policy/` | Policy | Reusable | Static policy content layout. Assign to any policy page (privacy, terms, cookies) |
+| `template-product/` | n/a | Auto | SureCart single product wrapper. Not selectable; loaded via `functions/surecart.php` for any `sc_product` single |
 
 ### Components
 
@@ -227,6 +233,7 @@ Components access arguments via the `$args` array, falling back to ACF fields wh
 | `functions/remove-menus.php` | Admin menu cleanup and Customiser streamlining |
 | `functions/custom-functions.php` | Add your own custom functions here |
 | `functions/surerank.php` | SureRank SEO analyser ACF bridge: auto-detects headings from templates |
+| `functions/surecart.php` | SureCart integration: routes `sc_product` singles to `pages/template-product/product.php`, enables block-template-parts support |
 
 ## Features
 

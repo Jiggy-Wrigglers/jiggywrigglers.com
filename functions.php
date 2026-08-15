@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( '_S_VERSION' ) ) {
-	define( '_S_VERSION', '2.1.0' );
+	define( '_S_VERSION', '2.2.0' );
 }
 
 if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
@@ -29,6 +29,7 @@ include get_template_directory() . '/functions/duplication.php';
 include get_template_directory() . '/functions/remove-menus.php';
 include get_template_directory() . '/functions/custom-functions.php';
 include get_template_directory() . '/functions/surerank.php';
+include get_template_directory() . '/functions/surecart.php';
 
 function jiggy_wrigglers_setup() {
 	load_theme_textdomain( 'jiggywrigglers', get_template_directory() . '/languages' );
@@ -64,7 +65,18 @@ function jiggy_wrigglers_setup() {
 		)
 	);
 
-	add_filter( 'use_block_editor_for_post', '__return_false', 10 );
+	// Block editor only for SureCart products (product content is block-based). Everything else is ACF-driven.
+	add_filter( 'use_block_editor_for_post', function( $use, $post ) {
+		if ( $post && 'sc_product' === $post->post_type ) {
+			return true;
+		}
+		return false;
+	}, 10, 2 );
+
+	add_filter( 'theme_page_templates', function( $templates ) {
+		unset( $templates['functions.php'] );
+		return $templates;
+	} );
 }
 add_action( 'after_setup_theme', 'jiggy_wrigglers_setup' );
 
@@ -82,12 +94,19 @@ function jiggy_wrigglers_scripts() {
 
 	wp_enqueue_style( 'splide-css', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css', array(), null );
 	wp_enqueue_script( 'splide', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js', array(), null, false );
-	wp_enqueue_script( 'alpinejs', 'https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js', array(), null, false );
+
+	wp_enqueue_style( 'lenis-css', 'https://unpkg.com/lenis@1.3.23/dist/lenis.css', array(), null );
+	wp_enqueue_script( 'lenis', 'https://unpkg.com/lenis@1.3.23/dist/lenis.min.js', array(), null, false );
+	wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/js/index.js', array( 'lenis' ), _S_VERSION, false );
+
+	wp_enqueue_script( 'alpinejs-intersect', 'https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.14.1/dist/cdn.min.js', array(), null, false );
+	wp_enqueue_script( 'alpinejs-collapse', 'https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.1/dist/cdn.min.js', array(), null, false );
+	wp_enqueue_script( 'alpinejs', 'https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js', array( 'alpinejs-intersect', 'alpinejs-collapse', 'theme-js' ), null, false );
 }
 add_action( 'wp_enqueue_scripts', 'jiggy_wrigglers_scripts' );
 
 function jiggy_wrigglers_defer_scripts( $tag, $handle ) {
-	$defer = array( 'alpinejs', 'splide' );
+	$defer = array( 'alpinejs', 'alpinejs-intersect', 'alpinejs-collapse', 'splide', 'lenis', 'theme-js' );
 	if ( in_array( $handle, $defer, true ) ) {
 		return str_replace( ' src=', ' defer src=', $tag );
 	}
@@ -96,7 +115,7 @@ function jiggy_wrigglers_defer_scripts( $tag, $handle ) {
 add_filter( 'script_loader_tag', 'jiggy_wrigglers_defer_scripts', 10, 2 );
 
 function jiggy_wrigglers_custom_admin_css() {
-	echo '<style>#postdivrich, #wp-content-wrap { display: none; }</style>';
+	echo '<style>#postdivrich, #wp-content-wrap, div#authordiv, div#slugdiv { display: none !important; }</style>';
 }
 add_action( 'admin_head', 'jiggy_wrigglers_custom_admin_css' );
 
@@ -177,3 +196,46 @@ add_action( 'admin_init', 'jiggy_wrigglers_disable_comments' );
 add_filter( 'comments_open', '__return_false', 20, 2 );
 add_filter( 'pings_open', '__return_false', 20, 2 );
 add_filter( 'get_comments_number', '__return_zero' );
+
+/**
+ * Sort an array of posts by an ACF numeric order field.
+ *
+ * Posts without a value (or <= 0 when $zero_is_unordered) sink to the end
+ * while keeping their original relative order.
+ *
+ * @param WP_Post[] $posts             Posts to sort.
+ * @param string    $field             ACF field name. Default 'order'.
+ * @param bool      $zero_is_unordered Treat 0 as unordered. Default false.
+ * @return WP_Post[]
+ */
+function jiggy_wrigglers_sort_by_order( $posts, $field = 'order', $zero_is_unordered = false ) {
+	$indexed = array();
+	foreach ( $posts as $i => $post ) {
+		$order = get_field( $field, $post->ID );
+		if ( $order === '' || $order === null || $order === false || ( $zero_is_unordered && (float) $order <= 0 ) ) {
+			$order = PHP_FLOAT_MAX;
+		} else {
+			$order = (float) $order;
+		}
+		$indexed[] = array( 'post' => $post, 'order' => $order, 'i' => $i );
+	}
+	usort( $indexed, function ( $a, $b ) {
+		if ( $a['order'] === $b['order'] ) {
+			return $a['i'] <=> $b['i'];
+		}
+		return $a['order'] <=> $b['order'];
+	} );
+	return array_column( $indexed, 'post' );
+}
+
+/**
+ * Maintenance mode. Activated via the ACF option: maintenance_mode (True/False).
+ * Only shown to non-logged-in visitors. Logged-in users see the live site.
+ */
+add_action( 'template_redirect', function () {
+	if ( get_field( 'maintenance_mode', 'option' ) && ! is_user_logged_in() ) {
+		http_response_code( 503 );
+		include get_template_directory() . '/maintenance.php';
+		die();
+	}
+} );

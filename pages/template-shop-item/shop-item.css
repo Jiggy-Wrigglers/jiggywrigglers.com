@@ -1,0 +1,12 @@
+/* Shop Item Template CSS file */
+/* ------------------------------------------------- */
+
+.shop-item-content {
+    padding: calc(var(--space-9) * 2) 0 var(--space-11);
+}
+
+.shop-item-content .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
