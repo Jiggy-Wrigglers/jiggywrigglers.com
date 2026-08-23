@@ -31,20 +31,20 @@ $groups_image     = get_field( 'groups_image' );
 $groups_repeater  = get_field( 'groups_repeater' );
 
 // Content 1
-$content_1_sup_title = get_field( 'content_1_sup_title' );
-$content_1_title     = get_field( 'content_1_title' );
-$content_1_text      = get_field( 'content_1_text' );
-$content_1_button    = get_field( 'content_1_button' );
+$content_1_sup_title    = get_field( 'content_1_sup_title' );
+$content_1_title        = get_field( 'content_1_title' );
+$content_1_text         = get_field( 'content_1_text' );
+$content_1_button       = get_field( 'content_1_button' );
+$content_1_image        = get_field( 'content_1_image' );
+$content_1_grid_reverse = get_field( 'content_1_grid_reverse' );
 
 // Content 2
-$content_2_title  = get_field( 'content_2_title' );
-$content_2_text   = get_field( 'content_2_text' );
-$content_2_button = get_field( 'content_2_button' );
-
-// Testimonials (page-level, passed to the component)
-$testimonials_sup_title = get_field( 'testimonials_sup_title' );
-$testimonials_title     = get_field( 'testimonials_title' );
-$testimonials           = get_field( 'testimonial_repeater' );
+$content_2_sup_title    = get_field( 'content_2_sup_title' );
+$content_2_title        = get_field( 'content_2_title' );
+$content_2_text         = get_field( 'content_2_text' );
+$content_2_button       = get_field( 'content_2_button' );
+$content_2_image        = get_field( 'content_2_image' );
+$content_2_grid_reverse = get_field( 'content_2_grid_reverse' );
 ?>
 
 <!-- Banner Section -->
@@ -171,20 +171,27 @@ $testimonials           = get_field( 'testimonial_repeater' );
 <!-- ------------------------------------------------- -->
 <?php if ( $content_1_title || $content_1_text ) : ?>
 <section class="home-content-1">
-    <div class="wrap">
-        <?php if ( $content_1_sup_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $content_1_sup_title ); ?></h3>
-        <?php endif; ?>
-        <?php if ( $content_1_title ) : ?>
-            <h2 class="heading-2"><?php echo wp_kses_post( $content_1_title ); ?></h2>
-        <?php endif; ?>
-        <?php if ( $content_1_text ) : ?>
-            <p class="body-medium"><?php echo wp_kses_post( $content_1_text ); ?></p>
-        <?php endif; ?>
-        <?php if ( $content_1_button ) : ?>
-            <a class="button button-orange" href="<?php echo esc_url( $content_1_button['url'] ); ?>"<?php echo ! empty( $content_1_button['target'] ) ? ' target="' . esc_attr( $content_1_button['target'] ) . '"' : ''; ?>>
-                <?php echo esc_html( $content_1_button['title'] ); ?>
-            </a>
+    <div class="wrap<?php echo $content_1_grid_reverse ? ' is-reversed' : ''; ?>">
+        <div class="home-content-text">
+            <?php if ( $content_1_sup_title ) : ?>
+                <h3 class="heading-5"><?php echo wp_kses_post( $content_1_sup_title ); ?></h3>
+            <?php endif; ?>
+            <?php if ( $content_1_title ) : ?>
+                <h2 class="heading-2"><?php echo wp_kses_post( $content_1_title ); ?></h2>
+            <?php endif; ?>
+            <?php if ( $content_1_text ) : ?>
+                <p class="body-medium"><?php echo wp_kses_post( $content_1_text ); ?></p>
+            <?php endif; ?>
+            <?php if ( $content_1_button ) : ?>
+                <a class="button button-orange" href="<?php echo esc_url( $content_1_button['url'] ); ?>"<?php echo ! empty( $content_1_button['target'] ) ? ' target="' . esc_attr( $content_1_button['target'] ) . '"' : ''; ?>>
+                    <?php echo esc_html( $content_1_button['title'] ); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+        <?php if ( $content_1_image ) : ?>
+            <div class="home-content-image">
+                <?php echo wp_get_attachment_image( $content_1_image['ID'], 'full' ); ?>
+            </div>
         <?php endif; ?>
     </div>
 </section>
@@ -194,17 +201,27 @@ $testimonials           = get_field( 'testimonial_repeater' );
 <!-- ------------------------------------------------- -->
 <?php if ( $content_2_title || $content_2_text ) : ?>
 <section class="home-content-2">
-    <div class="wrap">
-        <?php if ( $content_2_title ) : ?>
-            <h2 class="heading-2"><?php echo wp_kses_post( $content_2_title ); ?></h2>
-        <?php endif; ?>
-        <?php if ( $content_2_text ) : ?>
-            <p class="body-medium"><?php echo wp_kses_post( $content_2_text ); ?></p>
-        <?php endif; ?>
-        <?php if ( $content_2_button ) : ?>
-            <a class="button button-yellow" href="<?php echo esc_url( $content_2_button['url'] ); ?>"<?php echo ! empty( $content_2_button['target'] ) ? ' target="' . esc_attr( $content_2_button['target'] ) . '"' : ''; ?>>
-                <?php echo esc_html( $content_2_button['title'] ); ?>
-            </a>
+    <div class="wrap<?php echo $content_2_grid_reverse ? ' is-reversed' : ''; ?>">
+        <div class="home-content-text">
+            <?php if ( $content_2_sup_title ) : ?>
+                <h3 class="heading-5"><?php echo wp_kses_post( $content_2_sup_title ); ?></h3>
+            <?php endif; ?>
+            <?php if ( $content_2_title ) : ?>
+                <h2 class="heading-2"><?php echo wp_kses_post( $content_2_title ); ?></h2>
+            <?php endif; ?>
+            <?php if ( $content_2_text ) : ?>
+                <p class="body-medium"><?php echo wp_kses_post( $content_2_text ); ?></p>
+            <?php endif; ?>
+            <?php if ( $content_2_button ) : ?>
+                <a class="button button-yellow" href="<?php echo esc_url( $content_2_button['url'] ); ?>"<?php echo ! empty( $content_2_button['target'] ) ? ' target="' . esc_attr( $content_2_button['target'] ) . '"' : ''; ?>>
+                    <?php echo esc_html( $content_2_button['title'] ); ?>
+                </a>
+            <?php endif; ?>
+        </div>
+        <?php if ( $content_2_image ) : ?>
+            <div class="home-content-image">
+                <?php echo wp_get_attachment_image( $content_2_image['ID'], 'full' ); ?>
+            </div>
         <?php endif; ?>
     </div>
 </section>

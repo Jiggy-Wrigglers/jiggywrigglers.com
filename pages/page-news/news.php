@@ -26,7 +26,7 @@ get_header(); ?>
                         <a href="<?php the_permalink(); ?>" class="news-card-link">
                             <?php if ( has_post_thumbnail() ) : ?>
                                 <div class="news-card-image">
-                                    <?php the_post_thumbnail( 'large' ); ?>
+                                    <?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'full' ); ?>
                                 </div>
                             <?php endif; ?>
                             <div class="news-card-content">

@@ -81,13 +81,15 @@ if ( ! function_exists( 'jiggy_wrigglers_post_thumbnail' ) ) :
 		if ( is_singular() ) :
 			?>
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail(); ?>
+				<?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'full' ); ?>
 			</div>
 		<?php else : ?>
 			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
-				the_post_thumbnail(
-					'post-thumbnail',
+				echo wp_get_attachment_image(
+					get_post_thumbnail_id(),
+					'full',
+					false,
 					array(
 						'alt' => the_title_attribute(
 							array(

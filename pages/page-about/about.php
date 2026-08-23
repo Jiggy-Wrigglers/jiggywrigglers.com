@@ -98,7 +98,7 @@ $content_button    = get_field( 'content_button' );
         <div class="about-awards-grid">
             <?php foreach ( $awards_images as $award ) : ?>
                 <div class="about-award">
-                    <img src="<?php echo esc_url( $award['url'] ); ?>" alt="<?php echo esc_attr( $award['alt'] ); ?>" loading="lazy">
+                    <?php echo wp_get_attachment_image( $award['ID'], 'full' ); ?>
                     <?php if ( $award['alt'] ) : ?>
                         <h4 class="heading-6"><?php echo esc_html( $award['alt'] ); ?></h4>
                     <?php endif; ?>

@@ -38,7 +38,7 @@ if ($query->have_posts()) {
             'price' => '',
         );
 
-        $thumb = get_the_post_thumbnail_url($post_obj->ID, 'large');
+        $thumb = get_the_post_thumbnail_url($post_obj->ID, 'full');
         if ($thumb) {
             $product_data['image'] = $thumb;
         }

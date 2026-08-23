@@ -33,7 +33,7 @@
                 <div class="splide__list">
                     <?php foreach ( $jiggy_gallery_images as $image ) : ?>
                         <div class="splide__slide gallery-slide">
-                            <img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" loading="lazy">
+                            <?php echo wp_get_attachment_image( $image['ID'], 'full' ); ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
