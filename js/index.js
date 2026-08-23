@@ -1,11 +1,7 @@
-window.lenis = new Lenis({
-    autoRaf: true,
-    autoToggle: true,
-    anchors: true,
-    allowNestedScroll: true,
-    naiveDimensions: true,
-    stopInertiaOnNavigate: true,
-});
+// Flag JS availability FIRST: the CSS only hides [data-animate] on
+// html.anim, so content is never permanently invisible if anything
+// below this line fails to load or throws.
+document.documentElement.classList.add('anim');
 
 // Scroll reveal: add .is-visible to [data-animate] elements as they
 // enter the viewport. Works with the CSS animation utilities in style.css.
@@ -33,6 +29,19 @@ const initRevealAnimations = () => {
     els.forEach((el) => observer.observe(el));
 };
 document.addEventListener('DOMContentLoaded', initRevealAnimations);
+
+// Smooth scroll. Guarded: if the Lenis CDN fails the rest of the file
+// (and the reveal engine above) still runs.
+if (window.Lenis) {
+    window.lenis = new Lenis({
+        autoRaf: true,
+        autoToggle: true,
+        anchors: true,
+        allowNestedScroll: true,
+        naiveDimensions: true,
+        stopInertiaOnNavigate: true,
+    });
+}
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('parallaxItems', () => ({

@@ -316,11 +316,12 @@ button.button-peach:hover {
 /* Scroll Animation */
 /* ------------------------------------------------- */
 
-[data-animate] {
+/* Elements only hide while JS is available to reveal them */
+html.anim [data-animate] {
     opacity: 0;
 }
 
-[data-animate="fade-up"] {
+html.anim [data-animate="fade-up"] {
     transform: translateY(var(--animation-distance));
     will-change: opacity, transform;
 }
