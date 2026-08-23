@@ -14,9 +14,9 @@ get_header(); ?>
 
 <?php
 // Contact form
-$contact_form_sup_title  = get_field( 'contact_form_sup_title' );
-$contact_form_title      = get_field( 'contact_form_title' );
-$contact_form_shortcode  = get_field( 'contact_form_shortcode' );
+$contact_form_sup_title = get_field( 'contact_form_sup_title' );
+$contact_form_title = get_field( 'contact_form_title' );
+$contact_form_shortcode = get_field( 'contact_form_shortcode' );
 
 // Contact content
 $contact_content_title = get_field( 'contact_content_title' );

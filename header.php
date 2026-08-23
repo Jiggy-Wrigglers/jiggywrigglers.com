@@ -7,14 +7,6 @@
  *
  * @package Jiggy_Wrigglers
  */
-
-$company_logo         = get_field( 'company_logo', 'option' );
-$logo_white           = get_field( 'logo_white', 'option' );
-$header_menu_items    = get_field( 'header_menu_items', 'option' );
-$header_menu_button_1 = get_field( 'header_menu_button_1', 'option' );
-$header_menu_button_2 = get_field( 'header_menu_button_2', 'option' );
-
-$header_logo = $logo_white ? $logo_white : $company_logo;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -27,6 +19,15 @@ $header_logo = $logo_white ? $logo_white : $company_logo;
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<?php 
+	$company_logo = get_field( 'company_logo', 'option' );
+	$logo_white = get_field( 'logo_white', 'option' );
+	$header_menu_items = get_field( 'header_menu_items', 'option' );
+	$header_menu_button_1 = get_field( 'header_menu_button_1', 'option' );
+	$header_menu_button_2 = get_field( 'header_menu_button_2', 'option' );
+
+	$header_logo = $logo_white ? $logo_white : $company_logo;
+?>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <!-- Header -->
 <div class="header-shell" x-data="{ menuOpen: false }">

@@ -12,12 +12,12 @@
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/hero/style.css">
 <!-- Hero Section -->
 <?php
-    $hero_post_id   = isset( $hero_post_id ) ? $hero_post_id : null;
-    $hero_images    = isset( $hero_images ) ? $hero_images : get_field( 'hero_images', $hero_post_id );
-    $hero_title     = isset( $hero_title ) ? $hero_title : get_field( 'hero_title', $hero_post_id );
+    $hero_post_id = isset( $hero_post_id ) ? $hero_post_id : null;
+    $hero_images = isset( $hero_images ) ? $hero_images : get_field( 'hero_images', $hero_post_id );
+    $hero_title = isset( $hero_title ) ? $hero_title : get_field( 'hero_title', $hero_post_id );
     $hero_sub_title = isset( $hero_sub_title ) ? $hero_sub_title : get_field( 'hero_sub_title', $hero_post_id );
-    $hero_text      = isset( $hero_text ) ? $hero_text : get_field( 'hero_text', $hero_post_id );
-    $hero_buttons   = isset( $hero_buttons ) ? $hero_buttons : get_field( 'hero_buttons', $hero_post_id );
+    $hero_text = isset( $hero_text ) ? $hero_text : get_field( 'hero_text', $hero_post_id );
+    $hero_buttons = isset( $hero_buttons ) ? $hero_buttons : get_field( 'hero_buttons', $hero_post_id );
 
     $hero_image = is_array( $hero_images ) && ! empty( $hero_images ) ? $hero_images[0] : null;
 ?>

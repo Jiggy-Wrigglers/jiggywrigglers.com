@@ -18,7 +18,7 @@ get_header(); ?>
 
 <?php
 // Awards
-$awards_title  = get_field( 'awards_title' );
+$awards_title = get_field( 'awards_title' );
 $awards_images = get_field( 'awards_images' );
 ?>
 

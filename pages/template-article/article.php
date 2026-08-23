@@ -19,10 +19,10 @@ get_header(); ?>
 <?php
 // Content
 $content_sup_title = get_field( 'content_sup_title' );
-$content_title     = get_field( 'content_title' );
+$content_title = get_field( 'content_title' );
 
 // Article grid
-$paged    = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
+$paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 $articles = new WP_Query( array(
     'post_type'      => 'post',
     'posts_per_page' => 9,

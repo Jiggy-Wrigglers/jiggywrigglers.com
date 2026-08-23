@@ -20,7 +20,7 @@ $video_2_title = get_field( 'video_2_title' );
 $video_2_embed = get_field( 'video_2_embed' );
 
 // YouTube
-$youtube_text   = get_field( 'youtube_text' );
+$youtube_text = get_field( 'youtube_text' );
 $youtube_button = get_field( 'youtube_button' );
 ?>
 

@@ -12,8 +12,8 @@
 <!-- Gallery Component -->
 <?php
     $jiggy_gallery_sup_title = get_field( 'jiggy_gallery_sup_title', 'option' );
-    $jiggy_gallery_title     = get_field( 'jiggy_gallery_title', 'option' );
-    $jiggy_gallery_images    = get_field( 'jiggy_gallery_images', 'option' );
+    $jiggy_gallery_title = get_field( 'jiggy_gallery_title', 'option' );
+    $jiggy_gallery_images = get_field( 'jiggy_gallery_images', 'option' );
 
     if ( empty( $jiggy_gallery_images ) ) return;
 ?>

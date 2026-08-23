@@ -12,38 +12,38 @@ get_header(); ?>
 <?php
 // Banner
 $banner_images = get_field( 'banner_images' );
-$banner_title  = get_field( 'banner_title' );
-$banner_text   = get_field( 'banner_text' );
+$banner_title = get_field( 'banner_title' );
+$banner_text = get_field( 'banner_text' );
 $banner_buttons = get_field( 'banner_buttons' );
 
 // Introduction
-$introduction_sub_title   = get_field( 'introduction_sub_title' );
-$introduction_title       = get_field( 'introduction_title' );
-$introduction_text        = get_field( 'introduction_text' );
-$introduction_button      = get_field( 'introduction_button' );
+$introduction_sub_title = get_field( 'introduction_sub_title' );
+$introduction_title = get_field( 'introduction_title' );
+$introduction_text = get_field( 'introduction_text' );
+$introduction_button = get_field( 'introduction_button' );
 $introduction_character_1 = get_field( 'introduction_character_1' );
 $introduction_character_2 = get_field( 'introduction_character_2' );
 
 // Groups
 $groups_sup_title = get_field( 'groups_sup_title' );
-$groups_title     = get_field( 'groups_title' );
-$groups_image     = get_field( 'groups_image' );
-$groups_repeater  = get_field( 'groups_repeater' );
+$groups_title = get_field( 'groups_title' );
+$groups_image = get_field( 'groups_image' );
+$groups_repeater = get_field( 'groups_repeater' );
 
 // Content 1
-$content_1_sup_title    = get_field( 'content_1_sup_title' );
-$content_1_title        = get_field( 'content_1_title' );
-$content_1_text         = get_field( 'content_1_text' );
-$content_1_button       = get_field( 'content_1_button' );
-$content_1_image        = get_field( 'content_1_image' );
+$content_1_sup_title = get_field( 'content_1_sup_title' );
+$content_1_title = get_field( 'content_1_title' );
+$content_1_text = get_field( 'content_1_text' );
+$content_1_button = get_field( 'content_1_button' );
+$content_1_image = get_field( 'content_1_image' );
 $content_1_grid_reverse = get_field( 'content_1_grid_reverse' );
 
 // Content 2
-$content_2_sup_title    = get_field( 'content_2_sup_title' );
-$content_2_title        = get_field( 'content_2_title' );
-$content_2_text         = get_field( 'content_2_text' );
-$content_2_button       = get_field( 'content_2_button' );
-$content_2_image        = get_field( 'content_2_image' );
+$content_2_sup_title = get_field( 'content_2_sup_title' );
+$content_2_title = get_field( 'content_2_title' );
+$content_2_text = get_field( 'content_2_text' );
+$content_2_button = get_field( 'content_2_button' );
+$content_2_image = get_field( 'content_2_image' );
 $content_2_grid_reverse = get_field( 'content_2_grid_reverse' );
 ?>
 

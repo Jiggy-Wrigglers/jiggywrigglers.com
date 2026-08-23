@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/ethos/style.css">
 <!-- Ethos Component -->
 <?php
-    $ethos_title    = get_field( 'ethos_title', 'option' );
+    $ethos_title = get_field( 'ethos_title', 'option' );
     $ethos_repeater = get_field( 'ethos_repeater', 'option' );
 
     if ( empty( $ethos_repeater ) ) return;

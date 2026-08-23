@@ -18,18 +18,18 @@ get_header(); ?>
 <?php
 // Key Info
 $information_title = get_field( 'information_title' );
-$information_text  = get_field( 'information_text' );
-$key_info_boxes    = array(
+$information_text = get_field( 'information_text' );
+$key_info_boxes = array(
     array( 'icon' => get_field( 'key_info_1_icon' ), 'title' => get_field( 'key_info_1_title' ) ),
     array( 'icon' => get_field( 'key_info_2_icon' ), 'title' => get_field( 'key_info_2_title' ) ),
     array( 'icon' => get_field( 'key_info_3_icon' ), 'title' => get_field( 'key_info_3_title' ) ),
 );
 
 // Content Columns
-$content_text     = get_field( 'content_text' );
+$content_text = get_field( 'content_text' );
 $content_button_1 = get_field( 'content_button_1' );
 $content_button_2 = get_field( 'content_button_2' );
-$content_image    = get_field( 'content_image' );
+$content_image = get_field( 'content_image' );
 ?>
 
 <!-- Key Info Text Section -->

@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/playlist/style.css">
 <!-- Playlist Component -->
 <?php
-    $playlist_title   = isset( $playlist_title ) ? $playlist_title : get_field( 'playlist_title' );
-    $spotify_link     = isset( $spotify_link ) ? $spotify_link : get_field( 'spotify_link' );
+    $playlist_title = isset( $playlist_title ) ? $playlist_title : get_field( 'playlist_title' );
+    $spotify_link = isset( $spotify_link ) ? $spotify_link : get_field( 'spotify_link' );
     $apple_music_link = isset( $apple_music_link ) ? $apple_music_link : get_field( 'apple_music_link' );
 
     if ( empty( $spotify_link ) && empty( $apple_music_link ) ) return;

@@ -14,8 +14,8 @@
 <!-- Testimonials Component -->
 <?php
     $testimonials_sup_title = isset( $testimonials_sup_title ) ? $testimonials_sup_title : get_field( 'testimonial_sup_title', 'option' );
-    $testimonials_title     = isset( $testimonials_title ) ? $testimonials_title : get_field( 'testimonial_title', 'option' );
-    $testimonials           = isset( $testimonials ) ? $testimonials : get_field( 'testimonial_repeater', 'option' );
+    $testimonials_title = isset( $testimonials_title ) ? $testimonials_title : get_field( 'testimonial_title', 'option' );
+    $testimonials = isset( $testimonials ) ? $testimonials : get_field( 'testimonial_repeater', 'option' );
 
     if ( empty( $testimonials ) ) return;
 ?>

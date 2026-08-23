@@ -15,8 +15,8 @@ get_header(); ?>
 <?php
 // Content
 $content_sup_title = get_field( 'content_sup_title' );
-$content_title     = get_field( 'content_title' );
-$content_text      = get_field( 'content_text' );
+$content_title = get_field( 'content_title' );
+$content_text = get_field( 'content_text' );
 
 // Franchises
 $franchises_repeater = get_field( 'franchises_repeater' );

@@ -12,8 +12,8 @@
 header( 'Retry-After: 3600' );
 
 $maintenance_title = get_field( 'maintenance_title', 'option' ) ?: "We'll be back soon";
-$maintenance_text  = get_field( 'maintenance_text', 'option' ) ?: 'Jiggy Wrigglers is currently undergoing scheduled maintenance. Please check back shortly.';
-$maintenance_logo  = get_field( 'logo_white', 'option' );
+$maintenance_text = get_field( 'maintenance_text', 'option' ) ?: 'Jiggy Wrigglers is currently undergoing scheduled maintenance. Please check back shortly.';
+$maintenance_logo = get_field( 'logo_white', 'option' );
 $maintenance_image = get_field( 'maintenance_image', 'option' );
 ?>
 <!DOCTYPE html>

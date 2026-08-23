@@ -8,16 +8,16 @@
  * @package Jiggy_Wrigglers
  */
 
-$footer_1_title    = get_field( 'footer_1_title', 'option' );
-$footer_1_text     = get_field( 'footer_1_text', 'option' );
-$footer_2_title    = get_field( 'footer_2_title', 'option' );
-$footer_2_menu     = get_field( 'footer_2_menu', 'option' );
-$footer_3_title    = get_field( 'footer_3_title', 'option' );
-$footer_3_text     = get_field( 'footer_3_text', 'option' );
-$footer_4_title    = get_field( 'footer_4_title', 'option' );
+$footer_1_title = get_field( 'footer_1_title', 'option' );
+$footer_1_text = get_field( 'footer_1_text', 'option' );
+$footer_2_title = get_field( 'footer_2_title', 'option' );
+$footer_2_menu = get_field( 'footer_2_menu', 'option' );
+$footer_3_title = get_field( 'footer_3_title', 'option' );
+$footer_3_text = get_field( 'footer_3_text', 'option' );
+$footer_4_title = get_field( 'footer_4_title', 'option' );
 $footer_4_button_1 = get_field( 'footer_4_button_1', 'option' );
 $footer_4_button_2 = get_field( 'footer_4_button_2', 'option' );
-$copyright_link    = get_field( 'copyright_link', 'option' );
+$copyright_link = get_field( 'copyright_link', 'option' );
 ?>
 
 </main>
