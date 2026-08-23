@@ -59,14 +59,19 @@
     font-size: var(--font-size-16);
 }
 
-.key-info-label {
+.key-info-icon {
     color: var(--purple);
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: var(--font-size-14);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto var(--space-3);
+    font-size: 60px;
+}
+
+.key-info-icon svg {
+    width: 60px;
+    height: 60px;
 }
 
 .key-info-box .heading-5 {

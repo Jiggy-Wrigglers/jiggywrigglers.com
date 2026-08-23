@@ -17,23 +17,19 @@ get_header(); ?>
 
 <?php
 // Key Info
-$information_title      = get_field( 'information_title' );
-$information_text       = get_field( 'information_text' );
-$information_age_range  = get_field( 'information_age_range' );
-$information_length     = get_field( 'information_length' );
-$information_group_size = get_field( 'information_group_size' );
+$information_title = get_field( 'information_title' );
+$information_text  = get_field( 'information_text' );
+$key_info_boxes    = array(
+    array( 'icon' => get_field( 'key_info_1_icon' ), 'title' => get_field( 'key_info_1_title' ) ),
+    array( 'icon' => get_field( 'key_info_2_icon' ), 'title' => get_field( 'key_info_2_title' ) ),
+    array( 'icon' => get_field( 'key_info_3_icon' ), 'title' => get_field( 'key_info_3_title' ) ),
+);
 
 // Content Columns
 $content_text     = get_field( 'content_text' );
 $content_button_1 = get_field( 'content_button_1' );
 $content_button_2 = get_field( 'content_button_2' );
 $content_image    = get_field( 'content_image' );
-
-$key_info_boxes = array(
-    array( 'label' => 'Age Range', 'value' => $information_age_range ),
-    array( 'label' => 'Class Length', 'value' => $information_length ),
-    array( 'label' => 'Group Size', 'value' => $information_group_size ),
-);
 ?>
 
 <!-- Key Info Text Section -->
@@ -43,7 +39,7 @@ $key_info_boxes = array(
         <h2 class="heading-3 key-info-title" data-animate="fade-up"><?php echo wp_kses_post( $information_title ); ?></h2>
     <?php endif; ?>
 
-    <?php if ( $information_text || $information_age_range || $information_length || $information_group_size ) : ?>
+    <?php if ( $information_text || $key_info_boxes ) : ?>
         <div class="wrap key-info-strip" data-animate="fade-up" data-animate-delay="1">
             <?php if ( $information_text ) : ?>
                 <div class="key-info-box key-info-intro">
@@ -51,10 +47,14 @@ $key_info_boxes = array(
                 </div>
             <?php endif; ?>
             <?php foreach ( $key_info_boxes as $box ) : ?>
-                <?php if ( $box['value'] ) : ?>
+                <?php if ( $box['icon'] || $box['title'] ) : ?>
                     <div class="key-info-box">
-                        <p class="key-info-label"><?php echo esc_html( $box['label'] ); ?></p>
-                        <h3 class="heading-5"><?php echo wp_kses_post( $box['value'] ); ?></h3>
+                        <?php if ( $box['icon'] ) : ?>
+                            <div class="key-info-icon"><?php echo $box['icon']; ?></div>
+                        <?php endif; ?>
+                        <?php if ( $box['title'] ) : ?>
+                            <h3 class="heading-5"><?php echo wp_kses_post( $box['title'] ); ?></h3>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
             <?php endforeach; ?>
