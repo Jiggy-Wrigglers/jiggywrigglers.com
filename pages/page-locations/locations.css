@@ -1,2 +1,149 @@
 /* Locations Page CSS file */
 /* ------------------------------------------------- */
+
+/* Content */
+/* ------------------------------------------------- */
+
+.locations-content {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.locations-content .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 900px;
+}
+
+.locations-content-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.locations-content-text p {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Franchises */
+/* ------------------------------------------------- */
+
+.locations-franchises {
+    background: var(--peach);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.locations-franchises-search {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-bottom: var(--space-8);
+}
+
+.locations-franchises-search > .body-medium {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.locations-franchises-select {
+    position: relative;
+    max-width: 420px;
+}
+
+.locations-franchises-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: var(--font-size-16);
+    color: var(--black);
+    cursor: pointer;
+}
+
+.locations-franchises-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+    overflow: hidden;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.locations-franchises-dropdown button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: var(--font-size-16);
+    color: var(--black);
+    cursor: pointer;
+}
+
+.locations-franchises-dropdown button:hover {
+    background: var(--peach);
+}
+
+.locations-franchises-actions {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.locations-franchises-actions .is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.locations-franchises-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+}
+
+.locations-franchise {
+    background: var(--white);
+    border-radius: 6px;
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.locations-franchise .body-medium {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.locations-franchise a {
+    color: var(--purple);
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .locations-franchises-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .locations-franchises-grid {
+        grid-template-columns: 1fr;
+    }
+}

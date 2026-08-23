@@ -1,2 +1,51 @@
 /* Ethos Component CSS file */
 /* ------------------------------------------------- */
+
+.ethos {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.ethos-title {
+    margin-bottom: var(--space-7);
+}
+
+.ethos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+}
+
+.ethos-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background: var(--peach);
+    border-radius: 6px;
+    padding: var(--space-6);
+}
+
+.ethos-card-image img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.ethos-card-text {
+    color: var(--black);
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .ethos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .ethos-grid {
+        grid-template-columns: 1fr;
+    }
+}

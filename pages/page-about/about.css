@@ -1,2 +1,172 @@
 /* About Page CSS file */
 /* ------------------------------------------------- */
+
+/* Introduction */
+/* ------------------------------------------------- */
+
+.about-introduction {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.about-introduction .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 900px;
+}
+
+.about-introduction-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.about-introduction-text p {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Journey */
+/* ------------------------------------------------- */
+
+.about-journey {
+    background: var(--purple);
+    color: var(--white);
+    padding: var(--space-10) 0;
+}
+
+.about-journey-title {
+    color: var(--white);
+    margin-bottom: var(--space-7);
+}
+
+.about-journey-step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+}
+
+.about-journey-step + .about-journey-step {
+    margin-top: var(--space-9);
+}
+
+.about-journey-step--reversed .about-journey-text {
+    order: 2;
+}
+
+.about-journey-step--reversed .about-journey-image {
+    order: 1;
+}
+
+.about-journey-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+}
+
+.about-journey-text .body-medium {
+    color: var(--white);
+}
+
+.about-journey-trail {
+    max-width: 180px;
+}
+
+.about-journey-trail img {
+    width: 100%;
+}
+
+.about-journey-image img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+/* Awards */
+/* ------------------------------------------------- */
+
+.about-awards {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.about-awards-title {
+    margin-bottom: var(--space-7);
+}
+
+.about-awards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+}
+
+.about-award {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+    text-align: center;
+}
+
+.about-award img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+/* Content */
+/* ------------------------------------------------- */
+
+.about-content {
+    background: var(--peach);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.about-content .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+    max-width: 900px;
+}
+
+.about-content-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.about-content-text p {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .about-awards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .about-journey-step {
+        grid-template-columns: 1fr;
+    }
+
+    .about-journey-step--reversed .about-journey-text {
+        order: 1;
+    }
+
+    .about-journey-step--reversed .about-journey-image {
+        order: 2;
+    }
+
+    .about-awards-grid {
+        grid-template-columns: 1fr;
+    }
+}

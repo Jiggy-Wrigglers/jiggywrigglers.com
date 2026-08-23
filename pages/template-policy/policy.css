@@ -1,2 +1,36 @@
 /* Policy Template CSS file */
 /* ------------------------------------------------- */
+
+.policy-content {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.policy-text {
+    max-width: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.policy-text p,
+.policy-text li {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.policy-text h2,
+.policy-text h3,
+.policy-text h4 {
+    margin-top: var(--space-4);
+}
+
+.policy-text a {
+    color: var(--purple);
+}
+
+.policy-text ul,
+.policy-text ol {
+    padding-left: var(--space-5);
+    list-style: disc;
+}

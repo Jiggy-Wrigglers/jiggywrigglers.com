@@ -1,0 +1,44 @@
+/* Thank You Page CSS file */
+/* ------------------------------------------------- */
+
+.thank-you {
+    background: var(--purple);
+    color: var(--white);
+    padding: var(--space-11) 0;
+}
+
+.thank-you .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+}
+
+.thank-you-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+}
+
+.thank-you-content .heading-1 {
+    color: var(--white);
+}
+
+.thank-you-content .body-medium {
+    color: var(--white);
+    max-width: 540px;
+}
+
+.thank-you-image img {
+    width: 100%;
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .thank-you .wrap {
+        grid-template-columns: 1fr;
+    }
+}

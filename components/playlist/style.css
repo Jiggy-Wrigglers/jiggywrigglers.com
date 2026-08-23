@@ -1,0 +1,28 @@
+/* Playlist Component CSS file */
+/* ------------------------------------------------- */
+
+.playlist {
+    background: var(--purple);
+    color: var(--white);
+    padding: var(--space-9) 0;
+}
+
+.playlist .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    text-align: center;
+}
+
+.playlist-title {
+    color: var(--white);
+    max-width: 720px;
+}
+
+.playlist-links {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: center;
+}

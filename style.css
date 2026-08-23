@@ -97,37 +97,6 @@ ul {
     list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    line-height: 1.2;
-    color: var(--black);
-}
-
-h1 {
-    font-size: var(--font-size-h1);
-}
-
-h2 {
-    font-size: var(--font-size-h2);
-}
-
-h3 {
-    font-size: var(--font-size-h3);
-}
-
-h4 {
-    font-size: var(--font-size-h4);
-}
-
-h5 {
-    font-size: var(--font-size-h5);
-}
-
-h6 {
-    font-size: var(--font-size-h6);
-}
-
 p, a {
     font-family: var(--font-body);
     font-size: var(--font-size-body);

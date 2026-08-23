@@ -1,2 +1,68 @@
 /* Testimonials Component CSS file */
 /* ------------------------------------------------- */
+
+.testimonials {
+    background: var(--peach);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.testimonials-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-7);
+}
+
+.testimonials-slide-inner {
+    background: var(--white);
+    border-radius: 6px;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    height: 100%;
+}
+
+.testimonials-quote {
+    color: var(--black);
+}
+
+.testimonials-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--purple);
+    margin-top: auto;
+}
+
+.testimonials-job {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.testimonials-controls {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+}
+
+.testimonials-prev,
+.testimonials-next {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--purple);
+    color: var(--white);
+    border: solid 2px var(--purple);
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: ease 0.4s;
+}
+
+.testimonials-prev:hover,
+.testimonials-next:hover {
+    background: transparent;
+    color: var(--purple);
+}

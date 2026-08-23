@@ -12,7 +12,7 @@ get_header(); ?>
 
 <!-- Hero Section -->
 <!-- ------------------------------------------------- -->
-<?php include locate_template('components/hero/index.php'); ?>
+<?php include locate_template( 'components/hero/index.php' ); ?>
 
 <!-- Shop Listing Section -->
 <!-- ------------------------------------------------- -->

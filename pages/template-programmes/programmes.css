@@ -1,2 +1,111 @@
 /* Programmes Template CSS file */
 /* ------------------------------------------------- */
+
+/* Hero */
+/* ------------------------------------------------- */
+
+.programmes-hero {
+    background: var(--purple);
+    color: var(--white);
+    padding: var(--space-11) 0;
+}
+
+.programmes-hero .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+}
+
+.programmes-hero .heading-5,
+.programmes-hero .heading-1 {
+    color: var(--white);
+}
+
+.programmes-hero .body-medium {
+    color: var(--white);
+    max-width: 720px;
+}
+
+.programmes-hero-buttons {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+/* Information */
+/* ------------------------------------------------- */
+
+.programmes-information {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.programmes-information .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.programmes-information .body-medium {
+    color: rgba(0, 0, 0, 0.7);
+    max-width: 720px;
+}
+
+.programmes-information-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+}
+
+.programmes-information-box {
+    background: var(--peach);
+    border-radius: 6px;
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+/* Content */
+/* ------------------------------------------------- */
+
+.programmes-content {
+    background: var(--peach);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.programmes-content .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    align-items: flex-start;
+    max-width: 900px;
+}
+
+.programmes-content-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.programmes-content-text p {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.programmes-content-buttons {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .programmes-information-grid {
+        grid-template-columns: 1fr;
+    }
+}

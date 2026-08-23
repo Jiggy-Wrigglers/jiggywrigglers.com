@@ -1,2 +1,53 @@
 /* Contact Page CSS file */
 /* ------------------------------------------------- */
+
+.contact-form {
+    background: var(--peach);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.contact-form .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 900px;
+}
+
+.contact-form-shortcode {
+    margin-top: var(--space-5);
+}
+
+.contact-content {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.contact-content .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+}
+
+.contact-content-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+}
+
+.contact-content-image img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .contact-content .wrap {
+        grid-template-columns: 1fr;
+    }
+}

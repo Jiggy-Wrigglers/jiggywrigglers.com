@@ -1,2 +1,44 @@
 /* Hero Component CSS file */
 /* ------------------------------------------------- */
+
+.hero {
+    position: relative;
+    background: var(--purple);
+    color: var(--white);
+    padding: var(--space-11) 0;
+    overflow: hidden;
+}
+
+.hero > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero .wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+}
+
+.hero-text {
+    color: var(--white);
+}
+
+.hero .heading-1 {
+    color: var(--white);
+    max-width: 720px;
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 650px) {
+    .hero {
+        padding: var(--space-9) 0;
+    }
+}

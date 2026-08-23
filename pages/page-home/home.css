@@ -1,2 +1,212 @@
 /* Home Page CSS file */
 /* ------------------------------------------------- */
+
+/* Banner */
+/* ------------------------------------------------- */
+
+.home-banner {
+    position: relative;
+    background: var(--purple);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.home-banner-slider {
+    position: absolute;
+    inset: 0;
+}
+
+.home-banner-slider .splide__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-banner-slider + .wrap {
+    position: relative;
+}
+
+.home-banner .wrap {
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+}
+
+.home-banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    max-width: 720px;
+}
+
+.home-banner-content .heading-1 {
+    color: var(--white);
+}
+
+.home-banner-text {
+    color: var(--white);
+}
+
+.home-banner .splide__pagination {
+    position: absolute;
+    bottom: var(--space-4);
+    z-index: 2;
+}
+
+/* Introduction */
+/* ------------------------------------------------- */
+
+.home-introduction {
+    background: var(--white);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.home-introduction .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+    max-width: 900px;
+}
+
+.home-introduction-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.home-introduction-text p {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Groups */
+/* ------------------------------------------------- */
+
+.home-groups {
+    background: var(--peach);
+    color: var(--black);
+    padding: var(--space-10) 0;
+}
+
+.home-groups-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+    text-align: center;
+    margin-bottom: var(--space-7);
+    padding: 0 var(--space-5);
+}
+
+.home-groups-header-image {
+    max-width: 220px;
+}
+
+.home-groups-header-image img {
+    width: 100%;
+}
+
+.home-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+}
+
+.home-group {
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-group-image img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.home-group-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    flex: 1;
+}
+
+.home-group-logo {
+    padding: 0 var(--space-5) var(--space-5);
+    max-width: 140px;
+}
+
+.home-group-logo img {
+    width: 100%;
+}
+
+/* Content Bands */
+/* ------------------------------------------------- */
+
+.home-content-1 {
+    background: var(--purple);
+    color: var(--white);
+    padding: var(--space-10) 0;
+}
+
+.home-content-1 .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+}
+
+.home-content-1 .heading-5,
+.home-content-1 .heading-2 {
+    color: var(--white);
+}
+
+.home-content-1 .body-medium {
+    color: var(--white);
+    max-width: 720px;
+}
+
+.home-content-2 {
+    background: var(--blue);
+    color: var(--white);
+    padding: var(--space-10) 0;
+}
+
+.home-content-2 .wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+}
+
+.home-content-2 .heading-2 {
+    color: var(--white);
+}
+
+.home-content-2 .body-medium {
+    color: var(--white);
+    max-width: 720px;
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 1080px) {
+    .home-groups-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .home-banner .wrap {
+        min-height: 420px;
+    }
+
+    .home-groups-grid {
+        grid-template-columns: 1fr;
+    }
+}

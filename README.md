@@ -163,12 +163,18 @@ get_header();
 
 | Folder | Template Name | Type | Description |
 |--------|--------------|------|-------------|
-| `page-home/` | Home | Single page | Homepage with hero component |
+| `page-about/` | About | Single page | About page: hero, introduction, journey, awards, content |
+| `page-contact/` | Contact | Single page | Contact page: hero, form shortcode, contact content |
+| `page-home/` | Home | Single page | Homepage: banner slider, introduction, groups, content bands, testimonials |
+| `page-jiggy-videos/` | Jiggy Videos | Single page | Video embeds page with YouTube CTA |
+| `page-locations/` | Locations | Single page | Franchise locations with area selector (calendar / email) |
 | `page-news/` | News | Single page | News listing using the default WP query loop with pagination |
 | `page-shop/` | Shop | Single page | SureCart product listing with client-side search, sorting, and pagination |
+| `page-thank-you/` | Thank You | Single page | Post-submission thank-you page |
 | `template-article/` | Article | Reusable | Article grid using a custom `WP_Query` with pagination. Assign to any page that needs a post listing |
 | `template-policy/` | Policy | Reusable | Static policy content layout. Assign to any policy page (privacy, terms, cookies) |
 | `template-product/` | n/a | Auto | SureCart single product wrapper. Not selectable; loaded via `functions/surecart.php` for any `sc_product` single |
+| `template-programmes/` | Programmes | Reusable | Class programme pages: hero, key info boxes, content |
 
 ### Components
 
