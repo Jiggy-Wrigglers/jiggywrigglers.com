@@ -1,35 +1,6 @@
 /* About Page CSS file */
+/* Hero, ethos, gallery and testimonials come from shared components. */
 /* ------------------------------------------------- */
-
-/* Introduction */
-/* ------------------------------------------------- */
-
-.about-introduction {
-    background: var(--white);
-    color: var(--black);
-    padding: var(--space-10) 0;
-}
-
-.about-introduction .wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    max-width: 900px;
-}
-
-.about-introduction .heading-2 {
-    color: var(--purple);
-}
-
-.about-introduction-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-}
-
-.about-introduction-text p {
-    color: rgba(0, 0, 0, 0.7);
-}
 
 /* Journey */
 /* ------------------------------------------------- */
@@ -73,7 +44,9 @@
 
 .about-journey-text .body-medium {
     color: var(--white);
-}.about-journey-trail {
+}
+
+.about-journey-trail {
     max-width: 180px;
 }
 
@@ -83,7 +56,7 @@
 
 .about-journey-image img {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 20px;
 }
 
 /* Awards */
@@ -114,44 +87,13 @@
     text-align: center;
 }
 
-.about-award .heading-6 {
-    color: var(--purple);
-}
-
 .about-award img {
     width: 100%;
     aspect-ratio: 1;
     object-fit: contain;
 }
 
-/* Content */
-/* ------------------------------------------------- */
-
-.about-content {
-    background: var(--peach);
-    color: var(--purple);
-    padding: var(--space-10) 0;
-}
-
-.about-content .wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    align-items: flex-start;
-    max-width: 900px;
-}
-
-.about-content .heading-2 {
-    color: var(--purple);
-}
-
-.about-content-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-}
-
-.about-content-text p {
+.about-award .heading-6 {
     color: var(--purple);
 }
 

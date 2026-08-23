@@ -11,15 +11,13 @@
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/register-interest/style.css">
 <!-- Register Interest Component -->
 <?php
-    $register_interest_cta = get_field( 'register_interest_cta', 'option' );
-
-    if ( ! $register_interest_cta ) return;
-
     $register_heading = get_field( 'register_heading', 'option' );
     $register_title   = get_field( 'register_title', 'option' );
     $register_text    = get_field( 'register_text', 'option' );
     $register_button  = get_field( 'register_button', 'option' );
     $register_image   = get_field( 'register_image', 'option' );
+
+    if ( empty( $register_title ) && empty( $register_text ) && empty( $register_button ) && empty( $register_image ) ) return;
 ?>
 <section class="register-interest">
     <div class="wrap">

@@ -43,7 +43,7 @@
                                     <p class="testimonials-name"><?php echo esc_html( $testimonial['name'] ); ?></p>
                                 <?php endif; ?>
                                 <?php if ( ! empty( $testimonial['title'] ) ) : ?>
-                                    <p class="body-medium testimonials-job"><?php echo esc_html( $testimonial['title'] ); ?></p>
+                                    <p class="testimonials-role"><?php echo esc_html( $testimonial['title'] ); ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>

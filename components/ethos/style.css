@@ -1,39 +1,62 @@
 /* Ethos Component CSS file */
+/* Styled like the old site's offering block. */
 /* ------------------------------------------------- */
 
 .ethos {
-    background: var(--white);
-    color: var(--purple);
+    background: var(--purple);
+    color: var(--white);
     padding: var(--space-10) 0;
 }
 
 .ethos-title {
-    color: var(--purple);
-    margin-bottom: var(--space-7);
+    color: var(--white);
+    text-align: center;
+    margin-bottom: var(--space-8);
 }
 
 .ethos-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-5);
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
 }
 
 .ethos-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    background: var(--peach);
-    border-radius: 6px;
-    padding: var(--space-6);
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 1.6fr auto;
+    min-height: 360px;
+}
+
+.ethos-card-image {
+    position: relative;
 }
 
 .ethos-card-image img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    border-radius: 6px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ethos-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    text-align: center;
 }
 
 .ethos-card-text {
     color: var(--purple);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--font-size-18, 18px);
+    line-height: 1.5;
 }
 
 /* Responsive */
@@ -41,7 +64,7 @@
 
 @media (max-width: 1080px) {
     .ethos-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
     }
 }
 

@@ -92,12 +92,19 @@ $header_logo = $logo_white ? $logo_white : $company_logo;
 			<?php if ( $header_menu_items ) : ?>
 				<ul>
 					<?php foreach ( $header_menu_items as $menu_item ) : ?>
-						<li>
-							<a class="header-menu-link" href="<?php echo esc_url( $menu_item['link']['url'] ); ?>"<?php echo ! empty( $menu_item['link']['target'] ) ? ' target="' . esc_attr( $menu_item['link']['target'] ) . '"' : ''; ?>>
-								<?php echo wp_kses_post( $menu_item['link']['title'] ); ?>
-							</a>
+						<li x-data="{ subOpen: false }">
+							<div class="header-menu-item-header">
+								<a class="header-menu-link" href="<?php echo esc_url( $menu_item['link']['url'] ); ?>"<?php echo ! empty( $menu_item['link']['target'] ) ? ' target="' . esc_attr( $menu_item['link']['target'] ) . '"' : ''; ?>>
+									<?php echo wp_kses_post( $menu_item['link']['title'] ); ?>
+								</a>
+								<?php if ( ! empty( $menu_item['sub_menu'] ) ) : ?>
+									<button class="header-menu-arrow" :class="{ 'is-open': subOpen }" @click="subOpen = !subOpen" aria-label="Toggle sub menu" :aria-expanded="subOpen" type="button">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="<?php echo esc_attr( '#662483' ); ?>" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+									</button>
+								<?php endif; ?>
+							</div>
 							<?php if ( ! empty( $menu_item['sub_menu'] ) ) : ?>
-								<ul class="header-menu-sub">
+								<ul class="header-menu-sub" x-show="subOpen" x-collapse.duration.300ms>
 									<?php foreach ( $menu_item['sub_menu'] as $sub_link ) : ?>
 										<li>
 											<a href="<?php echo esc_url( $sub_link['link']['url'] ); ?>"<?php echo ! empty( $sub_link['link']['target'] ) ? ' target="' . esc_attr( $sub_link['link']['target'] ) . '"' : ''; ?>>
@@ -124,6 +131,7 @@ $header_logo = $logo_white ? $logo_white : $company_logo;
 				</a>
 			<?php endif; ?>
 		</div>
+	</div>
 	</div>
 </aside>
 </div>

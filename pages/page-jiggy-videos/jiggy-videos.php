@@ -24,30 +24,35 @@ $youtube_text   = get_field( 'youtube_text' );
 $youtube_button = get_field( 'youtube_button' );
 ?>
 
-<!-- Videos Section -->
+<!-- Video 1 Section -->
 <!-- ------------------------------------------------- -->
+<?php if ( $video_1_embed ) : ?>
 <section class="jiggy-videos">
     <div class="wrap">
-        <div class="jiggy-videos-grid">
-            <div class="jiggy-video" data-animate="fade-up">
-                <?php if ( $video_1_title ) : ?>
-                    <h2 class="heading-4"><?php echo wp_kses_post( $video_1_title ); ?></h2>
-                <?php endif; ?>
-                <?php if ( $video_1_embed ) : ?>
-                    <div class="jiggy-video-embed"><?php echo wp_kses_post( $video_1_embed ); ?></div>
-                <?php endif; ?>
-            </div>
-            <div class="jiggy-video" data-animate="fade-up" data-animate-delay="1">
-                <?php if ( $video_2_title ) : ?>
-                    <h2 class="heading-4"><?php echo wp_kses_post( $video_2_title ); ?></h2>
-                <?php endif; ?>
-                <?php if ( $video_2_embed ) : ?>
-                    <div class="jiggy-video-embed"><?php echo wp_kses_post( $video_2_embed ); ?></div>
-                <?php endif; ?>
-            </div>
+        <div class="jiggy-video" data-animate="fade-up">
+            <?php if ( $video_1_title ) : ?>
+                <h2 class="heading-4"><?php echo wp_kses_post( $video_1_title ); ?></h2>
+            <?php endif; ?>
+            <div class="jiggy-video-embed"><?php echo wp_kses_post( $video_1_embed ); ?></div>
         </div>
     </div>
 </section>
+<?php endif; ?>
+
+<!-- Video 2 Section -->
+<!-- ------------------------------------------------- -->
+<?php if ( $video_2_embed ) : ?>
+<section class="jiggy-videos">
+    <div class="wrap">
+        <div class="jiggy-video" data-animate="fade-up">
+            <?php if ( $video_2_title ) : ?>
+                <h2 class="heading-4"><?php echo wp_kses_post( $video_2_title ); ?></h2>
+            <?php endif; ?>
+            <div class="jiggy-video-embed"><?php echo wp_kses_post( $video_2_embed ); ?></div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
 
 <!-- YouTube Section -->
 <!-- ------------------------------------------------- -->
@@ -65,5 +70,9 @@ $youtube_button = get_field( 'youtube_button' );
     </div>
 </section>
 <?php endif; ?>
+
+<!-- Playlist Section -->
+<!-- ------------------------------------------------- -->
+<?php include locate_template( 'components/playlist/index.php' ); ?>
 
 <?php get_footer(); ?>

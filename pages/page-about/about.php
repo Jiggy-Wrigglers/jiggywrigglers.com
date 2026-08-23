@@ -12,12 +12,11 @@ get_header(); ?>
 <!-- ------------------------------------------------- -->
 <?php include locate_template( 'components/hero/index.php' ); ?>
 
-<?php
-// Introduction
-$introduction_sup_title = get_field( 'introduction_sup_title' );
-$introduction_title     = get_field( 'introduction_title' );
-$introduction_text      = get_field( 'introduction_text' );
+<!-- Ethos Section -->
+<!-- ------------------------------------------------- -->
+<?php include locate_template( 'components/ethos/index.php' ); ?>
 
+<?php
 // Journey
 $journey_title    = get_field( 'journey_title' );
 $journey_repeater = get_field( 'journey_repeater' );
@@ -25,29 +24,7 @@ $journey_repeater = get_field( 'journey_repeater' );
 // Awards
 $awards_title  = get_field( 'awards_title' );
 $awards_images = get_field( 'awards_images' );
-
-// Content
-$content_sup_title = get_field( 'content_sup_title' );
-$content_title     = get_field( 'content_title' );
-$content_text      = get_field( 'content_text' );
-$content_button    = get_field( 'content_button' );
 ?>
-
-<!-- Introduction Section -->
-<!-- ------------------------------------------------- -->
-<section class="about-introduction">
-    <div class="wrap">
-        <?php if ( $introduction_sup_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $introduction_sup_title ); ?></h3>
-        <?php endif; ?>
-        <?php if ( $introduction_title ) : ?>
-            <h2 class="heading-2"><?php echo wp_kses_post( $introduction_title ); ?></h2>
-        <?php endif; ?>
-        <?php if ( $introduction_text ) : ?>
-            <div class="about-introduction-text"><?php echo wp_kses_post( $introduction_text ); ?></div>
-        <?php endif; ?>
-    </div>
-</section>
 
 <!-- Journey Section -->
 <!-- ------------------------------------------------- -->
@@ -109,27 +86,12 @@ $content_button    = get_field( 'content_button' );
 </section>
 <?php endif; ?>
 
-<!-- Content Section -->
+<!-- Gallery Section -->
 <!-- ------------------------------------------------- -->
-<?php if ( $content_title || $content_text ) : ?>
-<section class="about-content">
-    <div class="wrap">
-        <?php if ( $content_sup_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $content_sup_title ); ?></h3>
-        <?php endif; ?>
-        <?php if ( $content_title ) : ?>
-            <h2 class="heading-2"><?php echo wp_kses_post( $content_title ); ?></h2>
-        <?php endif; ?>
-        <?php if ( $content_text ) : ?>
-            <div class="about-content-text"><?php echo wp_kses_post( $content_text ); ?></div>
-        <?php endif; ?>
-        <?php if ( $content_button ) : ?>
-            <a class="button button-purple" href="<?php echo esc_url( $content_button['url'] ); ?>"<?php echo ! empty( $content_button['target'] ) ? ' target="' . esc_attr( $content_button['target'] ) . '"' : ''; ?>>
-                <?php echo esc_html( $content_button['title'] ); ?>
-            </a>
-        <?php endif; ?>
-    </div>
-</section>
-<?php endif; ?>
+<?php include locate_template( 'components/gallery/index.php' ); ?>
+
+<!-- Testimonials Section -->
+<!-- ------------------------------------------------- -->
+<?php include locate_template( 'components/testimonials/index.php' ); ?>
 
 <?php get_footer(); ?>
