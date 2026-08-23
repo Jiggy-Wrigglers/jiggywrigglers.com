@@ -132,7 +132,6 @@ $header_logo = $logo_white ? $logo_white : $company_logo;
 			<?php endif; ?>
 		</div>
 	</div>
-	</div>
 </aside>
 </div>
 <main id="main-content" tabindex="-1">
