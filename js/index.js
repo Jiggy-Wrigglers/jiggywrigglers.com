@@ -31,8 +31,10 @@ const initRevealAnimations = () => {
 document.addEventListener('DOMContentLoaded', initRevealAnimations);
 
 // Smooth scroll. Guarded: if the Lenis CDN fails the rest of the file
-// (and the reveal engine above) still runs.
-if (window.Lenis) {
+// (and the reveal engine above) still runs. Retried on DOMContentLoaded
+// in case script ordering left Lenis unavailable at parse time.
+const initLenis = () => {
+    if (window.lenis || !window.Lenis) return;
     window.lenis = new Lenis({
         autoRaf: true,
         autoToggle: true,
@@ -41,7 +43,9 @@ if (window.Lenis) {
         naiveDimensions: true,
         stopInertiaOnNavigate: true,
     });
-}
+};
+initLenis();
+document.addEventListener('DOMContentLoaded', initLenis);
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('parallaxItems', () => ({
