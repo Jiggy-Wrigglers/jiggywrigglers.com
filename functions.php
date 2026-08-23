@@ -95,9 +95,7 @@ function jiggy_wrigglers_scripts() {
 	wp_enqueue_style( 'splide-css', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css', array(), null );
 	wp_enqueue_script( 'splide', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js', array(), null, false );
 
-	wp_enqueue_style( 'lenis-css', 'https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.css', array(), null );
-	wp_enqueue_script( 'lenis', 'https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js', array(), null, false );
-	wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/js/index.js', array( 'lenis' ), _S_VERSION, false );
+	wp_enqueue_script( 'theme-js', get_template_directory_uri() . '/js/index.js', array(), _S_VERSION, false );
 
 	wp_enqueue_script( 'alpinejs-intersect', 'https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.14.1/dist/cdn.min.js', array(), null, false );
 	wp_enqueue_script( 'alpinejs-collapse', 'https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.1/dist/cdn.min.js', array(), null, false );
@@ -106,7 +104,7 @@ function jiggy_wrigglers_scripts() {
 add_action( 'wp_enqueue_scripts', 'jiggy_wrigglers_scripts' );
 
 function jiggy_wrigglers_defer_scripts( $tag, $handle ) {
-	$defer = array( 'alpinejs', 'alpinejs-intersect', 'alpinejs-collapse', 'splide', 'lenis', 'theme-js' );
+	$defer = array( 'alpinejs', 'alpinejs-intersect', 'alpinejs-collapse', 'splide', 'theme-js' );
 	if ( in_array( $handle, $defer, true ) ) {
 		return str_replace( ' src=', ' defer src=', $tag );
 	}

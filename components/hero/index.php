@@ -21,9 +21,9 @@
 
     $hero_image = is_array( $hero_images ) && ! empty( $hero_images ) ? $hero_images[0] : null;
 ?>
-<section class="hero" x-data="parallaxItems">
+<section class="hero">
     <?php if ( $hero_image ) : ?>
-        <?php echo wp_get_attachment_image( $hero_image['ID'], 'full', false, array( 'data-parallax' => '0.3' ) ); ?>
+        <?php echo wp_get_attachment_image( $hero_image['ID'], 'full' ); ?>
     <?php endif; ?>
     <div class="wrap">
         <?php if ( $hero_title ) : ?>
