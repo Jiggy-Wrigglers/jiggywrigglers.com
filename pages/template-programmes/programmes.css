@@ -1,97 +1,162 @@
 ﻿/* Programmes Template CSS file */
+/* Key info styled like the old site's key-info-text block. */
 /* ------------------------------------------------- */
 
-/* Information */
-/* ------------------------------------------------- */
-
-.programmes-information {
+.key-info-text-block {
     background: var(--white);
-    color: var(--black);
-    padding: var(--space-10) 0;
+    padding: var(--space-5) 0 var(--space-8);
 }
 
-.programmes-information .wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-}
-
-.programmes-information .heading-2 {
-    color: var(--purple);
-}
-
-.programmes-information .body-medium {
-    color: rgba(0, 0, 0, 0.7);
-    max-width: 720px;
-}
-
-.programmes-information-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-5);
-}
-
-.programmes-information-box {
-    background: var(--peach);
-    border-radius: 6px;
-    padding: var(--space-5);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-}
-
-.programmes-information-box .heading-6,
-.programmes-information-box .body-medium {
-    color: var(--purple);
-}
-
-/* Content */
+/* Title */
 /* ------------------------------------------------- */
 
-.programmes-content {
-    background: var(--peach);
-    color: var(--purple);
-    padding: var(--space-10) 0;
+.key-info-title {
+    color: var(--pink);
+    text-align: center;
+    max-width: 1400px;
+    width: 90vw;
+    margin: var(--space-5) auto;
 }
 
-.programmes-content .wrap {
+/* Info Strip */
+/* ------------------------------------------------- */
+
+.key-info-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    padding: 40px;
+    max-width: calc(1200px - 60px);
+    background: var(--peach);
+    border-radius: 20px;
+}
+
+.key-info-box {
+    position: relative;
+    text-align: center;
+    color: var(--pink);
+}
+
+.key-info-box::after {
+    position: absolute;
+    height: 100%;
+    width: 3px;
+    background: #EEDEE5;
+    content: '';
+    top: 0;
+    right: -15px;
+}
+
+.key-info-box:nth-last-of-type(1)::after {
+    display: none;
+}
+
+.key-info-intro p {
+    color: var(--purple);
+    font-weight: 700;
+    text-align: start;
+    font-size: var(--font-size-16);
+}
+
+.key-info-label {
+    color: var(--purple);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--font-size-14);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--space-2);
+}
+
+.key-info-box .heading-5 {
+    color: var(--pink);
+}
+
+/* Content Columns */
+/* ------------------------------------------------- */
+
+.content-columns {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    position: relative;
+    padding: 60px 0 20px;
+    gap: 60px;
+}
+
+.content-columns-1 {
+    padding: 40px 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
+    gap: var(--space-4);
     align-items: flex-start;
-    max-width: 900px;
 }
 
-.programmes-content .heading-2 {
-    color: var(--purple);
-}
-
-.programmes-content-text {
+.content-columns-text {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
 }
 
-.programmes-content-text p {
+.content-columns-text p {
     color: var(--purple);
 }
 
-.programmes-content-image img {
-    width: 100%;
-    border-radius: 6px;
+.content-columns-button {
+    display: flex;
+    gap: 20px;
+    padding-top: 30px;
+    flex-wrap: wrap;
 }
 
-.programmes-content-buttons {
+.content-columns-2 {
+    position: relative;
+}
+
+.content-columns-2 .image {
     display: flex;
-    gap: var(--space-4);
-    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+}
+
+.content-columns-2 .image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 /* Responsive */
 /* ------------------------------------------------- */
 
-@media (max-width: 1080px) {
-    .programmes-information-grid {
+@media (max-width: 1024px) {
+    .key-info-strip {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .key-info-box::after {
+        display: none;
+    }
+}
+
+@media (max-width: 960px) {
+    .content-columns {
         grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1.3fr;
+    }
+}
+
+@media (max-width: 800px) {
+    .key-info-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .content-columns-button {
+        flex-direction: column;
     }
 }

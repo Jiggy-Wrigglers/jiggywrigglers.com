@@ -11,16 +11,21 @@
 get_header(); ?>
 
 <?php
-    $hero_title  = get_field( 'hero_title', 'option' ) ?: '404 - Page Not Found';
-    $hero_text   = get_field( 'hero_text', 'option' ) ?: "The page you are looking for could not be found. It may have been moved or no longer exists.";
-    $hero_button = get_field( 'hero_button_1', 'option' );
-    $hero_image  = get_field( 'hero_image', 'option' );
+    $hero_title   = get_field( 'hero_title', 'option' ) ?: '404 - Page Not Found';
+    $hero_text    = get_field( 'hero_text', 'option' ) ?: "The page you are looking for could not be found. It may have been moved or no longer exists.";
+    $hero_buttons = get_field( 'hero_buttons', 'option' );
+    $hero_images  = get_field( 'hero_images', 'option' );
 
-    if ( empty( $hero_button ) ) {
-        $hero_button = array(
-            'title'  => 'Back to Home',
-            'url'    => home_url( '/' ),
-            'target' => '',
+    if ( empty( $hero_buttons ) ) {
+        $hero_buttons = array(
+            array(
+                'button' => array(
+                    'title'  => 'Back to Home',
+                    'url'    => home_url( '/' ),
+                    'target' => '',
+                ),
+                'colour' => 'orange',
+            ),
         );
     }
 ?>

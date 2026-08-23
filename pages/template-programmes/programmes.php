@@ -11,87 +11,98 @@
 get_header(); ?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/pages/template-programmes/programmes.css">
 
+<!-- Hero Section -->
+<!-- ------------------------------------------------- -->
+<?php include locate_template( 'components/hero/index.php' ); ?>
+
 <?php
-// Information
+// Key Info
 $information_title      = get_field( 'information_title' );
 $information_text       = get_field( 'information_text' );
 $information_age_range  = get_field( 'information_age_range' );
 $information_length     = get_field( 'information_length' );
 $information_group_size = get_field( 'information_group_size' );
 
-// Content
+// Content Columns
 $content_text     = get_field( 'content_text' );
 $content_button_1 = get_field( 'content_button_1' );
 $content_button_2 = get_field( 'content_button_2' );
 $content_image    = get_field( 'content_image' );
+
+$key_info_boxes = array(
+    array( 'label' => 'Age Range', 'value' => $information_age_range ),
+    array( 'label' => 'Class Length', 'value' => $information_length ),
+    array( 'label' => 'Group Size', 'value' => $information_group_size ),
+);
 ?>
 
-<!-- Hero Section -->
+<!-- Key Info Text Section -->
 <!-- ------------------------------------------------- -->
-<?php
-$hero_button   = get_field( 'hero_button_1' );
-$hero_button_2 = get_field( 'hero_button_2' );
-include locate_template( 'components/hero/index.php' );
-?>
+<section class="key-info-text-block">
+    <?php if ( $information_title ) : ?>
+        <h2 class="heading-3 key-info-title" data-animate="fade-up"><?php echo wp_kses_post( $information_title ); ?></h2>
+    <?php endif; ?>
 
-<!-- Information Section -->
-<!-- ------------------------------------------------- -->
-<section class="programmes-information">
-    <div class="wrap">
-        <?php if ( $information_title ) : ?>
-            <h2 class="heading-2"><?php echo wp_kses_post( $information_title ); ?></h2>
-        <?php endif; ?>
-        <?php if ( $information_text ) : ?>
-            <p class="body-medium"><?php echo wp_kses_post( $information_text ); ?></p>
-        <?php endif; ?>
-        <div class="programmes-information-grid">
-            <?php if ( $information_age_range ) : ?>
-                <div class="programmes-information-box">
-                    <h3 class="heading-6">Age Range</h3>
-                    <p class="body-medium"><?php echo wp_kses_post( $information_age_range ); ?></p>
+    <?php if ( $information_text || $information_age_range || $information_length || $information_group_size ) : ?>
+        <div class="wrap key-info-strip" data-animate="fade-up" data-animate-delay="1">
+            <?php if ( $information_text ) : ?>
+                <div class="key-info-box key-info-intro">
+                    <p><?php echo wp_kses_post( $information_text ); ?></p>
                 </div>
             <?php endif; ?>
-            <?php if ( $information_length ) : ?>
-                <div class="programmes-information-box">
-                    <h3 class="heading-6">Class Length</h3>
-                    <p class="body-medium"><?php echo wp_kses_post( $information_length ); ?></p>
-                </div>
-            <?php endif; ?>
-            <?php if ( $information_group_size ) : ?>
-                <div class="programmes-information-box">
-                    <h3 class="heading-6">Group Size</h3>
-                    <p class="body-medium"><?php echo wp_kses_post( $information_group_size ); ?></p>
-                </div>
-            <?php endif; ?>
+            <?php foreach ( $key_info_boxes as $box ) : ?>
+                <?php if ( $box['value'] ) : ?>
+                    <div class="key-info-box">
+                        <p class="key-info-label"><?php echo esc_html( $box['label'] ); ?></p>
+                        <h3 class="heading-5"><?php echo wp_kses_post( $box['value'] ); ?></h3>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </div>
-    </div>
-</section>
+    <?php endif; ?>
 
-<!-- Content Section -->
-<!-- ------------------------------------------------- -->
-<?php if ( $content_text ) : ?>
-<section class="programmes-content">
-    <div class="wrap">
-        <div class="programmes-content-text"><?php echo wp_kses_post( $content_text ); ?></div>
-        <div class="programmes-content-buttons">
-            <?php if ( $content_button_1 ) : ?>
-                <a class="button button-purple" href="<?php echo esc_url( $content_button_1['url'] ); ?>"<?php echo ! empty( $content_button_1['target'] ) ? ' target="' . esc_attr( $content_button_1['target'] ) . '"' : ''; ?>>
-                    <?php echo esc_html( $content_button_1['title'] ); ?>
-                </a>
-            <?php endif; ?>
-            <?php if ( $content_button_2 ) : ?>
-                <a class="button button-pink" href="<?php echo esc_url( $content_button_2['url'] ); ?>"<?php echo ! empty( $content_button_2['target'] ) ? ' target="' . esc_attr( $content_button_2['target'] ) . '"' : ''; ?>>
-                    <?php echo esc_html( $content_button_2['title'] ); ?>
-                </a>
-            <?php endif; ?>
-        </div>
-        <?php if ( $content_image ) : ?>
-            <div class="programmes-content-image" data-animate="fade-up" data-animate-delay="2">
-                <?php echo wp_get_attachment_image( $content_image['ID'], 'full' ); ?>
+    <?php if ( $content_text || $content_image ) : ?>
+        <div class="wrap content-columns">
+            <div class="content-columns-1" data-animate="fade-up">
+                <?php if ( $content_text ) : ?>
+                    <div class="content-columns-text"><?php echo wp_kses_post( $content_text ); ?></div>
+                <?php endif; ?>
+                <?php if ( $content_button_1 || $content_button_2 ) : ?>
+                    <div class="content-columns-button">
+                        <?php if ( $content_button_1 ) : ?>
+                            <a class="button button-purple" href="<?php echo esc_url( $content_button_1['url'] ); ?>"<?php echo ! empty( $content_button_1['target'] ) ? ' target="' . esc_attr( $content_button_1['target'] ) . '"' : ''; ?>>
+                                <?php echo esc_html( $content_button_1['title'] ); ?>
+                            </a>
+                        <?php endif; ?>
+                        <?php if ( $content_button_2 ) : ?>
+                            <a class="button button-pink" href="<?php echo esc_url( $content_button_2['url'] ); ?>"<?php echo ! empty( $content_button_2['target'] ) ? ' target="' . esc_attr( $content_button_2['target'] ) . '"' : ''; ?>>
+                                <?php echo esc_html( $content_button_2['title'] ); ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
-    </div>
+            <?php if ( $content_image ) : ?>
+                <div class="content-columns-2" data-animate="fade-up" data-animate-delay="1">
+                    <div class="image">
+                        <?php echo wp_get_attachment_image( $content_image['ID'], 'full' ); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
 </section>
-<?php endif; ?>
+
+<!-- Gallery Section -->
+<!-- ------------------------------------------------- -->
+<?php include locate_template( 'components/gallery/index.php' ); ?>
+
+<!-- Ethos Section -->
+<!-- ------------------------------------------------- -->
+<?php include locate_template( 'components/ethos/index.php' ); ?>
+
+<!-- Testimonials Section -->
+<!-- ------------------------------------------------- -->
+<?php include locate_template( 'components/testimonials/index.php' ); ?>
 
 <?php get_footer(); ?>

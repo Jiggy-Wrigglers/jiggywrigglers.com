@@ -12,9 +12,6 @@ get_header(); ?>
 
 <!-- Hero Section -->
 <!-- ------------------------------------------------- -->
-<?php
-$hero_button = get_field( 'hero_button_1' );
-include locate_template( 'components/hero/index.php' );
-?>
+<?php include locate_template( 'components/hero/index.php' ); ?>
 
 <?php get_footer(); ?>
