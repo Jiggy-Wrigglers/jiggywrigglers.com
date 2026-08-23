@@ -19,10 +19,9 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<?php 
+<?php
 	$company_logo = get_field( 'company_logo', 'option' );
 	$logo_white = get_field( 'logo_white', 'option' );
-	$header_menu_items = get_field( 'header_menu_items', 'option' );
 	$header_menu_button_1 = get_field( 'header_menu_button_1', 'option' );
 	$header_menu_button_2 = get_field( 'header_menu_button_2', 'option' );
 
@@ -90,33 +89,47 @@
 >
 	<div class="wrap">
 		<nav class="header-menu-nav" aria-label="Primary">
-			<?php if ( $header_menu_items ) : ?>
+			<?php if ( have_rows( 'header_menu_items', 'option' ) ) : ?>
 				<ul>
-					<?php foreach ( $header_menu_items as $menu_item ) : ?>
+					<?php
+					while ( have_rows( 'header_menu_items', 'option' ) ) :
+						the_row();
+						$menu_link = get_sub_field( 'link' );
+						if ( empty( $menu_link ) ) {
+							continue;
+						}
+						?>
 						<li x-data="{ subOpen: false }">
 							<div class="header-menu-item-header">
-								<a class="header-menu-link" href="<?php echo esc_url( $menu_item['link']['url'] ); ?>"<?php echo ! empty( $menu_item['link']['target'] ) ? ' target="' . esc_attr( $menu_item['link']['target'] ) . '"' : ''; ?>>
-									<?php echo wp_kses_post( $menu_item['link']['title'] ); ?>
+								<a class="header-menu-link" href="<?php echo esc_url( $menu_link['url'] ); ?>"<?php echo ! empty( $menu_link['target'] ) ? ' target="' . esc_attr( $menu_link['target'] ) . '"' : ''; ?>>
+									<?php echo wp_kses_post( $menu_link['title'] ); ?>
 								</a>
-								<?php if ( ! empty( $menu_item['sub_menu'] ) ) : ?>
+								<?php if ( have_rows( 'sub_menu' ) ) : ?>
 									<button class="header-menu-arrow" :class="{ 'is-open': subOpen }" @click="subOpen = !subOpen" aria-label="Toggle sub menu" :aria-expanded="subOpen" type="button">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="<?php echo esc_attr( '#662483' ); ?>" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
 									</button>
 								<?php endif; ?>
 							</div>
-							<?php if ( ! empty( $menu_item['sub_menu'] ) ) : ?>
+							<?php if ( have_rows( 'sub_menu' ) ) : ?>
 								<ul class="header-menu-sub" x-show="subOpen" x-collapse.duration.300ms>
-									<?php foreach ( $menu_item['sub_menu'] as $sub_link ) : ?>
+									<?php
+									while ( have_rows( 'sub_menu' ) ) :
+										the_row();
+										$sub_link = get_sub_field( 'link' );
+										if ( empty( $sub_link ) ) {
+											continue;
+										}
+										?>
 										<li>
-											<a href="<?php echo esc_url( $sub_link['link']['url'] ); ?>"<?php echo ! empty( $sub_link['link']['target'] ) ? ' target="' . esc_attr( $sub_link['link']['target'] ) . '"' : ''; ?>>
-												<?php echo wp_kses_post( $sub_link['link']['title'] ); ?>
+											<a href="<?php echo esc_url( $sub_link['url'] ); ?>"<?php echo ! empty( $sub_link['target'] ) ? ' target="' . esc_attr( $sub_link['target'] ) . '"' : ''; ?>>
+												<?php echo wp_kses_post( $sub_link['title'] ); ?>
 											</a>
 										</li>
-									<?php endforeach; ?>
+									<?php endwhile; ?>
 								</ul>
 							<?php endif; ?>
 						</li>
-					<?php endforeach; ?>
+					<?php endwhile; ?>
 				</ul>
 			<?php endif; ?>
 		</nav>

@@ -229,23 +229,6 @@ function jiggy_wrigglers_sort_by_order( $posts, $field = 'order', $zero_is_unord
 }
 
 /**
- * Temporary diagnostic: on a fatal error mid-render, append the exact
- * error (file + line) to the response and log it, so truncation points
- * are diagnosable from the browser and debug.log.
- */
-register_shutdown_function( function () {
-	$error = error_get_last();
-	if ( $error && in_array( $error['type'], array( E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR ), true ) ) {
-		$message = sprintf( '[FATAL] %s in %s on line %d', $error['message'], $error['file'], $error['line'] );
-		error_log( $message );
-		if ( ! headers_sent() ) {
-			header( 'Content-Type: text/html; charset=utf-8' );
-		}
-		echo "\n<!-- jiggy-diagnostic: {$message} -->\n";
-	}
-} );
-
-/**
  * Maintenance mode. Activated via the ACF option: maintenance_mode (True/False).
  * Only shown to non-logged-in visitors. Logged-in users see the live site.
  */

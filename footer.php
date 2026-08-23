@@ -11,7 +11,6 @@
 $footer_1_title = get_field( 'footer_1_title', 'option' );
 $footer_1_text = get_field( 'footer_1_text', 'option' );
 $footer_2_title = get_field( 'footer_2_title', 'option' );
-$footer_2_menu = get_field( 'footer_2_menu', 'option' );
 $footer_3_title = get_field( 'footer_3_title', 'option' );
 $footer_3_text = get_field( 'footer_3_text', 'option' );
 $footer_4_title = get_field( 'footer_4_title', 'option' );
@@ -41,15 +40,20 @@ $copyright_link = get_field( 'copyright_link', 'option' );
                 <?php if ( $footer_2_title ) : ?>
                     <h2 class="heading-4"><?php echo esc_html( $footer_2_title ); ?></h2>
                 <?php endif; ?>
-                <?php if ( $footer_2_menu ) : ?>
+                <?php if ( have_rows( 'footer_2_menu', 'option' ) ) : ?>
                     <ul class="footer-menu">
-                        <?php foreach ( $footer_2_menu as $item ) : ?>
-                            <?php if ( ! empty( $item['link'] ) ) : ?>
-                                <li>
-                                    <a href="<?php echo esc_url( $item['link']['url'] ); ?>"<?php echo ! empty( $item['link']['target'] ) ? ' target="' . esc_attr( $item['link']['target'] ) . '"' : ''; ?>><?php echo esc_html( $item['link']['title'] ); ?></a>
-                                </li>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                        <?php
+                        while ( have_rows( 'footer_2_menu', 'option' ) ) :
+							the_row();
+                            $menu_link = get_sub_field( 'link' );
+                            if ( empty( $menu_link ) ) {
+                                continue;
+                            }
+                            ?>
+                            <li>
+                                <a href="<?php echo esc_url( $menu_link['url'] ); ?>"<?php echo ! empty( $menu_link['target'] ) ? ' target="' . esc_attr( $menu_link['target'] ) . '"' : ''; ?>><?php echo esc_html( $menu_link['title'] ); ?></a>
+                            </li>
+                        <?php endwhile; ?>
                     </ul>
                 <?php endif; ?>
             </div>
