@@ -21,8 +21,8 @@ get_header(); ?>
     <div class="wrap">
         <?php if ( have_posts() ) : ?>
             <div class="news-grid">
-                <?php while ( have_posts() ) : the_post(); ?>
-                    <article class="news-card">
+                <?php $i = 0; while ( have_posts() ) : the_post(); $i++; ?>
+                    <article class="news-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( ( $i - 1 ) % 3 ) + 1 ); ?>">
                         <a href="<?php the_permalink(); ?>" class="news-card-link">
                             <?php if ( has_post_thumbnail() ) : ?>
                                 <div class="news-card-image">

@@ -23,27 +23,27 @@
     <div class="wrap">
         <div class="testimonials-header">
             <?php if ( $testimonials_sup_title ) : ?>
-                <h3 class="heading-5"><?php echo wp_kses_post( $testimonials_sup_title ); ?></h3>
+                <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $testimonials_sup_title ); ?></h3>
             <?php endif; ?>
             <?php if ( $testimonials_title ) : ?>
-                <h2 class="heading-2"><?php echo wp_kses_post( $testimonials_title ); ?></h2>
+                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $testimonials_title ); ?></h2>
             <?php endif; ?>
         </div>
 
-        <div class="testimonials-slider splide">
+        <div class="testimonials-slider splide" data-animate="fade-up" data-animate-delay="2">
             <div class="splide__track">
                 <div class="splide__list">
                     <?php foreach ( $testimonials as $testimonial ) : ?>
                         <div class="splide__slide testimonials-slide">
                             <div class="testimonials-slide-inner">
                                 <?php if ( ! empty( $testimonial['quote'] ) ) : ?>
-                                    <p class="body-medium testimonials-quote">&ldquo;<?php echo wp_kses_post( $testimonial['quote'] ); ?>&rdquo;</p>
+                                    <p class="body-medium testimonials-quote"><?php echo wp_kses_post( $testimonial['quote'] ); ?></p>
                                 <?php endif; ?>
                                 <?php if ( ! empty( $testimonial['name'] ) ) : ?>
                                     <p class="testimonials-name"><?php echo esc_html( $testimonial['name'] ); ?></p>
                                 <?php endif; ?>
-                                <?php if ( ! empty( $testimonial['job'] ) ) : ?>
-                                    <p class="body-medium testimonials-job"><?php echo esc_html( $testimonial['job'] ); ?></p>
+                                <?php if ( ! empty( $testimonial['title'] ) ) : ?>
+                                    <p class="body-medium testimonials-job"><?php echo esc_html( $testimonial['title'] ); ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>

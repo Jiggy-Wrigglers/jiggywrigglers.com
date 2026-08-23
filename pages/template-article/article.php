@@ -47,8 +47,8 @@ $articles = new WP_Query( array(
 
         <?php if ( $articles->have_posts() ) : ?>
             <div class="article-grid">
-                <?php while ( $articles->have_posts() ) : $articles->the_post(); ?>
-                    <article class="article-card">
+                <?php $i = 0; while ( $articles->have_posts() ) : $articles->the_post(); $i++; ?>
+                    <article class="article-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( ( $i - 1 ) % 3 ) + 1 ); ?>">
                         <a href="<?php the_permalink(); ?>" class="article-card-link">
                             <?php if ( has_post_thumbnail() ) : ?>
                                 <div class="article-card-image">

@@ -29,7 +29,7 @@ $youtube_button = get_field( 'youtube_button' );
 <section class="jiggy-videos">
     <div class="wrap">
         <div class="jiggy-videos-grid">
-            <div class="jiggy-video">
+            <div class="jiggy-video" data-animate="fade-up">
                 <?php if ( $video_1_title ) : ?>
                     <h2 class="heading-4"><?php echo wp_kses_post( $video_1_title ); ?></h2>
                 <?php endif; ?>
@@ -37,7 +37,7 @@ $youtube_button = get_field( 'youtube_button' );
                     <div class="jiggy-video-embed"><?php echo wp_kses_post( $video_1_embed ); ?></div>
                 <?php endif; ?>
             </div>
-            <div class="jiggy-video">
+            <div class="jiggy-video" data-animate="fade-up" data-animate-delay="1">
                 <?php if ( $video_2_title ) : ?>
                     <h2 class="heading-4"><?php echo wp_kses_post( $video_2_title ); ?></h2>
                 <?php endif; ?>

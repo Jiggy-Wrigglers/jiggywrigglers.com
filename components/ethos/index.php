@@ -18,12 +18,12 @@
 <section class="ethos">
     <div class="wrap">
         <?php if ( $ethos_title ) : ?>
-            <h2 class="heading-2 ethos-title"><?php echo wp_kses_post( $ethos_title ); ?></h2>
+            <h2 class="heading-2 ethos-title" data-animate="fade-up"><?php echo wp_kses_post( $ethos_title ); ?></h2>
         <?php endif; ?>
 
         <div class="ethos-grid">
-            <?php foreach ( $ethos_repeater as $ethos ) : ?>
-                <div class="ethos-card">
+            <?php foreach ( $ethos_repeater as $i => $ethos ) : ?>
+                <div class="ethos-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( $i % 3 ) + 1 ); ?>">
                     <?php if ( ! empty( $ethos['image'] ) ) : ?>
                         <div class="ethos-card-image">
                             <?php echo wp_get_attachment_image( $ethos['image']['ID'], 'full' ); ?>

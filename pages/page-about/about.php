@@ -60,7 +60,7 @@ $content_button    = get_field( 'content_button' );
     <?php endif; ?>
     <div class="wrap">
         <?php foreach ( $journey_repeater as $i => $journey ) : ?>
-            <div class="about-journey-step<?php echo $i % 2 !== 0 ? ' about-journey-step--reversed' : ''; ?>">
+            <div class="about-journey-step<?php echo $i % 2 !== 0 ? ' about-journey-step--reversed' : ''; ?>" data-animate="fade-up">
                 <div class="about-journey-text">
                     <?php if ( ! empty( $journey['text'] ) ) : ?>
                         <p class="body-medium"><?php echo wp_kses_post( $journey['text'] ); ?></p>
@@ -71,12 +71,12 @@ $content_button    = get_field( 'content_button' );
                         </a>
                     <?php endif; ?>
                     <?php if ( ! empty( $journey['journey_trail'] ) ) : ?>
-                        <div class="about-journey-trail">
+                        <div class="about-journey-trail" data-animate="fade-in" data-animate-delay="2">
                             <?php echo wp_get_attachment_image( $journey['journey_trail']['ID'], 'full' ); ?>
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="about-journey-image">
+                <div class="about-journey-image" data-animate="fade-up" data-animate-delay="1">
                     <?php if ( ! empty( $journey['image'] ) ) : ?>
                         <?php echo wp_get_attachment_image( $journey['image']['ID'], 'full' ); ?>
                     <?php endif; ?>
@@ -96,8 +96,8 @@ $content_button    = get_field( 'content_button' );
             <h2 class="heading-2 about-awards-title"><?php echo wp_kses_post( $awards_title ); ?></h2>
         <?php endif; ?>
         <div class="about-awards-grid">
-            <?php foreach ( $awards_images as $award ) : ?>
-                <div class="about-award">
+            <?php foreach ( $awards_images as $i => $award ) : ?>
+                <div class="about-award" data-animate="scale-up" data-animate-delay="<?php echo esc_attr( ( $i % 4 ) + 1 ); ?>">
                     <?php echo wp_get_attachment_image( $award['ID'], 'full' ); ?>
                     <?php if ( $award['alt'] ) : ?>
                         <h4 class="heading-6"><?php echo esc_html( $award['alt'] ); ?></h4>

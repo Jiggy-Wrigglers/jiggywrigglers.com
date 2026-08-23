@@ -12,13 +12,6 @@ get_header(); ?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/pages/template-programmes/programmes.css">
 
 <?php
-// Hero
-$hero_title     = get_field( 'hero_title' );
-$hero_sub_title = get_field( 'hero_sub_title' );
-$hero_text      = get_field( 'hero_text' );
-$hero_button_1  = get_field( 'hero_button_1' );
-$hero_button_2  = get_field( 'hero_button_2' );
-
 // Information
 $information_title      = get_field( 'information_title' );
 $information_text       = get_field( 'information_text' );
@@ -35,31 +28,11 @@ $content_image    = get_field( 'content_image' );
 
 <!-- Hero Section -->
 <!-- ------------------------------------------------- -->
-<section class="programmes-hero">
-    <div class="wrap">
-        <?php if ( $hero_sub_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $hero_sub_title ); ?></h3>
-        <?php endif; ?>
-        <?php if ( $hero_title ) : ?>
-            <h1 class="heading-1"><?php echo wp_kses_post( $hero_title ); ?></h1>
-        <?php endif; ?>
-        <?php if ( $hero_text ) : ?>
-            <p class="body-medium"><?php echo wp_kses_post( $hero_text ); ?></p>
-        <?php endif; ?>
-        <div class="programmes-hero-buttons">
-            <?php if ( $hero_button_1 ) : ?>
-                <a class="button button-orange" href="<?php echo esc_url( $hero_button_1['url'] ); ?>"<?php echo ! empty( $hero_button_1['target'] ) ? ' target="' . esc_attr( $hero_button_1['target'] ) . '"' : ''; ?>>
-                    <?php echo esc_html( $hero_button_1['title'] ); ?>
-                </a>
-            <?php endif; ?>
-            <?php if ( $hero_button_2 ) : ?>
-                <a class="button button-blue" href="<?php echo esc_url( $hero_button_2['url'] ); ?>"<?php echo ! empty( $hero_button_2['target'] ) ? ' target="' . esc_attr( $hero_button_2['target'] ) . '"' : ''; ?>>
-                    <?php echo esc_html( $hero_button_2['title'] ); ?>
-                </a>
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
+<?php
+$hero_button   = get_field( 'hero_button_1' );
+$hero_button_2 = get_field( 'hero_button_2' );
+include locate_template( 'components/hero/index.php' );
+?>
 
 <!-- Information Section -->
 <!-- ------------------------------------------------- -->
@@ -113,7 +86,7 @@ $content_image    = get_field( 'content_image' );
             <?php endif; ?>
         </div>
         <?php if ( $content_image ) : ?>
-            <div class="programmes-content-image">
+            <div class="programmes-content-image" data-animate="fade-up" data-animate-delay="2">
                 <?php echo wp_get_attachment_image( $content_image['ID'], 'full' ); ?>
             </div>
         <?php endif; ?>

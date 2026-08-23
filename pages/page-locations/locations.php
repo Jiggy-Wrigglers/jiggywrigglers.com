@@ -74,8 +74,8 @@ $franchises_repeater = get_field( 'franchises_repeater' );
         </div>
 
         <div class="locations-franchises-grid">
-            <?php foreach ( $franchises_repeater as $franchise ) : ?>
-                <div class="locations-franchise">
+            <?php foreach ( $franchises_repeater as $i => $franchise ) : ?>
+                <div class="locations-franchise" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( $i % 3 ) + 1 ); ?>">
                     <h3 class="heading-5"><?php echo esc_html( $franchise['franchise_name'] ); ?></h3>
                     <p class="body-medium"><?php echo esc_html( $franchise['franchise_area'] ); ?></p>
                     <?php if ( ! empty( $franchise['franchise_email'] ) ) : ?>

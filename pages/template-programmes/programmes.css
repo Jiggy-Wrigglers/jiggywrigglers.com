@@ -1,38 +1,6 @@
 ﻿/* Programmes Template CSS file */
 /* ------------------------------------------------- */
 
-/* Hero */
-/* ------------------------------------------------- */
-
-.programmes-hero {
-    background: var(--purple);
-    color: var(--white);
-    padding: var(--space-10) 0;
-}
-
-.programmes-hero .wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-    align-items: flex-start;
-}
-
-.programmes-hero .heading-5,
-.programmes-hero .heading-1 {
-    color: var(--white);
-}
-
-.programmes-hero .body-medium {
-    color: var(--white);
-    max-width: 720px;
-}
-
-.programmes-hero-buttons {
-    display: flex;
-    gap: var(--space-4);
-    flex-wrap: wrap;
-}
-
 /* Information */
 /* ------------------------------------------------- */
 

@@ -21,14 +21,14 @@
     <div class="wrap">
         <div class="gallery-header">
             <?php if ( $jiggy_gallery_sup_title ) : ?>
-                <h3 class="heading-5"><?php echo wp_kses_post( $jiggy_gallery_sup_title ); ?></h3>
+                <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $jiggy_gallery_sup_title ); ?></h3>
             <?php endif; ?>
             <?php if ( $jiggy_gallery_title ) : ?>
-                <h2 class="heading-2"><?php echo wp_kses_post( $jiggy_gallery_title ); ?></h2>
+                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $jiggy_gallery_title ); ?></h2>
             <?php endif; ?>
         </div>
 
-        <div class="gallery-slider splide">
+        <div class="gallery-slider splide" data-animate="fade-up" data-animate-delay="2">
             <div class="splide__track">
                 <div class="splide__list">
                     <?php foreach ( $jiggy_gallery_images as $image ) : ?>

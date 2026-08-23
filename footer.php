@@ -21,6 +21,8 @@ $social_links      = get_field( 'social_links', 'option' );
 $copyright_link    = get_field( 'copyright_link', 'option' );
 ?>
 
+</main>
+
 <!-- Playlist Component -->
 <!-- ------------------------------------------------- -->
 <?php include locate_template( 'components/playlist/index.php' ); ?>

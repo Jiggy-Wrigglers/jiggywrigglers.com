@@ -21,9 +21,9 @@
 <section class="playlist">
     <div class="wrap">
         <?php if ( $playlist_title ) : ?>
-            <h2 class="heading-3 playlist-title"><?php echo wp_kses_post( $playlist_title ); ?></h2>
+            <h2 class="heading-3 playlist-title" data-animate="fade-up"><?php echo wp_kses_post( $playlist_title ); ?></h2>
         <?php endif; ?>
-        <div class="playlist-links">
+        <div class="playlist-links" data-animate="fade-up" data-animate-delay="1">
             <?php if ( $spotify_link ) : ?>
                 <a class="button button-blue" href="<?php echo esc_url( $spotify_link['url'] ); ?>"<?php echo ! empty( $spotify_link['target'] ) ? ' target="' . esc_attr( $spotify_link['target'] ) . '"' : ''; ?>>
                     <?php echo esc_html( $spotify_link['title'] ); ?>

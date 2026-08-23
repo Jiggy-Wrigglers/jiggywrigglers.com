@@ -66,13 +66,13 @@ $content_2_grid_reverse = get_field( 'content_2_grid_reverse' );
     <div class="wrap">
         <div class="home-banner-content">
             <?php if ( $banner_title ) : ?>
-                <h1 class="heading-1"><?php echo wp_kses_post( $banner_title ); ?></h1>
+                <h1 class="heading-1" data-animate="fade-up"><?php echo wp_kses_post( $banner_title ); ?></h1>
             <?php endif; ?>
             <?php if ( $banner_text ) : ?>
-                <p class="body-medium home-banner-text"><?php echo wp_kses_post( $banner_text ); ?></p>
+                <p class="body-medium home-banner-text" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $banner_text ); ?></p>
             <?php endif; ?>
             <?php if ( $banner_buttons ) : ?>
-                <div class="home-banner-buttons">
+                <div class="home-banner-buttons" data-animate="fade-up" data-animate-delay="2">
                     <?php foreach ( $banner_buttons as $banner_button ) : ?>
                         <?php if ( ! empty( $banner_button['button'] ) ) :
                             $colour = ! empty( $banner_button['colour'] ) ? $banner_button['colour'] : 'orange'; ?>
@@ -91,27 +91,27 @@ $content_2_grid_reverse = get_field( 'content_2_grid_reverse' );
 <!-- ------------------------------------------------- -->
 <section class="home-introduction">
     <?php if ( $introduction_character_1 ) : ?>
-        <div class="home-introduction-character home-introduction-character-1">
+        <div class="home-introduction-character home-introduction-character-1" data-animate="fade-in" data-animate-delay="2">
             <?php echo wp_get_attachment_image( $introduction_character_1['ID'], 'full' ); ?>
         </div>
     <?php endif; ?>
     <?php if ( $introduction_character_2 ) : ?>
-        <div class="home-introduction-character home-introduction-character-2">
+        <div class="home-introduction-character home-introduction-character-2" data-animate="fade-in" data-animate-delay="3">
             <?php echo wp_get_attachment_image( $introduction_character_2['ID'], 'full' ); ?>
         </div>
     <?php endif; ?>
     <div class="wrap">
         <?php if ( $introduction_sub_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $introduction_sub_title ); ?></h3>
+            <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $introduction_sub_title ); ?></h3>
         <?php endif; ?>
         <?php if ( $introduction_title ) : ?>
-            <h2 class="heading-2"><?php echo wp_kses_post( $introduction_title ); ?></h2>
+            <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $introduction_title ); ?></h2>
         <?php endif; ?>
         <?php if ( $introduction_text ) : ?>
-            <div class="home-introduction-text"><?php echo wp_kses_post( $introduction_text ); ?></div>
+            <div class="home-introduction-text" data-animate="fade-up" data-animate-delay="2"><?php echo wp_kses_post( $introduction_text ); ?></div>
         <?php endif; ?>
         <?php if ( $introduction_button ) : ?>
-            <a class="button button-blue" href="<?php echo esc_url( $introduction_button['url'] ); ?>"<?php echo ! empty( $introduction_button['target'] ) ? ' target="' . esc_attr( $introduction_button['target'] ) . '"' : ''; ?>>
+            <a class="button button-blue" data-animate="fade-up" data-animate-delay="3" href="<?php echo esc_url( $introduction_button['url'] ); ?>"<?php echo ! empty( $introduction_button['target'] ) ? ' target="' . esc_attr( $introduction_button['target'] ) . '"' : ''; ?>>
                 <?php echo esc_html( $introduction_button['title'] ); ?>
             </a>
         <?php endif; ?>
@@ -124,21 +124,21 @@ $content_2_grid_reverse = get_field( 'content_2_grid_reverse' );
 <section class="home-groups">
     <div class="home-groups-header">
         <?php if ( $groups_sup_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $groups_sup_title ); ?></h3>
+            <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $groups_sup_title ); ?></h3>
         <?php endif; ?>
         <?php if ( $groups_title ) : ?>
-            <h2 class="heading-2"><?php echo wp_kses_post( $groups_title ); ?></h2>
+            <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $groups_title ); ?></h2>
         <?php endif; ?>
         <?php if ( $groups_image ) : ?>
-            <div class="home-groups-header-image">
+            <div class="home-groups-header-image" data-animate="scale-up" data-animate-delay="2">
                 <?php echo wp_get_attachment_image( $groups_image['ID'], 'full' ); ?>
             </div>
         <?php endif; ?>
     </div>
     <div class="wrap">
         <div class="home-groups-grid">
-            <?php foreach ( $groups_repeater as $group ) : ?>
-                <div class="home-group">
+            <?php foreach ( $groups_repeater as $i => $group ) : ?>
+                <div class="home-group" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( $i % 3 ) + 1 ); ?>">
                     <?php if ( ! empty( $group['image'] ) ) : ?>
                         <div class="home-group-image">
                             <?php echo wp_get_attachment_image( $group['image']['ID'], 'full' ); ?>
@@ -174,22 +174,22 @@ $content_2_grid_reverse = get_field( 'content_2_grid_reverse' );
     <div class="wrap<?php echo $content_1_grid_reverse ? ' is-reversed' : ''; ?>">
         <div class="home-content-text">
             <?php if ( $content_1_sup_title ) : ?>
-                <h3 class="heading-5"><?php echo wp_kses_post( $content_1_sup_title ); ?></h3>
+                <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $content_1_sup_title ); ?></h3>
             <?php endif; ?>
             <?php if ( $content_1_title ) : ?>
-                <h2 class="heading-2"><?php echo wp_kses_post( $content_1_title ); ?></h2>
+                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $content_1_title ); ?></h2>
             <?php endif; ?>
             <?php if ( $content_1_text ) : ?>
-                <p class="body-medium"><?php echo wp_kses_post( $content_1_text ); ?></p>
+                <p class="body-medium" data-animate="fade-up" data-animate-delay="2"><?php echo wp_kses_post( $content_1_text ); ?></p>
             <?php endif; ?>
             <?php if ( $content_1_button ) : ?>
-                <a class="button button-orange" href="<?php echo esc_url( $content_1_button['url'] ); ?>"<?php echo ! empty( $content_1_button['target'] ) ? ' target="' . esc_attr( $content_1_button['target'] ) . '"' : ''; ?>>
+                <a class="button button-blue" data-animate="fade-up" data-animate-delay="3" href="<?php echo esc_url( $content_1_button['url'] ); ?>"<?php echo ! empty( $content_1_button['target'] ) ? ' target="' . esc_attr( $content_1_button['target'] ) . '"' : ''; ?>>
                     <?php echo esc_html( $content_1_button['title'] ); ?>
                 </a>
             <?php endif; ?>
         </div>
         <?php if ( $content_1_image ) : ?>
-            <div class="home-content-image">
+            <div class="home-content-image" data-animate="fade-up" data-animate-delay="2">
                 <?php echo wp_get_attachment_image( $content_1_image['ID'], 'full' ); ?>
             </div>
         <?php endif; ?>
@@ -204,22 +204,22 @@ $content_2_grid_reverse = get_field( 'content_2_grid_reverse' );
     <div class="wrap<?php echo $content_2_grid_reverse ? ' is-reversed' : ''; ?>">
         <div class="home-content-text">
             <?php if ( $content_2_sup_title ) : ?>
-                <h3 class="heading-5"><?php echo wp_kses_post( $content_2_sup_title ); ?></h3>
+                <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $content_2_sup_title ); ?></h3>
             <?php endif; ?>
             <?php if ( $content_2_title ) : ?>
-                <h2 class="heading-2"><?php echo wp_kses_post( $content_2_title ); ?></h2>
+                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $content_2_title ); ?></h2>
             <?php endif; ?>
             <?php if ( $content_2_text ) : ?>
-                <p class="body-medium"><?php echo wp_kses_post( $content_2_text ); ?></p>
+                <p class="body-medium" data-animate="fade-up" data-animate-delay="2"><?php echo wp_kses_post( $content_2_text ); ?></p>
             <?php endif; ?>
             <?php if ( $content_2_button ) : ?>
-                <a class="button button-yellow" href="<?php echo esc_url( $content_2_button['url'] ); ?>"<?php echo ! empty( $content_2_button['target'] ) ? ' target="' . esc_attr( $content_2_button['target'] ) . '"' : ''; ?>>
+                <a class="button button-orange" data-animate="fade-up" data-animate-delay="3" href="<?php echo esc_url( $content_2_button['url'] ); ?>"<?php echo ! empty( $content_2_button['target'] ) ? ' target="' . esc_attr( $content_2_button['target'] ) . '"' : ''; ?>>
                     <?php echo esc_html( $content_2_button['title'] ); ?>
                 </a>
             <?php endif; ?>
         </div>
         <?php if ( $content_2_image ) : ?>
-            <div class="home-content-image">
+            <div class="home-content-image" data-animate="fade-up" data-animate-delay="2">
                 <?php echo wp_get_attachment_image( $content_2_image['ID'], 'full' ); ?>
             </div>
         <?php endif; ?>
