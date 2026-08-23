@@ -17,15 +17,10 @@ $footer_3_text     = get_field( 'footer_3_text', 'option' );
 $footer_4_title    = get_field( 'footer_4_title', 'option' );
 $footer_4_button_1 = get_field( 'footer_4_button_1', 'option' );
 $footer_4_button_2 = get_field( 'footer_4_button_2', 'option' );
-$social_links      = get_field( 'social_links', 'option' );
 $copyright_link    = get_field( 'copyright_link', 'option' );
 ?>
 
 </main>
-
-<!-- Register Interest Component -->
-<!-- ------------------------------------------------- -->
-<?php include locate_template( 'components/register-interest/index.php' ); ?>
 
 <!-- Footer -->
 <!-- ------------------------------------------------- -->
@@ -65,15 +60,6 @@ $copyright_link    = get_field( 'copyright_link', 'option' );
                 <?php endif; ?>
                 <?php if ( $footer_3_text ) : ?>
                     <div class="footer-text"><?php echo wp_kses_post( $footer_3_text ); ?></div>
-                <?php endif; ?>
-                <?php if ( $social_links ) : ?>
-                    <div class="footer-socials">
-                        <?php foreach ( $social_links as $social ) : ?>
-                            <?php if ( ! empty( $social['link'] ) ) : ?>
-                                <a href="<?php echo esc_url( $social['link']['url'] ); ?>"<?php echo ! empty( $social['link']['target'] ) ? ' target="' . esc_attr( $social['link']['target'] ) . '"' : ''; ?>><?php echo esc_html( $social['link']['title'] ); ?></a>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
                 <?php endif; ?>
             </div>
 

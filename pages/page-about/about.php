@@ -12,57 +12,15 @@ get_header(); ?>
 <!-- ------------------------------------------------- -->
 <?php include locate_template( 'components/hero/index.php' ); ?>
 
-<!-- Ethos Section -->
+<!-- Ethos Section (content-journey block, Site Settings) -->
 <!-- ------------------------------------------------- -->
 <?php include locate_template( 'components/ethos/index.php' ); ?>
 
 <?php
-// Journey
-$journey_title    = get_field( 'journey_title' );
-$journey_repeater = get_field( 'journey_repeater' );
-
 // Awards
 $awards_title  = get_field( 'awards_title' );
 $awards_images = get_field( 'awards_images' );
 ?>
-
-<!-- Journey Section -->
-<!-- ------------------------------------------------- -->
-<?php if ( $journey_repeater ) : ?>
-<section class="about-journey">
-    <?php if ( $journey_title ) : ?>
-        <div class="wrap">
-            <h2 class="heading-2 about-journey-title"><?php echo wp_kses_post( $journey_title ); ?></h2>
-        </div>
-    <?php endif; ?>
-    <div class="wrap">
-        <?php foreach ( $journey_repeater as $i => $journey ) : ?>
-            <div class="about-journey-step<?php echo $i % 2 !== 0 ? ' about-journey-step--reversed' : ''; ?>" data-animate="fade-up">
-                <div class="about-journey-text">
-                    <?php if ( ! empty( $journey['text'] ) ) : ?>
-                        <p class="body-medium"><?php echo wp_kses_post( $journey['text'] ); ?></p>
-                    <?php endif; ?>
-                    <?php if ( ! empty( $journey['button'] ) ) : ?>
-                        <a class="button button-orange" href="<?php echo esc_url( $journey['button']['url'] ); ?>"<?php echo ! empty( $journey['button']['target'] ) ? ' target="' . esc_attr( $journey['button']['target'] ) . '"' : ''; ?>>
-                            <?php echo esc_html( $journey['button']['title'] ); ?>
-                        </a>
-                    <?php endif; ?>
-                    <?php if ( ! empty( $journey['journey_trail'] ) ) : ?>
-                        <div class="about-journey-trail" data-animate="fade-in" data-animate-delay="2">
-                            <?php echo wp_get_attachment_image( $journey['journey_trail']['ID'], 'full' ); ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <div class="about-journey-image" data-animate="fade-up" data-animate-delay="1">
-                    <?php if ( ! empty( $journey['image'] ) ) : ?>
-                        <?php echo wp_get_attachment_image( $journey['image']['ID'], 'full' ); ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</section>
-<?php endif; ?>
 
 <!-- Awards Section -->
 <!-- ------------------------------------------------- -->

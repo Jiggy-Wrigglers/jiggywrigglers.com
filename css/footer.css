@@ -59,22 +59,6 @@
     color: var(--yellow);
 }
 
-.footer-socials {
-    display: flex;
-    gap: var(--space-3);
-    flex-wrap: wrap;
-}
-
-.footer-socials a {
-    color: var(--white);
-    font-weight: 500;
-    text-decoration: underline;
-}
-
-.footer-socials a:hover {
-    color: var(--yellow);
-}
-
 /* Copyright Bar */
 /* ------------------------------------------------- */
 

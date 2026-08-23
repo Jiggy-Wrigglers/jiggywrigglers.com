@@ -1,75 +1,123 @@
 /* Ethos Component CSS file */
-/* Styled like the old site's offering block. */
+/* Styled like the old site's content-journey block. */
 /* ------------------------------------------------- */
 
 .ethos {
     background: var(--purple);
     color: var(--white);
     padding: var(--space-10) 0;
+    overflow: hidden;
 }
 
 .ethos-title {
     color: var(--white);
     text-align: center;
-    margin-bottom: var(--space-8);
+    max-width: 80vw;
+    margin: 0 auto var(--space-7);
 }
 
-.ethos-grid {
+.single-journey {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 8vw, 120px);
+    padding: 30px 0;
 }
 
-.ethos-card {
-    background: var(--white);
+.journey-text {
+    position: relative;
+    padding: clamp(20px, 6vw, 80px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+    font-size: 20px;
+}
+
+.journey-text .body-medium {
+    color: var(--white);
+}
+
+.journey-image-area {
+    position: relative;
+    max-height: 100%;
+    max-width: 100%;
     border-radius: 20px;
     overflow: hidden;
-    display: grid;
-    grid-template-rows: 1.6fr auto;
-    min-height: 360px;
+    aspect-ratio: 4/3;
 }
 
-.ethos-card-image {
-    position: relative;
-}
-
-.ethos-card-image img {
+.journey-image-area img {
     position: absolute;
-    inset: 0;
-    width: 100%;
     height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
-.ethos-card-content {
+/* Trail image dangling below the text */
+/* ------------------------------------------------- */
+
+.content-trail.before-trail {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-5);
-    text-align: center;
+    width: calc(50% + 80px);
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    top: calc(100% - 40px);
+    max-height: 270px;
 }
 
-.ethos-card-text {
-    color: var(--purple);
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: var(--font-size-18, 18px);
-    line-height: 1.5;
+.journey-reversed .content-trail.before-trail {
+    left: auto;
+    right: 50%;
+}
+
+.content-trail.before-trail img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+}
+
+/* Reversed rows */
+/* ------------------------------------------------- */
+
+.journey-reversed .journey-text {
+    order: 2;
+}
+
+.journey-reversed .journey-image-area {
+    order: 1;
 }
 
 /* Responsive */
 /* ------------------------------------------------- */
 
-@media (max-width: 1080px) {
-    .ethos-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 650px) {
-    .ethos-grid {
+@media (max-width: 980px) {
+    .single-journey {
         grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1.8fr;
+        gap: 40px;
+    }
+
+    .journey-image-area {
+        grid-row: 2;
+    }
+
+    .journey-text {
+        grid-row: 1;
+        padding: 20px 0;
+    }
+
+    .journey-reversed .journey-text {
+        order: 0;
+    }
+
+    .journey-reversed .journey-image-area {
+        order: 0;
+    }
+
+    .content-trail.before-trail {
+        display: none;
     }
 }

@@ -1,12 +1,10 @@
 /* Testimonials Component CSS file */
-/* Styled like the old topodium testimonial block. */
 /* ------------------------------------------------- */
 
 .testimonials {
     background: var(--peach);
-    padding: var(--space-10) 0 calc(var(--space-10) + var(--space-8));
-    position: relative;
-    overflow: hidden;
+    color: var(--purple);
+    padding: var(--space-10) 0;
 }
 
 .testimonials-header {
@@ -15,62 +13,49 @@
     gap: var(--space-3);
     align-items: center;
     text-align: center;
+    margin-bottom: var(--space-7);
 }
 
 .testimonials-header .heading-5 {
-    color: var(--pink);
+    color: var(--purple);
 }
 
 .testimonials-header .heading-2 {
     color: var(--blue);
 }
 
-.testimonials-slider {
-    margin-top: var(--space-8);
-}
-
-/* Card */
-/* ------------------------------------------------- */
-
 .testimonials-slide-inner {
     background: var(--white);
-    border-radius: 20px;
+    border-radius: 6px;
     padding: var(--space-6);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: var(--space-4);
     height: 100%;
-    text-align: center;
 }
 
 .testimonials-quote {
     color: var(--purple);
-    font-weight: 600;
 }
 
 .testimonials-name {
-    color: var(--orange);
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: var(--font-size-18, 18px);
+    color: var(--orange);
+    margin-top: auto;
 }
 
 .testimonials-role {
     color: var(--blue);
-    font-weight: 600;
     font-family: var(--font-body);
+    font-weight: 600;
     font-size: var(--font-size-16);
 }
-
-/* Controls */
-/* ------------------------------------------------- */
 
 .testimonials-controls {
     display: flex;
     gap: var(--space-2);
     margin-top: var(--space-5);
-    justify-content: center;
 }
 
 .testimonials-prev,
@@ -80,10 +65,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--white);
-    color: var(--purple);
-    border: solid 2px var(--orange);
-    border-radius: 50%;
+    background: var(--purple);
+    color: var(--white);
+    border: solid 2px var(--purple);
+    border-radius: 6px;
     font-size: 18px;
     cursor: pointer;
     transition: ease 0.4s;
@@ -91,6 +76,6 @@
 
 .testimonials-prev:hover,
 .testimonials-next:hover {
-    background: var(--orange);
-    color: var(--white);
+    background: transparent;
+    color: var(--purple);
 }
