@@ -1,10 +1,10 @@
-/* Playlist Component CSS file */
+﻿/* Playlist Component CSS file */
 /* ------------------------------------------------- */
 
 .playlist {
     background: var(--purple);
     color: var(--white);
-    padding: var(--space-9) 0;
+    padding: var(--space-10) 0;
 }
 
 .playlist .wrap {

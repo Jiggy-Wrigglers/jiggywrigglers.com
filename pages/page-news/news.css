@@ -39,6 +39,10 @@
     color: rgba(0, 0, 0, 0.55);
 }
 
+.news-card-content .heading-5 {
+    color: var(--purple);
+}
+
 .news-card-content .body-medium {
     color: rgba(0, 0, 0, 0.7);
 }

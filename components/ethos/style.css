@@ -3,11 +3,12 @@
 
 .ethos {
     background: var(--white);
-    color: var(--black);
+    color: var(--purple);
     padding: var(--space-10) 0;
 }
 
 .ethos-title {
+    color: var(--purple);
     margin-bottom: var(--space-7);
 }
 
@@ -32,7 +33,7 @@
 }
 
 .ethos-card-text {
-    color: var(--black);
+    color: var(--purple);
 }
 
 /* Responsive */

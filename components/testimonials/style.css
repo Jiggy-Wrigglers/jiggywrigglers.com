@@ -3,7 +3,7 @@
 
 .testimonials {
     background: var(--peach);
-    color: var(--black);
+    color: var(--purple);
     padding: var(--space-10) 0;
 }
 
@@ -12,6 +12,14 @@
     flex-direction: column;
     gap: var(--space-3);
     margin-bottom: var(--space-7);
+}
+
+.testimonials-header .heading-5 {
+    color: var(--purple);
+}
+
+.testimonials-header .heading-2 {
+    color: var(--blue);
 }
 
 .testimonials-slide-inner {
@@ -25,7 +33,7 @@
 }
 
 .testimonials-quote {
-    color: var(--black);
+    color: var(--purple);
 }
 
 .testimonials-name {
@@ -36,7 +44,8 @@
 }
 
 .testimonials-job {
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--purple);
+    opacity: 0.7;
 }
 
 .testimonials-controls {

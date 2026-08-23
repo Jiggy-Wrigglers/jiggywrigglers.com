@@ -1,10 +1,10 @@
-/* Footer CSS file */
+﻿/* Footer CSS file */
 /* ------------------------------------------------- */
 
 .footer {
     background: var(--blue);
     color: var(--white);
-    padding: var(--space-9) 0;
+    padding: var(--space-10) 0;
 }
 
 .footer-grid {

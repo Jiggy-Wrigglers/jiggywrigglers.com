@@ -1,10 +1,14 @@
-/* Jiggy Videos Page CSS file */
+﻿/* Jiggy Videos Page CSS file */
 /* ------------------------------------------------- */
 
 .jiggy-videos {
     background: var(--white);
     color: var(--black);
     padding: var(--space-10) 0;
+}
+
+.jiggy-videos .heading-4 {
+    color: var(--purple);
 }
 
 .jiggy-videos-grid {
@@ -35,7 +39,7 @@
 .jiggy-videos-youtube {
     background: var(--purple);
     color: var(--white);
-    padding: var(--space-9) 0;
+    padding: var(--space-10) 0;
 }
 
 .jiggy-videos-youtube .wrap {

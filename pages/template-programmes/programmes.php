@@ -30,6 +30,7 @@ $information_group_size = get_field( 'information_group_size' );
 $content_text     = get_field( 'content_text' );
 $content_button_1 = get_field( 'content_button_1' );
 $content_button_2 = get_field( 'content_button_2' );
+$content_image    = get_field( 'content_image' );
 ?>
 
 <!-- Hero Section -->
@@ -111,6 +112,11 @@ $content_button_2 = get_field( 'content_button_2' );
                 </a>
             <?php endif; ?>
         </div>
+        <?php if ( $content_image ) : ?>
+            <div class="programmes-content-image">
+                <?php echo wp_get_attachment_image( $content_image['ID'], 'full' ); ?>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 <?php endif; ?>

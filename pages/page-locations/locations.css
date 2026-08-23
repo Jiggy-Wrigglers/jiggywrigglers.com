@@ -10,6 +10,10 @@
     padding: var(--space-10) 0;
 }
 
+.locations-content .heading-2 {
+    color: var(--purple);
+}
+
 .locations-content .wrap {
     display: flex;
     flex-direction: column;
@@ -32,7 +36,7 @@
 
 .locations-franchises {
     background: var(--peach);
-    color: var(--black);
+    color: var(--purple);
     padding: var(--space-10) 0;
 }
 
@@ -44,7 +48,7 @@
 }
 
 .locations-franchises-search > .body-medium {
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--purple);
 }
 
 .locations-franchises-select {
@@ -126,7 +130,7 @@
 }
 
 .locations-franchise .body-medium {
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--purple);
 }
 
 .locations-franchise a {

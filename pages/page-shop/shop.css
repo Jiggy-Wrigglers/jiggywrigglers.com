@@ -1,8 +1,8 @@
-/* Shop Listing CSS file */
+﻿/* Shop Listing CSS file */
 /* ------------------------------------------------- */
 
 .shop-listing {
-    padding: var(--space-11) 0;
+    padding: var(--space-10) 0;
 }
 
 .shop-listing-header {

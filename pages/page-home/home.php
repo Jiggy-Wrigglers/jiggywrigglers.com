@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Template Name: Home
  *
@@ -14,12 +14,15 @@ get_header(); ?>
 $banner_images = get_field( 'banner_images' );
 $banner_title  = get_field( 'banner_title' );
 $banner_text   = get_field( 'banner_text' );
+$banner_buttons = get_field( 'banner_buttons' );
 
 // Introduction
-$introduction_sup_title = get_field( 'introduction_sup_title' );
-$introduction_title     = get_field( 'introduction_title' );
-$introduction_text      = get_field( 'introduction_text' );
-$introduction_button    = get_field( 'introduction_button' );
+$introduction_sub_title   = get_field( 'introduction_sub_title' );
+$introduction_title       = get_field( 'introduction_title' );
+$introduction_text        = get_field( 'introduction_text' );
+$introduction_button      = get_field( 'introduction_button' );
+$introduction_character_1 = get_field( 'introduction_character_1' );
+$introduction_character_2 = get_field( 'introduction_character_2' );
 
 // Groups
 $groups_sup_title = get_field( 'groups_sup_title' );
@@ -58,7 +61,6 @@ $testimonials           = get_field( 'testimonial_repeater' );
                     <?php endforeach; ?>
                 </div>
             </div>
-            <div class="splide__pagination"></div>
         </div>
     <?php endif; ?>
     <div class="wrap">
@@ -69,6 +71,18 @@ $testimonials           = get_field( 'testimonial_repeater' );
             <?php if ( $banner_text ) : ?>
                 <p class="body-medium home-banner-text"><?php echo wp_kses_post( $banner_text ); ?></p>
             <?php endif; ?>
+            <?php if ( $banner_buttons ) : ?>
+                <div class="home-banner-buttons">
+                    <?php foreach ( $banner_buttons as $banner_button ) : ?>
+                        <?php if ( ! empty( $banner_button['button'] ) ) :
+                            $colour = ! empty( $banner_button['colour'] ) ? $banner_button['colour'] : 'orange'; ?>
+                            <a class="button button-<?php echo esc_attr( $colour ); ?>" href="<?php echo esc_url( $banner_button['button']['url'] ); ?>"<?php echo ! empty( $banner_button['button']['target'] ) ? ' target="' . esc_attr( $banner_button['button']['target'] ) . '"' : ''; ?>>
+                                <?php echo esc_html( $banner_button['button']['title'] ); ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </section>
@@ -76,9 +90,19 @@ $testimonials           = get_field( 'testimonial_repeater' );
 <!-- Introduction Section -->
 <!-- ------------------------------------------------- -->
 <section class="home-introduction">
+    <?php if ( $introduction_character_1 ) : ?>
+        <div class="home-introduction-character home-introduction-character-1">
+            <?php echo wp_get_attachment_image( $introduction_character_1['ID'], 'full' ); ?>
+        </div>
+    <?php endif; ?>
+    <?php if ( $introduction_character_2 ) : ?>
+        <div class="home-introduction-character home-introduction-character-2">
+            <?php echo wp_get_attachment_image( $introduction_character_2['ID'], 'full' ); ?>
+        </div>
+    <?php endif; ?>
     <div class="wrap">
-        <?php if ( $introduction_sup_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $introduction_sup_title ); ?></h3>
+        <?php if ( $introduction_sub_title ) : ?>
+            <h3 class="heading-5"><?php echo wp_kses_post( $introduction_sub_title ); ?></h3>
         <?php endif; ?>
         <?php if ( $introduction_title ) : ?>
             <h2 class="heading-2"><?php echo wp_kses_post( $introduction_title ); ?></h2>

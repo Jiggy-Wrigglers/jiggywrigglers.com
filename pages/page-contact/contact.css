@@ -3,7 +3,7 @@
 
 .contact-form {
     background: var(--peach);
-    color: var(--black);
+    color: var(--purple);
     padding: var(--space-10) 0;
 }
 
@@ -14,6 +14,10 @@
     max-width: 900px;
 }
 
+.contact-form .heading-2 {
+    color: var(--purple);
+}
+
 .contact-form-shortcode {
     margin-top: var(--space-5);
 }
@@ -22,6 +26,10 @@
     background: var(--white);
     color: var(--black);
     padding: var(--space-10) 0;
+}
+
+.contact-content-text .heading-3 {
+    color: var(--purple);
 }
 
 .contact-content .wrap {

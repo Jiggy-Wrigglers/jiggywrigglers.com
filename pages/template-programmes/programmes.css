@@ -1,4 +1,4 @@
-/* Programmes Template CSS file */
+﻿/* Programmes Template CSS file */
 /* ------------------------------------------------- */
 
 /* Hero */
@@ -7,7 +7,7 @@
 .programmes-hero {
     background: var(--purple);
     color: var(--white);
-    padding: var(--space-11) 0;
+    padding: var(--space-10) 0;
 }
 
 .programmes-hero .wrap {
@@ -48,6 +48,10 @@
     gap: var(--space-5);
 }
 
+.programmes-information .heading-2 {
+    color: var(--purple);
+}
+
 .programmes-information .body-medium {
     color: rgba(0, 0, 0, 0.7);
     max-width: 720px;
@@ -68,12 +72,17 @@
     gap: var(--space-2);
 }
 
+.programmes-information-box .heading-6,
+.programmes-information-box .body-medium {
+    color: var(--purple);
+}
+
 /* Content */
 /* ------------------------------------------------- */
 
 .programmes-content {
     background: var(--peach);
-    color: var(--black);
+    color: var(--purple);
     padding: var(--space-10) 0;
 }
 
@@ -85,6 +94,10 @@
     max-width: 900px;
 }
 
+.programmes-content .heading-2 {
+    color: var(--purple);
+}
+
 .programmes-content-text {
     display: flex;
     flex-direction: column;
@@ -92,7 +105,12 @@
 }
 
 .programmes-content-text p {
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--purple);
+}
+
+.programmes-content-image img {
+    width: 100%;
+    border-radius: 6px;
 }
 
 .programmes-content-buttons {

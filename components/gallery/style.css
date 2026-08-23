@@ -3,7 +3,7 @@
 
 .gallery {
     background: var(--orange);
-    color: var(--black);
+    color: var(--white);
     padding: var(--space-10) 0;
 }
 
@@ -12,6 +12,14 @@
     flex-direction: column;
     gap: var(--space-3);
     margin-bottom: var(--space-7);
+}
+
+.gallery-header .heading-5 {
+    color: var(--purple);
+}
+
+.gallery-header .heading-2 {
+    color: var(--white);
 }
 
 .gallery-slide img {

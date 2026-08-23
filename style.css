@@ -51,12 +51,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     --font-size-14: 14px;
     --font-size-16: 16px;
 
-    --font-size-h1: clamp(36px, 8.4vw, 84px);
-    --font-size-h2: clamp(28px, 6.4vw, 64px);
-    --font-size-h3: clamp(24px, 5vw, 50px);
-    --font-size-h4: clamp(21px, 3.6vw, 36px);
-    --font-size-h5: clamp(19px, 2.6vw, 26px);
-    --font-size-h6: clamp(16px, 1.8vw, 18px);
+    --font-size-h1: clamp(30px, 4.5vw, 46px);
+    --font-size-h2: clamp(25px, 3.6vw, 38px);
+    --font-size-h3: clamp(21px, 2.8vw, 30px);
+    --font-size-h4: clamp(18px, 2.2vw, 24px);
+    --font-size-h5: clamp(16px, 1.9vw, 20px);
+    --font-size-h6: clamp(15px, 1.5vw, 18px);
     --font-size-body: clamp(15px, 1.1vw, 17px);
 }
 
