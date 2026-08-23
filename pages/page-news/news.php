@@ -17,12 +17,12 @@ get_header(); ?>
 
 <!-- News Listing Section -->
 <!-- ------------------------------------------------- -->
-<section class="news-listing">
+<section class="news-listing" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <?php if ( have_posts() ) : ?>
             <div class="news-grid">
                 <?php $i = 0; while ( have_posts() ) : the_post(); $i++; ?>
-                    <article class="news-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( ( $i - 1 ) % 3 ) + 1 ); ?>">
+                    <article class="news-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( ( $i - 1 ) % 3 ) + 1 ); ?>" :class="shown && 'is-visible'">
                         <a href="<?php the_permalink(); ?>" class="news-card-link">
                             <?php if ( has_post_thumbnail() ) : ?>
                                 <div class="news-card-image">

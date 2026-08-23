@@ -19,18 +19,18 @@
 
     if ( empty( $testimonials ) ) return;
 ?>
-<section class="testimonials">
+<section class="testimonials" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <div class="testimonials-header">
             <?php if ( $testimonials_sup_title ) : ?>
-                <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $testimonials_sup_title ); ?></h3>
+                <h3 class="heading-5" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $testimonials_sup_title ); ?></h3>
             <?php endif; ?>
             <?php if ( $testimonials_title ) : ?>
-                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $testimonials_title ); ?></h2>
+                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'"><?php echo wp_kses_post( $testimonials_title ); ?></h2>
             <?php endif; ?>
         </div>
 
-        <div class="testimonials-slider splide" data-animate="fade-up" data-animate-delay="2">
+        <div class="testimonials-slider splide" data-animate="fade-up" data-animate-delay="2" :class="shown && 'is-visible'">
             <div class="splide__track">
                 <div class="splide__list">
                     <?php foreach ( $testimonials as $testimonial ) : ?>

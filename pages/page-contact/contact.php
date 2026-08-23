@@ -25,7 +25,7 @@ $contact_content_image = get_field( 'contact_content_image' );
 
 <!-- Contact Form Section -->
 <!-- ------------------------------------------------- -->
-<section class="contact-form">
+<section class="contact-form" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <?php if ( $contact_form_sup_title ) : ?>
             <h3 class="heading-5"><?php echo wp_kses_post( $contact_form_sup_title ); ?></h3>
@@ -44,16 +44,16 @@ $contact_content_image = get_field( 'contact_content_image' );
 <!-- Contact Content Section -->
 <!-- ------------------------------------------------- -->
 <?php if ( $contact_content_title || $contact_content_image ) : ?>
-<section class="contact-content">
+<section class="contact-content" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <div class="contact-content-text">
             <?php if ( $contact_content_title ) : ?>
-                <h2 class="heading-3" data-animate="fade-up"><?php echo wp_kses_post( $contact_content_title ); ?></h2>
+                <h2 class="heading-3" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $contact_content_title ); ?></h2>
             <?php endif; ?>
-            <a class="button button-blue" data-animate="fade-up" data-animate-delay="1" href="mailto:enquiries@jiggywrigglers.com">enquiries@jiggywrigglers.com</a>
+            <a class="button button-blue" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'" href="mailto:enquiries@jiggywrigglers.com">enquiries@jiggywrigglers.com</a>
         </div>
         <?php if ( $contact_content_image ) : ?>
-            <div class="contact-content-image" data-animate="fade-up" data-animate-delay="2">
+            <div class="contact-content-image" data-animate="fade-up" data-animate-delay="2" :class="shown && 'is-visible'">
                 <?php echo wp_get_attachment_image( $contact_content_image['ID'], 'full' ); ?>
             </div>
         <?php endif; ?>

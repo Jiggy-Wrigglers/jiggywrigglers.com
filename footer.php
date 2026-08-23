@@ -23,9 +23,9 @@ $copyright_link = get_field( 'copyright_link', 'option' );
 
 <!-- Footer -->
 <!-- ------------------------------------------------- -->
-<footer class="footer">
+<footer class="footer" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
-        <div class="footer-grid">
+        <div class="footer-grid" data-animate="fade-in" :class="shown && 'is-visible'">
 
             <div class="footer-section footer-section-1">
                 <?php if ( $footer_1_title ) : ?>

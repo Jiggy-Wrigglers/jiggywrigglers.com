@@ -27,9 +27,9 @@ $youtube_button = get_field( 'youtube_button' );
 <!-- Video 1 Section -->
 <!-- ------------------------------------------------- -->
 <?php if ( $video_1_embed ) : ?>
-<section class="jiggy-videos">
+<section class="jiggy-videos" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
-        <div class="jiggy-video" data-animate="fade-up">
+        <div class="jiggy-video" data-animate="fade-up" :class="shown && 'is-visible'">
             <?php if ( $video_1_title ) : ?>
                 <h2 class="heading-4"><?php echo wp_kses_post( $video_1_title ); ?></h2>
             <?php endif; ?>
@@ -42,9 +42,9 @@ $youtube_button = get_field( 'youtube_button' );
 <!-- Video 2 Section -->
 <!-- ------------------------------------------------- -->
 <?php if ( $video_2_embed ) : ?>
-<section class="jiggy-videos">
+<section class="jiggy-videos" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
-        <div class="jiggy-video" data-animate="fade-up">
+        <div class="jiggy-video" data-animate="fade-up" :class="shown && 'is-visible'">
             <?php if ( $video_2_title ) : ?>
                 <h2 class="heading-4"><?php echo wp_kses_post( $video_2_title ); ?></h2>
             <?php endif; ?>
@@ -57,7 +57,7 @@ $youtube_button = get_field( 'youtube_button' );
 <!-- YouTube Section -->
 <!-- ------------------------------------------------- -->
 <?php if ( $youtube_text || $youtube_button ) : ?>
-<section class="jiggy-videos-youtube">
+<section class="jiggy-videos-youtube" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <?php if ( $youtube_text ) : ?>
             <h2 class="heading-3"><?php echo wp_kses_post( $youtube_text ); ?></h2>

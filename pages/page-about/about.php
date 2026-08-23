@@ -25,14 +25,14 @@ $awards_images = get_field( 'awards_images' );
 <!-- Awards Section -->
 <!-- ------------------------------------------------- -->
 <?php if ( $awards_images ) : ?>
-<section class="about-awards">
+<section class="about-awards" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <?php if ( $awards_title ) : ?>
             <h2 class="heading-2 about-awards-title"><?php echo wp_kses_post( $awards_title ); ?></h2>
         <?php endif; ?>
         <div class="about-awards-grid">
             <?php foreach ( $awards_images as $i => $award ) : ?>
-                <div class="about-award" data-animate="scale-up" data-animate-delay="<?php echo esc_attr( ( $i % 4 ) + 1 ); ?>">
+                <div class="about-award" data-animate="scale-up" data-animate-delay="<?php echo esc_attr( ( $i % 4 ) + 1 ); ?>" :class="shown && 'is-visible'">
                     <?php echo wp_get_attachment_image( $award['ID'], 'full' ); ?>
                     <?php if ( $award['alt'] ) : ?>
                         <h4 class="heading-6"><?php echo esc_html( $award['alt'] ); ?></h4>

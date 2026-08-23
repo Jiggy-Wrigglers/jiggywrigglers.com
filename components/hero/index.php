@@ -21,22 +21,22 @@
 
     $hero_image = is_array( $hero_images ) && ! empty( $hero_images ) ? $hero_images[0] : null;
 ?>
-<section class="hero">
+<section class="hero" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <?php if ( $hero_image ) : ?>
         <?php echo wp_get_attachment_image( $hero_image['ID'], 'full' ); ?>
     <?php endif; ?>
     <div class="wrap">
         <?php if ( $hero_title ) : ?>
-            <h1 class="heading-1" data-animate="fade-up"><?php echo wp_kses_post( $hero_title ); ?></h1>
+            <h1 class="heading-1" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $hero_title ); ?></h1>
         <?php endif; ?>
         <?php if ( $hero_text ) : ?>
-            <p class="body-medium hero-text" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $hero_text ); ?></p>
+            <p class="body-medium hero-text" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'"><?php echo wp_kses_post( $hero_text ); ?></p>
         <?php endif; ?>
         <?php if ( $hero_sub_title ) : ?>
-            <h2 class="heading-4 hero-sub-title" data-animate="fade-up" data-animate-delay="2"><?php echo wp_kses_post( $hero_sub_title ); ?></h2>
+            <h2 class="heading-4 hero-sub-title" data-animate="fade-up" data-animate-delay="2" :class="shown && 'is-visible'"><?php echo wp_kses_post( $hero_sub_title ); ?></h2>
         <?php endif; ?>
         <?php if ( $hero_buttons ) : ?>
-            <div class="hero-buttons" data-animate="fade-up" data-animate-delay="3">
+            <div class="hero-buttons" data-animate="fade-up" data-animate-delay="3" :class="shown && 'is-visible'">
                 <?php foreach ( $hero_buttons as $hero_button ) : ?>
                     <?php if ( ! empty( $hero_button['button'] ) ) :
                         $colour = ! empty( $hero_button['colour'] ) ? $hero_button['colour'] : 'orange'; ?>

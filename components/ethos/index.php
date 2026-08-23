@@ -17,13 +17,13 @@
 
     if ( empty( $ethos_repeater ) ) return;
 ?>
-<section class="ethos">
+<section class="ethos" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <?php if ( $ethos_title ) : ?>
-        <h2 class="heading-2 ethos-title" data-animate="fade-up"><?php echo wp_kses_post( $ethos_title ); ?></h2>
+        <h2 class="heading-2 ethos-title" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $ethos_title ); ?></h2>
     <?php endif; ?>
     <div class="wrap">
         <?php foreach ( $ethos_repeater as $i => $ethos ) : ?>
-            <div class="single-journey<?php echo $i % 2 !== 0 ? ' journey-reversed' : ''; ?>" data-animate="fade-up">
+            <div class="single-journey<?php echo $i % 2 !== 0 ? ' journey-reversed' : ''; ?>" data-animate="fade-up" :class="shown && 'is-visible'">
                 <div class="journey-text">
                     <?php if ( ! empty( $ethos['text'] ) ) : ?>
                         <p class="body-medium"><?php echo wp_kses_post( $ethos['text'] ); ?></p>
@@ -39,7 +39,7 @@
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="journey-image-area" data-animate="fade-up" data-animate-delay="1">
+                <div class="journey-image-area" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'">
                     <?php if ( ! empty( $ethos['image'] ) ) : ?>
                         <?php echo wp_get_attachment_image( $ethos['image']['ID'], 'full' ); ?>
                     <?php endif; ?>

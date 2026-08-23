@@ -32,7 +32,7 @@ $articles = new WP_Query( array(
 
 <!-- Article Listing Section -->
 <!-- ------------------------------------------------- -->
-<section class="article-listing">
+<section class="article-listing" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <?php if ( $content_sup_title || $content_title ) : ?>
             <div class="article-listing-header">
@@ -48,7 +48,7 @@ $articles = new WP_Query( array(
         <?php if ( $articles->have_posts() ) : ?>
             <div class="article-grid">
                 <?php $i = 0; while ( $articles->have_posts() ) : $articles->the_post(); $i++; ?>
-                    <article class="article-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( ( $i - 1 ) % 3 ) + 1 ); ?>">
+                    <article class="article-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( ( $i - 1 ) % 3 ) + 1 ); ?>" :class="shown && 'is-visible'">
                         <a href="<?php the_permalink(); ?>" class="article-card-link">
                             <?php if ( has_post_thumbnail() ) : ?>
                                 <div class="article-card-image">

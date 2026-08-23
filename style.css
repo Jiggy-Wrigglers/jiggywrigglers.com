@@ -316,12 +316,14 @@ button.button-peach:hover {
 /* Scroll Animation */
 /* ------------------------------------------------- */
 
-/* Elements only hide while JS is available to reveal them */
-html.anim [data-animate] {
+/* Scroll Animation */
+/* ------------------------------------------------- */
+
+[data-animate] {
     opacity: 0;
 }
 
-html.anim [data-animate="fade-up"] {
+[data-animate="fade-up"] {
     transform: translateY(var(--animation-distance));
     will-change: opacity, transform;
 }
@@ -361,29 +363,6 @@ html.anim [data-animate="fade-up"] {
 [data-animate-delay="4"] { transition-delay: calc(var(--animation-delay-step) * 4); }
 [data-animate-delay="5"] { transition-delay: calc(var(--animation-delay-step) * 5); }
 [data-animate-delay="6"] { transition-delay: calc(var(--animation-delay-step) * 6); }
-
-/* Images reveal faster: subtle 0.3s fade-up */
-img[data-animate],
-.home-group-image,
-.home-content-image,
-.about-journey-image,
-.contact-content-image,
-.programmes-content-image {
-    --animation-duration: 0.3s;
-    --animation-distance: 24px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    [data-animate] {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-    }
-
-    [data-parallax] {
-        transform: none !important;
-    }
-}
 
 [data-parallax] {
     will-change: transform;

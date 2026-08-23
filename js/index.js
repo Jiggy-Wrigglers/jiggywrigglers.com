@@ -1,35 +1,3 @@
-// Flag JS availability: the CSS only hides [data-animate] on html.anim,
-// so content is never permanently invisible if anything below fails.
-document.documentElement.classList.add('anim');
-
-// Scroll reveal: add .is-visible to [data-animate] elements as they
-// enter the viewport. Works with the CSS animation utilities in style.css.
-const initRevealAnimations = () => {
-    const els = document.querySelectorAll('[data-animate]');
-    if (!els.length) return;
-
-    if (!('IntersectionObserver' in window)) {
-        els.forEach((el) => el.classList.add('is-visible'));
-        return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -5% 0px',
-    });
-
-    els.forEach((el) => observer.observe(el));
-};
-document.addEventListener('DOMContentLoaded', initRevealAnimations);
-
-// Smooth scroll — same setup as the proven production build.
 window.lenis = new Lenis({
     autoRaf: true,
     autoToggle: true,

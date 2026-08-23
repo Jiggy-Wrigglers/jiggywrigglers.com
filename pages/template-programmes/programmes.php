@@ -34,13 +34,13 @@ $content_image = get_field( 'content_image' );
 
 <!-- Key Info Text Section -->
 <!-- ------------------------------------------------- -->
-<section class="key-info-text-block">
+<section class="key-info-text-block" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <?php if ( $information_title ) : ?>
-        <h2 class="heading-3 key-info-title" data-animate="fade-up"><?php echo wp_kses_post( $information_title ); ?></h2>
+        <h2 class="heading-3 key-info-title" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $information_title ); ?></h2>
     <?php endif; ?>
 
     <?php if ( $information_text || $key_info_boxes ) : ?>
-        <div class="wrap key-info-strip" data-animate="fade-up" data-animate-delay="1">
+        <div class="wrap key-info-strip" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'">
             <?php if ( $information_text ) : ?>
                 <div class="key-info-box key-info-intro">
                     <p><?php echo wp_kses_post( $information_text ); ?></p>
@@ -63,7 +63,7 @@ $content_image = get_field( 'content_image' );
 
     <?php if ( $content_text || $content_image ) : ?>
         <div class="wrap content-columns">
-            <div class="content-columns-1" data-animate="fade-up">
+            <div class="content-columns-1" data-animate="fade-up" :class="shown && 'is-visible'">
                 <?php if ( $content_text ) : ?>
                     <div class="content-columns-text"><?php echo wp_kses_post( $content_text ); ?></div>
                 <?php endif; ?>
@@ -83,7 +83,7 @@ $content_image = get_field( 'content_image' );
                 <?php endif; ?>
             </div>
             <?php if ( $content_image ) : ?>
-                <div class="content-columns-2" data-animate="fade-up" data-animate-delay="1">
+                <div class="content-columns-2" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'">
                     <div class="image">
                         <?php echo wp_get_attachment_image( $content_image['ID'], 'full' ); ?>
                     </div>

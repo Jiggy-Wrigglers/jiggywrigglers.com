@@ -17,18 +17,18 @@
 
     if ( empty( $jiggy_gallery_images ) ) return;
 ?>
-<section class="gallery">
+<section class="gallery" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <div class="gallery-header">
             <?php if ( $jiggy_gallery_sup_title ) : ?>
-                <h3 class="heading-5" data-animate="fade-up"><?php echo wp_kses_post( $jiggy_gallery_sup_title ); ?></h3>
+                <h3 class="heading-5" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $jiggy_gallery_sup_title ); ?></h3>
             <?php endif; ?>
             <?php if ( $jiggy_gallery_title ) : ?>
-                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1"><?php echo wp_kses_post( $jiggy_gallery_title ); ?></h2>
+                <h2 class="heading-2" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'"><?php echo wp_kses_post( $jiggy_gallery_title ); ?></h2>
             <?php endif; ?>
         </div>
 
-        <div class="gallery-slider splide" data-animate="fade-up" data-animate-delay="2">
+        <div class="gallery-slider splide" data-animate="fade-up" data-animate-delay="2" :class="shown && 'is-visible'">
             <div class="splide__track">
                 <div class="splide__list">
                     <?php foreach ( $jiggy_gallery_images as $image ) : ?>

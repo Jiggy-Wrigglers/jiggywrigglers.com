@@ -24,7 +24,7 @@ $franchises_repeater = get_field( 'franchises_repeater' );
 
 <!-- Content Section -->
 <!-- ------------------------------------------------- -->
-<section class="locations-content">
+<section class="locations-content" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <div class="wrap">
         <?php if ( $content_sup_title ) : ?>
             <h3 class="heading-5"><?php echo wp_kses_post( $content_sup_title ); ?></h3>
@@ -75,7 +75,7 @@ $franchises_repeater = get_field( 'franchises_repeater' );
 
         <div class="locations-franchises-grid">
             <?php foreach ( $franchises_repeater as $i => $franchise ) : ?>
-                <div class="locations-franchise" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( $i % 3 ) + 1 ); ?>">
+                <div class="locations-franchise" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( $i % 3 ) + 1 ); ?>" :class="shown && 'is-visible'">
                     <h3 class="heading-5"><?php echo esc_html( $franchise['franchise_name'] ); ?></h3>
                     <p class="body-medium"><?php echo esc_html( $franchise['franchise_area'] ); ?></p>
                     <?php if ( ! empty( $franchise['franchise_email'] ) ) : ?>
