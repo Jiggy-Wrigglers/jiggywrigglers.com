@@ -1,49 +1,17 @@
 ﻿/* Jiggy Videos Page CSS file */
+/* Styled like the old site's video-block-1 and video-block-2. */
 /* ------------------------------------------------- */
 
-.jiggy-videos {
-    background: var(--white);
-    color: var(--black);
-    padding: var(--space-10) 0;
-}
+/* Video Block 1 */
+/* ------------------------------------------------- */
 
-.jiggy-videos .wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    max-width: 1000px;
-}
-
-.jiggy-video {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-}
-
-.jiggy-videos .heading-4 {
+.video-block-1 {
+    background: var(--peach);
     color: var(--purple);
+    padding: var(--space-8) 0;
 }
 
-.jiggy-video-embed {
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.jiggy-video-embed iframe,
-.jiggy-video-embed embed,
-.jiggy-video-embed video {
-    width: 100%;
-    aspect-ratio: 16/9;
-    display: block;
-}
-
-.jiggy-videos-youtube {
-    background: var(--purple);
-    color: var(--white);
-    padding: var(--space-10) 0;
-}
-
-.jiggy-videos-youtube .wrap {
+.video-block-1 .wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,16 +19,169 @@
     text-align: center;
 }
 
-.jiggy-videos-youtube .heading-3 {
+.video-block-1 .heading-3 {
+    color: var(--purple);
+}
+
+.video-block-1-embed,
+.video-block-1-embed iframe,
+.video-block-1-embed embed,
+.video-block-1-embed video {
+    width: 100%;
+    max-width: 800px;
+}
+
+.video-block-1-embed iframe,
+.video-block-1-embed embed,
+.video-block-1-embed video {
+    height: 400px;
+    border-radius: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Video Block 2 */
+/* ------------------------------------------------- */
+
+.video-block-2 {
+    background: var(--purple);
     color: var(--white);
-    max-width: 720px;
+    padding: var(--space-10) 0;
+}
+
+.video-block-2 .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+}
+
+.video-block-2-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--space-4);
+    text-align: center;
+}
+
+.video-block-2-item .heading-3 {
+    color: var(--white);
+}
+
+.video-block-2-embed,
+.video-block-2-embed iframe,
+.video-block-2-embed embed,
+.video-block-2-embed video {
+    width: 100%;
+    max-width: 800px;
+}
+
+.video-block-2-embed iframe,
+.video-block-2-embed embed,
+.video-block-2-embed video {
+    height: 30vh;
+    min-height: 250px;
+    max-height: 350px;
+    border-radius: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Playlist (jiggy-playlight-footer) */
+/* ------------------------------------------------- */
+
+.jiggy-playlight-footer {
+    padding: var(--space-10) 0;
+    background: var(--pink);
+    color: var(--white);
+}
+
+.jiggy-playlight-footer .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+}
+
+.header-jpl {
+    display: flex;
+    gap: var(--space-5);
+    align-items: center;
+}
+
+.header-jpl .playlist-note {
+    font-size: 60px;
+    color: var(--white);
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.header-jpl .playlist-note:first-child {
+    margin-top: auto;
+}
+
+.header-jpl .playlist-title {
+    color: var(--white);
+}
+
+.linkd-jpl {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    justify-content: center;
+    align-items: center;
+}
+
+.linkd-jpl a {
+    background: var(--white);
+    border-radius: 20px;
+    border: solid 1px var(--black);
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-3);
+    align-items: center;
+    color: var(--black);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: var(--font-size-18, 18px);
+    font-weight: 600;
+    text-transform: uppercase;
+    width: fit-content;
+    transition: ease 0.4s;
+}
+
+.linkd-jpl a svg {
+    width: 24px;
+    height: 24px;
+    color: var(--black);
+}
+
+.linkd-jpl a:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: var(--white);
+}
+
+.linkd-jpl a:hover svg {
+    color: var(--white);
 }
 
 /* Responsive */
 /* ------------------------------------------------- */
 
-@media (max-width: 1080px) {
-    .jiggy-videos .wrap {
-        max-width: none;
+@media (max-width: 960px) {
+    .jiggy-playlight-footer .wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .header-jpl {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 800px) {
+    .video-block-2 .wrap {
+        grid-template-columns: 1fr;
     }
 }

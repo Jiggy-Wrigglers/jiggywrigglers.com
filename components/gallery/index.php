@@ -38,7 +38,10 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-            <div class="splide__pagination"></div>
+            <div class="gallery-controls">
+                <button class="gallery-prev" type="button" aria-label="Previous image">&larr;</button>
+                <button class="gallery-next" type="button" aria-label="Next image">&rarr;</button>
+            </div>
         </div>
     </div>
 </section>
