@@ -30,6 +30,7 @@ include get_template_directory() . '/functions/remove-menus.php';
 include get_template_directory() . '/functions/custom-functions.php';
 include get_template_directory() . '/functions/surerank.php';
 include get_template_directory() . '/functions/surecart.php';
+include get_template_directory() . '/functions/sureforms.php';
 
 function jiggy_wrigglers_setup() {
 	load_theme_textdomain( 'jiggywrigglers', get_template_directory() . '/languages' );
@@ -65,9 +66,13 @@ function jiggy_wrigglers_setup() {
 		)
 	);
 
-	// Block editor only for SureCart products (product content is block-based). Everything else is ACF-driven.
+	// Block editor only for block-based content (SureCart products, SureForms forms). Everything else is ACF-driven.
 	add_filter( 'use_block_editor_for_post', function( $use, $post ) {
-		if ( $post && 'sc_product' === $post->post_type ) {
+		$block_editable = array(
+			'sc_product',
+			'sureforms_form',
+		);
+		if ( $post && in_array( $post->post_type, $block_editable, true ) ) {
 			return true;
 		}
 		return false;
@@ -115,6 +120,10 @@ function jiggy_wrigglers_defer_scripts( $tag, $handle ) {
 add_filter( 'script_loader_tag', 'jiggy_wrigglers_defer_scripts', 10, 2 );
 
 function jiggy_wrigglers_custom_admin_css() {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( $screen && in_array( $screen->post_type, array( 'sc_product', 'sureforms_form' ), true ) ) {
+		return;
+	}
 	echo '<style>#postdivrich, #wp-content-wrap, div#authordiv, div#slugdiv { display: none !important; }</style>';
 }
 add_action( 'admin_head', 'jiggy_wrigglers_custom_admin_css' );
