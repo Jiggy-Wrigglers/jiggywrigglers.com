@@ -1,0 +1,207 @@
+/* Franchise Opportunity Page CSS file */
+/* Sections styled like the old site's blocks. */
+/* ------------------------------------------------- */
+
+/* Text 3 Images */
+/* ------------------------------------------------- */
+
+.text-with-3-images-block {
+    padding: var(--space-10) 0;
+    background: var(--white);
+}
+
+.text-with-3-images-block .heading-5 {
+    color: var(--pink);
+    text-align: center;
+    margin-bottom: var(--space-2);
+}
+
+.text-with-3-images-block .heading-2 {
+    color: var(--blue);
+    text-align: center;
+}
+
+.text-with-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+}
+
+.text-section {
+    padding: var(--space-7) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.text-section p {
+    color: var(--purple);
+    font-size: var(--font-size-18, 18px);
+}
+
+.image-section {
+    position: relative;
+    min-height: 400px;
+}
+
+.image-section img {
+    position: absolute;
+    height: 40%;
+    width: auto;
+}
+
+.image-section img:nth-of-type(1) {
+    top: 0;
+    left: 0;
+}
+
+.image-section img:nth-of-type(2) {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 0;
+}
+
+.image-section img:nth-of-type(3) {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+/* Video Block 2 */
+/* ------------------------------------------------- */
+
+.video-block-2 {
+    padding: var(--space-8) 0;
+    background: var(--white);
+    color: var(--purple);
+}
+
+.video-block-2 .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+}
+
+.video-block-2-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--space-4);
+    text-align: center;
+}
+
+.video-block-2-item .heading-3 {
+    color: var(--purple);
+}
+
+.video-block-2-embed,
+.video-block-2-embed iframe,
+.video-block-2-embed embed,
+.video-block-2-embed video {
+    width: 100%;
+    max-width: 800px;
+}
+
+.video-block-2-embed iframe,
+.video-block-2-embed embed,
+.video-block-2-embed video {
+    height: 30vh;
+    min-height: 250px;
+    max-height: 350px;
+    border-radius: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* List Block */
+/* ------------------------------------------------- */
+
+.list-block {
+    padding: var(--space-10) 0;
+    background: var(--peach);
+    color: var(--purple);
+}
+
+.list-block .wrap {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-7);
+    align-items: start;
+}
+
+.list-area {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.list-area .heading-5 {
+    color: var(--orange);
+}
+
+.list-area .heading-2 {
+    color: var(--blue);
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+}
+
+.list-block-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.list-block .item {
+    font-size: var(--font-size-18, 18px);
+    font-weight: 700;
+    color: var(--purple);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+}
+
+.list-block .item svg {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+}
+
+.list-block .item i {
+    font-size: 40px;
+    margin: 0 auto;
+}
+
+.list-block .list-area .button {
+    margin-top: var(--space-5);
+}
+
+.list-block-image {
+    position: relative;
+}
+
+.list-block-image img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* Responsive */
+/* ------------------------------------------------- */
+
+@media (max-width: 960px) {
+    .text-with-images {
+        grid-template-columns: 1fr;
+    }
+
+    .list-block .wrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 800px) {
+    .video-block-2 .wrap {
+        grid-template-columns: 1fr;
+    }
+}
