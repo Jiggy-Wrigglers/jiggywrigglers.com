@@ -38,7 +38,7 @@ $apple_music_link = get_field( 'apple_music_link' );
             <h2 class="heading-3" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $video_block_1_title ); ?></h2>
         <?php endif; ?>
         <div class="video-block-1-embed" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'">
-            <?php echo wp_kses_post( $video_block_1_embed ); ?>
+            <?php echo $video_block_1_embed; ?>
         </div>
     </div>
 </section>
@@ -54,7 +54,7 @@ $apple_music_link = get_field( 'apple_music_link' );
                 <?php if ( $video_block_2_1_title ) : ?>
                     <h2 class="heading-3" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $video_block_2_1_title ); ?></h2>
                 <?php endif; ?>
-                <div class="video-block-2-embed"><?php echo wp_kses_post( $video_block_2_1_embed ); ?></div>
+                <div class="video-block-2-embed"><?php echo $video_block_2_1_embed; ?></div>
             </div>
         <?php endif; ?>
         <?php if ( $video_block_2_2_embed ) : ?>
@@ -62,7 +62,7 @@ $apple_music_link = get_field( 'apple_music_link' );
                 <?php if ( $video_block_2_2_title ) : ?>
                     <h2 class="heading-3" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'"><?php echo wp_kses_post( $video_block_2_2_title ); ?></h2>
                 <?php endif; ?>
-                <div class="video-block-2-embed"><?php echo wp_kses_post( $video_block_2_2_embed ); ?></div>
+                <div class="video-block-2-embed"><?php echo $video_block_2_2_embed; ?></div>
             </div>
         <?php endif; ?>
     </div>

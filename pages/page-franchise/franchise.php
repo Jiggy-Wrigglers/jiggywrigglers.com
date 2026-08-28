@@ -80,7 +80,7 @@ $list_image = get_field( 'list_image' );
                 <?php if ( $video_1_title ) : ?>
                     <h2 class="heading-3" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $video_1_title ); ?></h2>
                 <?php endif; ?>
-                <div class="video-block-2-embed"><?php echo wp_kses_post( $video_1_embed ); ?></div>
+                <div class="video-block-2-embed"><?php echo $video_1_embed; ?></div>
             </div>
         <?php endif; ?>
         <?php if ( $video_2_embed ) : ?>
@@ -88,7 +88,7 @@ $list_image = get_field( 'list_image' );
                 <?php if ( $video_2_title ) : ?>
                     <h2 class="heading-3" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'"><?php echo wp_kses_post( $video_2_title ); ?></h2>
                 <?php endif; ?>
-                <div class="video-block-2-embed"><?php echo wp_kses_post( $video_2_embed ); ?></div>
+                <div class="video-block-2-embed"><?php echo $video_2_embed; ?></div>
             </div>
         <?php endif; ?>
     </div>
