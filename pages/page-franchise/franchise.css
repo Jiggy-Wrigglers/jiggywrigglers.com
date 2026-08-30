@@ -169,11 +169,6 @@
     margin: 0 auto;
 }
 
-.list-block .item i {
-    font-size: 40px;
-    margin: 0 auto;
-}
-
 .list-block .list-area .button {
     margin-top: var(--space-5);
 }

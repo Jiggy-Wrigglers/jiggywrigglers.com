@@ -109,7 +109,8 @@
 }
 
 .header-jpl .playlist-note {
-    font-size: 60px;
+    width: 60px;
+    height: 60px;
     color: var(--white);
     opacity: 0.5;
     flex-shrink: 0;
