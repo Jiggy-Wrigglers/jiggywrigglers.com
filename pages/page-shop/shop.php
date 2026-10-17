@@ -155,7 +155,8 @@ $filtered = '' !== $search || '' !== $collection;
 						$shop_url
 					);
 					echo wp_kses_post( paginate_links( array(
-						'base'      => str_replace( '999999999', '%#%', esc_url( add_query_arg( 'shop_page', 999999999, $pagination_url ) ) ),
+						// paginate_links() combines query arguments, then escapes each final URL.
+						'base'      => str_replace( '999999999', '%#%', add_query_arg( 'shop_page', 999999999, $pagination_url ) ),
 						'format'    => '',
 						'current'   => $current_page,
 						'total'     => (int) $products->max_num_pages,

@@ -16,12 +16,15 @@ foreach ( get_posts( array( 'post_type' => array( 'page', 'post', 'sc_product' )
 	$meta = jw_seo_apply_meta( $meta, $item );
 	$product = 'sc_product' === $item->post_type ? get_post_meta( $item->ID, 'product', true ) : array();
 	$product = is_object( $product ) ? (array) $product : $product;
+	$stored_general = get_post_meta( $item->ID, 'surerank_settings_general', true );
 	$rows[] = array(
 		'id' => $item->ID, 'type' => $item->post_type, 'slug' => $item->post_name,
 		'url' => get_permalink( $item ), 'title' => wp_strip_all_tags( $meta['page_title'] ?? get_the_title( $item ) ),
 		'description' => wp_strip_all_tags( $meta['page_description'] ?? '' ),
 		'canonical' => ! empty( $meta['canonical_url'] ) ? $meta['canonical_url'] : get_permalink( $item ),
 		'noindex_override' => $meta['post_no_index'] ?? '',
+		'description_storage_type' => gettype( $stored_general ),
+		'stored_description' => is_array( $stored_general ) ? ( $stored_general['page_description'] ?? '' ) : '',
 		'sku' => is_array( $product ) && isset( $product['sku'] ) && is_scalar( $product['sku'] ) ? (string) $product['sku'] : '',
 	);
 }
