@@ -6,7 +6,7 @@
  */
 
 get_header(); ?>
-<link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/pages/page-locations/locations.css">
+<link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/pages/page-locations/locations.css?ver=<?php echo esc_attr( _S_VERSION ); ?>">
 
 <?php
 $hero_title = get_field( 'hero_title' ) ?: get_the_title();
@@ -102,7 +102,14 @@ foreach ( is_array( $franchises_repeater ) ? $franchises_repeater : array() as $
             <h2 class="heading-2"><?php echo wp_kses_post( $content_title ); ?></h2>
         <?php endif; ?>
         <?php if ( $content_text ) : ?>
-            <div class="locations-content-text"><?php echo wp_kses_post( $content_text ); ?></div>
+            <?php if ( $location_pages ) : ?>
+                <details class="locations-regions">
+                    <summary><?php esc_html_e( 'Browse locations by region', 'jiggywrigglers' ); ?></summary>
+                    <div class="locations-content-text"><?php echo wp_kses_post( $content_text ); ?></div>
+                </details>
+            <?php else : ?>
+                <div class="locations-content-text"><?php echo wp_kses_post( $content_text ); ?></div>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 </section>
