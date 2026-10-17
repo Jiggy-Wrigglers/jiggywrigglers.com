@@ -1,49 +1,86 @@
-/* Contact Page CSS file */
-/* ------------------------------------------------- */
-
+/* Contact page: one peach surface, with consistent native SureForms fields. */
 body .contact-form {
     color: var(--purple);
-    padding: var(--space-10) 0;
-    padding-block: clamp(56px, 7vw, 96px);
     background: var(--peach);
+    padding: clamp(48px, 7vw, 88px) 0;
 }
 
-body .contact-form .wrap {
+body .contact-form > .wrap {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: 14px;
     max-width: 860px;
 }
 
-.contact-form .heading-2 {
+body .contact-form :is(.heading-2, .heading-5) {
     color: var(--purple);
 }
 
-body .contact-form-shortcode {
-    margin-top: var(--space-5);
-    background: #fff;
-    border: 1px solid var(--jw-border);
-    border-radius: var(--jw-radius);
-    padding: clamp(22px, 4vw, 44px);
-    box-shadow: var(--jw-shadow);
+body .contact-form > .wrap > .heading-5 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
-body .contact-form-shortcode :is(input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="hidden"]), select, textarea) {
+/* The embedded form already owns its peach background and field layout. */
+body .contact-form-shortcode {
+    width: 100%;
+    min-width: 0;
+    margin-top: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+body .contact-form-shortcode .srfm-form-container {
+    --srfm-color-input-background: #fff;
+    --srfm-color-input-background-hover: #fff;
+    --srfm-dropdown-input-background-hover: #fff;
+    --srfm-color-input-border: #c6b2ce;
+    --srfm-color-input-border-hover: var(--purple);
+    --srfm-input-height: 52px;
+    --srfm-input-field-padding: 12px 14px;
+    --srfm-input-field-font-size: 16px;
+    --srfm-input-field-line-height: 24px;
+    --srfm-input-field-border-radius: 10px;
+    --srfm-label-font-size: 16px;
+    --srfm-label-line-height: 24px;
+    --srfm-col-gap-between-fields: 20px;
+    --srfm-row-gap-between-fields: 20px;
+    --srfm-row-gap-between-blocks: 20px;
+    --srfm-btn-font-size: 16px;
+    --srfm-btn-line-height: 24px;
+    --srfm-btn-padding: 12px 24px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+body .contact-form-shortcode :where(input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="hidden"]):not(.ts-control input), select, textarea) {
     box-sizing: border-box;
     max-width: 100%;
-    min-height: 50px;
+    min-height: 52px;
     font-family: var(--font-body);
     font-size: 16px;
+    line-height: 24px;
     color: var(--jw-ink);
     background-color: #fff;
-    border: 1px solid #cdbdd7;
+    border: 1px solid #c6b2ce;
     border-radius: 10px;
     padding: 12px 14px;
 }
 
 body .contact-form-shortcode textarea {
-    min-height: 150px;
+    min-height: 160px;
     resize: vertical;
+}
+
+body .contact-form-shortcode .srfm-form .srfm-dropdown-common-wrap .ts-wrapper:is(:focus-within, .focus, .input-active) .ts-control {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(102, 36, 131, 0.18);
 }
 
 body .contact-form-shortcode :is(label, legend) {
@@ -51,8 +88,10 @@ body .contact-form-shortcode :is(label, legend) {
     font-weight: 600;
 }
 
-body .contact-form-shortcode :is(button[type="submit"], input[type="submit"]) {
-    min-height: 50px;
+body .contact-form-shortcode :is(button[type="submit"], input[type="submit"]),
+body .contact-form-shortcode .srfm-form .srfm-submit-container .srfm-submit-button {
+    min-height: 52px;
+    min-width: 120px;
     background: var(--purple);
     color: #fff;
     border: 2px solid var(--purple);
@@ -62,4 +101,18 @@ body .contact-form-shortcode :is(button[type="submit"], input[type="submit"]) {
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
+}
+
+body .contact-form-shortcode :is(button[type="submit"], input[type="submit"], .srfm-submit-button):disabled {
+    cursor: wait;
+}
+
+@media (max-width: 600px) {
+    body .contact-form {
+        padding-block: 44px 56px;
+    }
+
+    body .contact-form-shortcode {
+        margin-top: 12px;
+    }
 }

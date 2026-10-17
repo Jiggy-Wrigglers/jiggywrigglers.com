@@ -106,3 +106,13 @@ body .hero-text {
     font-size: clamp(17px, 1.6vw, 20px);
     line-height: 1.7;
 }
+
+/* Keep policy information within reach below the banner. */
+body .hero.hero--compact {
+    min-height: 0;
+}
+
+body .hero.hero--compact .wrap {
+    min-height: 0;
+    padding-block: clamp(48px, 6vw, 80px);
+}

@@ -17,6 +17,7 @@ get_header(); ?>
 <!-- ------------------------------------------------- -->
 <?php
 $hero_title = get_field( 'hero_title' ) ?: get_the_title();
+$hero_compact = true;
 include locate_template( 'components/hero/index.php' );
 ?>
 

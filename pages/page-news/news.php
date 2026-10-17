@@ -29,9 +29,16 @@ include locate_template( 'components/hero/index.php' );
                     <article class="news-card" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( ( $i - 1 ) % 3 ) + 1 ); ?>" :class="shown && 'is-visible'">
                         <a href="<?php the_permalink(); ?>" class="news-card-link">
                             <?php if ( has_post_thumbnail() ) : ?>
-                                <div class="news-card-image">
+                                <?php
+                                $thumbnail_meta = wp_get_attachment_metadata( get_post_thumbnail_id() );
+                                $wide_thumbnail = is_array( $thumbnail_meta ) && ! empty( $thumbnail_meta['height'] )
+                                    && ( (float) ( $thumbnail_meta['width'] ?? 0 ) / $thumbnail_meta['height'] ) > 2.2;
+                                ?>
+                                <div class="news-card-image<?php echo $wide_thumbnail ? ' news-card-image--wide' : ''; ?>">
                                     <?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'full' ); ?>
                                 </div>
+                            <?php else : ?>
+                                <div class="news-card-image news-card-image--placeholder" aria-hidden="true"><span>Jiggy Wrigglers</span></div>
                             <?php endif; ?>
                             <div class="news-card-content">
                                 <p class="news-card-date"><?php echo esc_html( get_the_date( 'd M Y' ) ); ?></p>

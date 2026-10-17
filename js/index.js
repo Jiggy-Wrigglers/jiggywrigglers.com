@@ -50,6 +50,9 @@ function headerMenuFocusTrap() {
     return {
         trapFocus(event) {
             const container = this.$el;
+            const menu = container.querySelector('#header-menu');
+            const toggle = container.querySelector('.header-menu-toggle');
+            if (!menu || !toggle) return;
             const isReverse = event.shiftKey;
             const focusableSelectors = [
                 'a[href]',
@@ -60,9 +63,7 @@ function headerMenuFocusTrap() {
                 '[tabindex]:not([tabindex="-1"])'
             ];
 
-            const focusable = Array.from(
-                container.querySelectorAll(focusableSelectors.join(','))
-            ).filter(el =>
+            const focusable = [toggle, ...menu.querySelectorAll(focusableSelectors.join(','))].filter(el =>
                 !el.hasAttribute('disabled') &&
                 !el.closest('[inert]') &&
                 el.getAttribute('aria-hidden') !== 'true' &&

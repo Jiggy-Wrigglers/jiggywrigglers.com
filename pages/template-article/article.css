@@ -58,8 +58,8 @@ body .article-content-text a {
     text-underline-offset: 4px;
 }
 
-.article-content-text a:hover {
-    color: var(--orange);
+body .article-content-text a:hover {
+    color: var(--jw-purple-dark);
 }
 
 body .article-content-text blockquote {

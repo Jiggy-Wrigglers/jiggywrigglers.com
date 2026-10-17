@@ -20,9 +20,17 @@
     $hero_text = isset( $hero_text ) ? $hero_text : get_field( 'hero_text', $hero_post_id );
     $hero_buttons = isset( $hero_buttons ) ? $hero_buttons : get_field( 'hero_buttons', $hero_post_id );
 
+    // Some imported pages repeat the same introduction in both ACF fields.
+    $hero_plain_text = static function ( $value ) {
+        return trim( preg_replace( '/\s+/u', ' ', html_entity_decode( wp_strip_all_tags( (string) $value ), ENT_QUOTES, 'UTF-8' ) ) );
+    };
+    if ( $hero_text && $hero_sub_title && $hero_plain_text( $hero_text ) === $hero_plain_text( $hero_sub_title ) ) {
+        $hero_sub_title = '';
+    }
+
     $hero_image = is_array( $hero_images ) && ! empty( $hero_images ) ? $hero_images[0] : null;
 ?>
-<section class="hero" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
+<section class="hero<?php echo ! empty( $hero_compact ) || ! $hero_image ? ' hero--compact' : ''; ?>" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
     <?php if ( $hero_image ) : ?>
         <?php echo wp_get_attachment_image( $hero_image['ID'], 'full' ); ?>
     <?php endif; ?>

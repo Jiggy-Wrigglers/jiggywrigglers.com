@@ -220,8 +220,10 @@ body .header-menu-link {
     line-height: 1.35;
 }
 
-.header-menu-link:hover {
-    color: var(--orange);
+body .header-menu-link:hover {
+    color: var(--jw-purple-dark);
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 /* Sub menu toggle */
@@ -277,8 +279,10 @@ body .header-menu-sub a {
     color: var(--jw-muted);
 }
 
-.header-menu-sub a:hover {
-    color: var(--orange);
+body .header-menu-sub a:hover {
+    color: var(--jw-purple-dark);
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 .header-menu-buttons {

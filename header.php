@@ -29,7 +29,7 @@
 ?>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <!-- Header -->
-<div class="header-shell" x-data="{ menuOpen: false }" @keydown.escape.window="if (menuOpen) { $event.preventDefault(); menuOpen = false; $nextTick(() => document.querySelector('.header-menu-toggle')?.focus()); }">
+<div class="header-shell" x-data="{ ...headerMenuFocusTrap(), menuOpen: false }" @keydown.tab="if (menuOpen) trapFocus($event)" @keydown.escape.window="if (menuOpen) { $event.preventDefault(); menuOpen = false; $nextTick(() => document.querySelector('.header-menu-toggle')?.focus()); }">
 <header class="header" :class="{ 'menu-open': menuOpen }">
 	<div class="wrap">
 		<div class="header-wrapper">
@@ -84,14 +84,12 @@
 	class="header-menu"
 	:class="{ open: menuOpen }"
 	x-show="menuOpen"
-	x-data="headerMenuFocusTrap()"
 	@keydown.escape.prevent="
 		menuOpen = false;
 		$nextTick(() => {
 			document.querySelector('.header-menu-toggle')?.focus();
 		});
 	"
-	@keydown.tab="trapFocus($event)"
 	:inert="!menuOpen"
 >
 	<div class="wrap">

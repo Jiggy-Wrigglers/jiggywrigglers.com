@@ -78,7 +78,8 @@ body .footer-copyright a {
 }
 
 .footer-copyright a:hover {
-    color: var(--orange);
+    color: var(--jw-purple-dark);
+    text-decoration: underline;
 }
 
 /* Responsive */

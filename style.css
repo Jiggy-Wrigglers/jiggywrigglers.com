@@ -4,7 +4,7 @@ Theme URI: https://jiggywrigglers.com
 Author: Jiggy Wrigglers
 Author URI: https://jiggywrigglers.com
 Description: Welcome to Jiggy Wrigglers, award-winning, pay-as-you-go, music, movement and sensory developmental classes for babies, toddlers and preschoolers. Our classes opened in 2008 and today we are one of the leading baby and pre-school development providers in the UK. Jiggy Wrigglers Children music classes also offer sensory and development support we offer an engaging combination of upbeat music, dance and creative toddler activities, designed to stimulate and entertain adults and children.
-Version: 2.4.2
+Version: 2.5.0
 Requires PHP: 7.4+
 Text Domain: jiggywrigglers
 License: GNU General Public License v2 or later
@@ -834,7 +834,8 @@ body *::after {
     background: #662483!important;
     border: 2px solid #662483!important;
     color: #fff!important;
-    border-radius: 6px!important;
+    border-radius: 12px!important;
+    min-height: 48px;
 }
 
 .wp-block-surecart-product-buy-button .sc-button__link:hover {
@@ -859,7 +860,7 @@ body *::after {
 
 .wp-block-surecart-product-variant-pill {
     border: 1px solid #ccb7d6!important;
-    border-radius: 6px!important;
+    border-radius: 12px!important;
     color: #662483!important;
     background: #fff!important;
 }
@@ -877,7 +878,7 @@ body *::after {
 
 .wp-block-surecart-product-quantity .sc-quantity-selector {
     border-color: #ccb7d6!important;
-    border-radius: 6px!important;
+    border-radius: 12px!important;
 }
 
 .wp-block-surecart-product-quantity .sc-input-group-text {
@@ -886,7 +887,7 @@ body *::after {
 }
 
 .wp-block-surecart-product-buy-button button:focus-visible,.wp-block-surecart-product-variant-pill:focus-visible,.wp-block-surecart-product-quantity [role="button"]:focus-visible {
-    outline: 3px solid #43b3d9!important;
+    outline: 3px solid var(--purple)!important;
     outline-offset: 3px;
 }
 

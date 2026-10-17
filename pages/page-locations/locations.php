@@ -120,6 +120,10 @@ foreach ( is_array( $franchises_repeater ) ? $franchises_repeater : array() as $
     <div class="wrap">
         <div class="locations-franchises-search">
             <h2 id="locations-franchises-title" class="heading-3"><?php esc_html_e( 'Find your local Jiggy Wrigglers', 'jiggywrigglers' ); ?></h2>
+            <div class="locations-booking-search">
+                <p><?php esc_html_e( 'Search current classes by postcode in our live booking system, or choose your local area below for venues, parties and contact details.', 'jiggywrigglers' ); ?></p>
+                <a class="button button-purple" href="https://jiggywrigglers.my-sfs.com/app.groups.php"><?php esc_html_e( 'Search classes by postcode', 'jiggywrigglers' ); ?></a>
+            </div>
             <?php if ( $franchises ) : ?>
             <p id="locations-area-help" class="body-medium"><?php esc_html_e( 'Choose your area to view party calendars or contact your local franchise. You can also browse all areas below.', 'jiggywrigglers' ); ?></p>
             <div class="locations-franchises-select">
@@ -214,7 +218,7 @@ foreach ( is_array( $franchises_repeater ) ? $franchises_repeater : array() as $
             card.hidden = !matches;
             if (matches) visible++;
         });
-        searchStatus.textContent = visible ? visible + ' / ' + cards.length : <?php echo wp_json_encode( __( 'No areas found. Try a nearby town or browse all areas by clearing your search.', 'jiggywrigglers' ) ); ?>;
+        searchStatus.textContent = visible ? visible + ' of ' + cards.length + ' areas' : <?php echo wp_json_encode( __( 'No areas found. Try a nearby town, use the postcode search above, or clear your search to see all areas.', 'jiggywrigglers' ) ); ?>;
     }
     search.addEventListener('input', filterLocations);
     filterLocations();

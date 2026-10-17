@@ -12,6 +12,7 @@ on:
           - seo-audit
           - rebuild-sitemap
           - repair-duplicate-descriptions
+          - polish-page-introductions
 jobs:
   maintenance:
     runs-on: ubuntu-latest

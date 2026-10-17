@@ -117,6 +117,153 @@ function jiggy_wrigglers_sfs_fallback() {
         . esc_html__( 'Contact us', 'jiggywrigglers' ) . '</a></span>';
 }
 
+/** The six live fields that a local page editor may override independently. */
+function jiggy_wrigglers_sfs_override_fields() {
+    return array(
+        'about'           => array( 'label' => __( 'About your local group', 'jiggywrigglers' ), 'type' => 'html' ),
+        'venues'          => array( 'label' => __( 'Venues', 'jiggywrigglers' ), 'type' => 'html' ),
+        'bookingscontact' => array( 'label' => __( 'Booking phone number', 'jiggywrigglers' ), 'type' => 'text' ),
+        'bookingsemail'   => array( 'label' => __( 'Booking email address', 'jiggywrigglers' ), 'type' => 'email' ),
+        'facebook'        => array( 'label' => __( 'Facebook URL', 'jiggywrigglers' ), 'type' => 'url' ),
+        'instagram'       => array( 'label' => __( 'Instagram URL', 'jiggywrigglers' ), 'type' => 'url' ),
+    );
+}
+
+/** Only imported individual local pages have an SFS area; the directory does not. */
+function jiggy_wrigglers_sfs_editor_area( $post_id ) {
+    if ( 'page' !== get_post_type( $post_id ) ) {
+        return '';
+    }
+    $area = get_post_meta( $post_id, '_jw_sfs_area', true );
+    return is_string( $area ) && preg_match( '/\A[\p{L}\p{N} _.-]{1,100}\z/u', $area ) ? $area : '';
+}
+
+/** Validate the original value before WordPress can prefix a bare handle. */
+function jiggy_wrigglers_sfs_valid_url( $value ) {
+    if ( ! is_string( $value ) || ! preg_match( '#^https?://#i', trim( $value ) ) ) {
+        return '';
+    }
+    $url = esc_url_raw( trim( $value ), array( 'http', 'https' ) );
+    $parts = wp_parse_url( $url );
+    if ( ! $parts || empty( $parts['host'] ) || empty( $parts['scheme'] )
+        || ! in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true )
+        || isset( $parts['user'] ) || isset( $parts['pass'] ) ) {
+        return '';
+    }
+    return $url;
+}
+
+/**
+ * Return null for automatic data, or a string (including empty) for a page override.
+ * Overrides never enter the shared API cache and cannot cross area/page boundaries.
+ */
+function jiggy_wrigglers_sfs_manual_value( $area, $key ) {
+    $fields = jiggy_wrigglers_sfs_override_fields();
+    if ( ! isset( $fields[ $key ] ) || ! is_string( $area ) ) {
+        return null;
+    }
+    $post_id = get_the_ID();
+    if ( ! $post_id || trim( $area ) !== jiggy_wrigglers_sfs_editor_area( $post_id ) ) {
+        return null;
+    }
+    $overrides = get_post_meta( $post_id, '_jw_sfs_overrides', true );
+    return is_array( $overrides ) && array_key_exists( $key, $overrides ) && is_string( $overrides[ $key ] )
+        ? $overrides[ $key ] : null;
+}
+
+/** Render a manually supplied page value, retaining the shortcode's inline/block role. */
+function jiggy_wrigglers_sfs_render_manual( $key, $value, $display_type ) {
+    $value = trim( $value );
+    if ( '' === $value ) {
+        return '';
+    }
+    $class = 'sfs-result sfs-result--' . $key . ' sfs-result--manual';
+    if ( in_array( $key, array( 'about', 'venues' ), true ) ) {
+        return '<div class="' . esc_attr( $class ) . '">' . wp_kses_post( wpautop( $value ) ) . '</div>';
+    }
+    if ( 'email' === $display_type ) {
+        $email = sanitize_email( $value );
+        return is_email( $email ) && $email === $value
+            ? '<span class="' . esc_attr( $class ) . '"><a href="' . esc_url( 'mailto:' . $email ) . '">' . esc_html( $email ) . '</a></span>' : '';
+    }
+    if ( 'link' === $display_type ) {
+        $url = jiggy_wrigglers_sfs_valid_url( $value );
+        return $url ? '<span class="' . esc_attr( $class ) . '"><a href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $value ) . '</a></span>' : '';
+    }
+    return '<span class="' . esc_attr( $class ) . '">' . esc_html( $value ) . '</span>';
+}
+
+/** Add controls only to individual local pages, without fetching or changing live data. */
+function jiggy_wrigglers_sfs_add_editor_box( $post ) {
+    if ( ! $post || ! jiggy_wrigglers_sfs_editor_area( $post->ID ) ) {
+        return;
+    }
+    add_meta_box( 'jw-sfs-local-information', __( 'Local information: automatic or manual', 'jiggywrigglers' ), 'jiggy_wrigglers_sfs_editor_box', 'page', 'normal', 'default' );
+}
+add_action( 'add_meta_boxes_page', 'jiggy_wrigglers_sfs_add_editor_box' );
+
+function jiggy_wrigglers_sfs_editor_box( $post ) {
+    $overrides = get_post_meta( $post->ID, '_jw_sfs_overrides', true );
+    $overrides = is_array( $overrides ) ? $overrides : array();
+    wp_nonce_field( 'jw_sfs_local_information_' . $post->ID, 'jw_sfs_local_information_nonce' );
+    echo '<p>' . esc_html__( 'By default these fields update automatically from SFS. Tick a field to use this page’s manual value instead. A ticked field with an empty value is hidden. Untick it and update the page to return to automatic information.', 'jiggywrigglers' ) . '</p>';
+    echo '<p>' . esc_html__( 'The original text inside the page’s SFS shortcodes remains an outage fallback. Other page text, images and booking buttons can still be edited in the main page editor.', 'jiggywrigglers' ) . '</p>';
+    echo '<p><strong>' . esc_html__( 'Connected SFS group:', 'jiggywrigglers' ) . '</strong> ' . esc_html( jiggy_wrigglers_sfs_editor_area( $post->ID ) ) . '</p>';
+    foreach ( jiggy_wrigglers_sfs_override_fields() as $key => $field ) {
+        $enabled = array_key_exists( $key, $overrides );
+        $value = $enabled && is_string( $overrides[ $key ] ) ? $overrides[ $key ] : '';
+        $id = 'jw-sfs-' . $key;
+        echo '<fieldset style="margin:20px 0;padding:12px;border:1px solid #c3c4c7"><legend><strong>' . esc_html( $field['label'] ) . '</strong></legend>';
+        echo '<p><label><input type="checkbox" name="jw_sfs_manual[' . esc_attr( $key ) . ']" value="1"' . ( $enabled ? ' checked' : '' ) . '> ' . esc_html__( 'Use this page’s manual value', 'jiggywrigglers' ) . '</label></p>';
+        echo '<label for="' . esc_attr( $id ) . '">' . esc_html__( 'Manual value', 'jiggywrigglers' ) . '</label>';
+        if ( 'html' === $field['type'] ) {
+            echo '<textarea class="widefat" rows="5" id="' . esc_attr( $id ) . '" name="jw_sfs_value[' . esc_attr( $key ) . ']" aria-describedby="' . esc_attr( $id ) . '-help">' . esc_textarea( $value ) . '</textarea>';
+            echo '<p class="description" id="' . esc_attr( $id ) . '-help">' . esc_html__( 'Plain text or safe paragraph, list and link HTML. Line breaks are supported. This is used only when the manual option above is ticked.', 'jiggywrigglers' ) . '</p>';
+        } else {
+            echo '<input class="widefat" type="' . esc_attr( $field['type'] ) . '" id="' . esc_attr( $id ) . '" name="jw_sfs_value[' . esc_attr( $key ) . ']" value="' . esc_attr( $value ) . '"' . ( 'url' === $field['type'] ? ' placeholder="https://"' : '' ) . '>';
+        }
+        echo '</fieldset>';
+    }
+}
+
+/** Save explicit page overrides; normal, preview and automatic requests cannot mutate them. */
+function jiggy_wrigglers_sfs_save_editor_box( $post_id ) {
+    if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id )
+        || ! current_user_can( 'edit_post', $post_id ) || ! jiggy_wrigglers_sfs_editor_area( $post_id ) ) {
+        return;
+    }
+    $nonce = isset( $_POST['jw_sfs_local_information_nonce'] ) && is_string( $_POST['jw_sfs_local_information_nonce'] )
+        ? wp_unslash( $_POST['jw_sfs_local_information_nonce'] ) : '';
+    if ( ! wp_verify_nonce( $nonce, 'jw_sfs_local_information_' . $post_id ) ) {
+        return;
+    }
+    $enabled = isset( $_POST['jw_sfs_manual'] ) && is_array( $_POST['jw_sfs_manual'] ) ? wp_unslash( $_POST['jw_sfs_manual'] ) : array();
+    $values = isset( $_POST['jw_sfs_value'] ) && is_array( $_POST['jw_sfs_value'] ) ? wp_unslash( $_POST['jw_sfs_value'] ) : array();
+    $overrides = array();
+    foreach ( jiggy_wrigglers_sfs_override_fields() as $key => $field ) {
+        if ( ! isset( $enabled[ $key ] ) || '1' !== $enabled[ $key ] ) {
+            continue;
+        }
+        $value = isset( $values[ $key ] ) && is_string( $values[ $key ] ) ? trim( $values[ $key ] ) : '';
+        if ( 'html' === $field['type'] ) {
+            $value = wp_kses_post( $value );
+        } elseif ( 'url' === $field['type'] ) {
+            $value = jiggy_wrigglers_sfs_valid_url( $value );
+        } elseif ( 'email' === $field['type'] ) {
+            $value = is_email( $value ) ? sanitize_email( $value ) : '';
+        } else {
+            $value = sanitize_text_field( $value );
+        }
+        $overrides[ $key ] = $value;
+    }
+    if ( $overrides ) {
+        update_post_meta( $post_id, '_jw_sfs_overrides', wp_slash( $overrides ) );
+    } else {
+        delete_post_meta( $post_id, '_jw_sfs_overrides' );
+    }
+}
+add_action( 'save_post_page', 'jiggy_wrigglers_sfs_save_editor_box' );
+
 /**
  * Render a legacy SFS shortcode without exposing arbitrary response fields.
  *
@@ -140,6 +287,11 @@ function jiggy_wrigglers_sfs_shortcode( $atts = array(), $content = null ) {
         'bookingsemail', 'facebook', 'instagram', 'twitter', 'imagelink', 'bookclasslink', 'bookpartylink', 'bookvouchersextraslink' );
     if ( ! in_array( $key, $allowed_keys, true ) ) {
         return '';
+    }
+
+    $manual_value = jiggy_wrigglers_sfs_manual_value( $atts['area'], $key );
+    if ( null !== $manual_value ) {
+        return jiggy_wrigglers_sfs_render_manual( $key, $manual_value, sanitize_key( $atts['display_type'] ) );
     }
 
     $data = jiggy_wrigglers_sfs_get_group( $atts['area'] );
@@ -179,15 +331,8 @@ function jiggy_wrigglers_sfs_shortcode( $atts = array(), $content = null ) {
 
     if ( 'link' === $display_type ) {
         $value = trim( $value );
-        // WordPress otherwise prefixes bare SFS handles with http://.
-        if ( ! preg_match( '#^https?://#i', $value ) ) {
-            return '';
-        }
-        $url = esc_url_raw( $value, array( 'http', 'https' ) );
-        $parts = wp_parse_url( $url );
-        if ( ! $parts || empty( $parts['host'] ) || empty( $parts['scheme'] )
-            || ! in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true )
-            || isset( $parts['user'] ) || isset( $parts['pass'] ) ) {
+        $url = jiggy_wrigglers_sfs_valid_url( $value );
+        if ( ! $url ) {
             return '';
         }
         return '<span class="' . esc_attr( $class ) . '"><a href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">'

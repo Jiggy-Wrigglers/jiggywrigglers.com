@@ -161,7 +161,7 @@ body .content-columns-2 .image {
 
     body .content-columns {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1.3fr;
+        grid-template-rows: auto auto;
     }
 }
 

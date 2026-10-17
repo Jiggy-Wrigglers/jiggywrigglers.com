@@ -213,6 +213,36 @@ body .locations-franchise {
     overflow-wrap: anywhere;
 }
 
+.locations-booking-search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--jw-border);
+}
+
+.locations-booking-search p {
+    flex: 1 1 360px;
+    color: var(--jw-muted);
+}
+
+.locations-booking-search .button {
+    flex-shrink: 0;
+}
+
+body .locations-franchise .heading-5 a {
+    font: inherit;
+    font-size: var(--font-size-h4);
+    font-weight: 700;
+    line-height: 1.35;
+    text-decoration: none;
+}
+
+body .locations-franchise .heading-5 a:hover {
+    text-decoration: underline;
+}
+
 .locations-franchise-link {
     margin-top: auto;
     padding-top: var(--space-3);

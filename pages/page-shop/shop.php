@@ -142,7 +142,7 @@ $filtered = '' !== $search || '' !== $collection;
 							<?php if ( '' !== $price ) : ?>
 								<p class="shop-listing-card-price"><?php echo esc_html( wp_strip_all_tags( $price ) ); ?></p>
 							<?php endif; ?>
-							<span class="shop-listing-card-button"><?php esc_html_e( 'Take a look', 'jiggywrigglers' ); ?> <span aria-hidden="true">→</span></span>
+							<span class="button button-purple shop-listing-card-button"><?php esc_html_e( 'Take a look', 'jiggywrigglers' ); ?> <span aria-hidden="true">→</span></span>
 						</div>
 					</a>
 				<?php endwhile; ?>

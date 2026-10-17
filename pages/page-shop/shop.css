@@ -46,11 +46,32 @@ body .shop-listing-header {
 }
 
 .shop-account-links > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
     color: var(--purple);
     font-size: 14px;
     font-weight: 700;
     text-decoration: underline;
     text-underline-offset: 4px;
+}
+
+.shop-account-links > .wp-block-surecart-cart-menu-icon-button {
+    justify-content: center;
+    min-width: 48px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 2px solid var(--jw-border);
+    border-radius: 12px;
+    background: var(--white);
+    text-decoration: none;
+    transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.shop-account-links > .wp-block-surecart-cart-menu-icon-button:hover {
+    border-color: var(--purple);
+    background: var(--peach);
 }
 
 body .shop-listing-search-row {
@@ -67,10 +88,12 @@ body .shop-listing-search-row {
 
 .shop-listing-search {
     flex: 2 1 230px;
+    min-width: 0;
 }
 
 .shop-listing-sort {
     flex: 1 1 180px;
+    min-width: 0;
 }
 
 .shop-listing-search-row label {
@@ -99,14 +122,7 @@ body .shop-listing-search-row {
 }
 
 .shop-filter-button {
-    min-height: 48px;
-    border: 0;
-    border-radius: 12px;
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    padding: 12px 24px;
-    gap: 18px;
+    flex-shrink: 0;
 }
 
 .shop-listing-summary {
@@ -146,13 +162,12 @@ body .shop-listing-card {
     overflow: hidden;
     background: #fff;
     box-shadow: var(--jw-shadow);
-    border-color: #dfd0e6!important;
 }
 
 .shop-listing-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 18px 38px rgba(62, 31, 74, .09);
-    border-color: #43b3d9!important;
+    border-color: var(--blue);
 }
 
 body .shop-listing-card-image {
@@ -208,31 +223,19 @@ body .shop-listing-card-price {
 }
 
 body .shop-listing-card-button {
-    border-radius: 5px;
-    box-sizing: border-box;
-    padding: 6px 12px;
-    min-height: 0;
-    height: 32px;
-    line-height: 20px;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    align-self: stretch;
-    gap: 12px;
-    border-top: 1px solid #eee7f2;
-    letter-spacing: 0;
-    text-transform: none;
-    font-size: 15px;
-    font-weight: 700;
     margin-top: auto;
-    padding-top: 10px;
-    background: #662483!important;
-    color: #fff!important;
+    align-self: flex-start;
 }
 
 .shop-listing-card-button > span {
-    font-size: 22px;
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+.shop-listing-card:is(:hover, :focus-visible) .shop-listing-card-button {
+    background: var(--jw-purple-dark);
+    border-color: var(--jw-purple-dark);
+    color: var(--white);
 }
 
 .shop-listing-empty {
@@ -258,7 +261,6 @@ body .shop-listing-card-button {
 
 .shop-listing-empty .button {
     display: inline-flex;
-    border-radius: 12px;
 }
 
 .shop-listing-pagination {
@@ -271,6 +273,9 @@ body .shop-listing-card-button {
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .shop-listing-pagination .page-numbers:not(ul) {
@@ -278,21 +283,30 @@ body .shop-listing-card-button {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-width: 44px;
-    min-height: 44px;
-    padding: 9px 14px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 12px 16px;
     border-radius: 12px;
     border: 1px solid #d7ccde;
     color: var(--purple);
     font-size: 14px;
     font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
     background: var(--white);
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
-.shop-listing-pagination .current, .shop-listing-pagination a:hover {
-    background: var(--purple) !important;
-    border-color: var(--purple) !important;
-    color: var(--white) !important;
+.shop-listing-pagination .page-numbers.current {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: var(--white);
+}
+
+.shop-listing-pagination a:hover {
+    background: var(--jw-purple-dark);
+    border-color: var(--jw-purple-dark);
+    color: var(--white);
 }
 
 .shop-listing :is(a, button, input, select):focus-visible {
@@ -328,6 +342,10 @@ body .shop-listing-card-button {
         flex-basis: 100%;
     }
 
+    body .shop-listing-search-row .shop-filter-button {
+        width: 100%;
+    }
+
     body .shop-listing-card-content {
         padding: 20px;
     }
@@ -335,88 +353,14 @@ body .shop-listing-card-button {
 
 @media (prefers-reduced-motion: reduce) {
 
-    body .shop-listing-card,body .shop-listing-card-image img {
+    body .shop-listing-card,
+    body .shop-listing-card-image img,
+    .shop-account-links > .wp-block-surecart-cart-menu-icon-button,
+    .shop-listing-pagination .page-numbers:not(ul) {
         transition: none;
     }
 
     .shop-listing-card:hover, .shop-listing-card:hover img {
         transform: none;
     }
-}
-
-body :is(.shop-listing-search input, .shop-listing-sort select) {
-    min-height: 52px;
-    box-sizing: border-box;
-    border-color: #cdbdd7;
-    border-radius: 12px;
-}
-
-body .shop-listing-search input {
-    padding-left: 50px;
-}
-
-body .shop-listing-search input::placeholder {
-    color: var(--jw-muted);
-}
-
-body :is(.shop-listing-pagination-btn,
-    .shop-listing-pagination-page) {
-    min-width: 44px;
-    min-height: 44px;
-    border-radius: 11px;
-    border-color: #ccb7d6!important;
-    color: #662483!important;
-}
-
-@media (max-width: 650px) {
-
-    body .shop-listing-card-content {
-        padding: 24px;
-    }
-}
-
-.shop-listing-card h3,.shop-listing-card-price {
-    color: #662483!important;
-}
-
-.shop-listing-card-button svg path {
-    fill: currentColor!important;
-}
-
-.shop-listing-card:hover .shop-listing-card-button {
-    background: #54206c!important;
-}
-
-.shop-listing-pagination-page.is-active {
-    background: #662483!important;
-    border-color: #662483!important;
-    color: #fff!important;
-}
-
-.shop-listing-pagination-page:hover,.shop-listing-pagination-btn:not(:disabled):hover {
-    background: var(--peach)!important;
-}
-
-.shop-listing-pagination-page.is-active:hover {
-    background: #54206c!important;
-}
-
-.shop-listing-search,.shop-listing-sort select {
-    border-color: #ccb7d6!important;
-    border-radius: 6px!important;
-}
-
-.shop-listing-search:focus-within,.shop-listing-sort select:focus-visible {
-    outline: 3px solid #43b3d9;
-    outline-offset: 2px;
-}
-
-.shop-listing-card:focus-visible,.shop-listing-pagination-page:focus-visible,.shop-listing-pagination-btn:focus-visible {
-    outline: 3px solid #43b3d9;
-    outline-offset: 3px;
-}
-
-.shop-listing-card-button svg {
-    width: 12px;
-    height: 12px;
 }

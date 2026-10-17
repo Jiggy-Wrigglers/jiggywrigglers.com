@@ -3,12 +3,6 @@
 
 body .product-content {
     padding: 64px 0 90px;
-    --sc-color-primary-500: #662483;
-    --sc-color-primary: #662483;
-    --sc-color-primary-hover: #49175f;
-    --sc-focus-ring-color-primary: #873fa2;
-    --sc-input-border-color-focus: #662483;
-    --sc-border-radius: 12px;
 }
 
 body .product-content .wrap {
@@ -23,12 +17,14 @@ body .product-content .wrap {
 /* ------------------------------------------------- */
 
 body .product-content {
-    --sc-color-primary-500: var(--black);
-    --sc-color-primary: var(--black);
-    --sc-color-primary-hover: rgba(0, 0, 0, 0.8);
+    --sc-color-primary: 282;
+    --sc-color-primary-500: var(--purple);
+    --sc-color-primary-600: var(--jw-purple-dark);
+    --sc-color-primary-700: var(--jw-purple-dark);
+    --sc-color-primary-hover: var(--jw-purple-dark);
     --sc-color-primary-text: var(--white);
-    --sc-focus-ring-color-primary: var(--black);
-    --sc-input-border-color-focus: var(--black);
+    --sc-focus-ring-color-primary: var(--purple);
+    --sc-input-border-color-focus: var(--purple);
     --sc-color-gray-900: var(--black);
     --sc-color-gray-800: rgba(0, 0, 0, 0.9);
     --sc-color-gray-700: rgba(0, 0, 0, 0.8);
@@ -42,12 +38,12 @@ body .product-content {
     --sc-input-border-color: rgba(0, 0, 0, 0.16);
     --sc-input-background-color: var(--white);
     --sc-input-color: var(--black);
-    --sc-font-family: "Open Sans", sans-serif;
-    --sc-headings-font-family: "M PLUS Rounded 1c", sans-serif;
+    --sc-font-family: var(--font-body);
+    --sc-headings-font-family: var(--font-heading);
     --sc-line-height-base: 1.6;
     --sc-font-size-base: 16px;
     --sc-font-weight: 400;
-    --sc-border-radius: 0;
+    --sc-border-radius: 12px;
 }
 
 /* Product Title */
@@ -114,20 +110,20 @@ body .product-content h1.wp-block-surecart-product-title {
 
 body .product-content .wp-block-button__link.sc-button__link {
     font-family: var(--font-body);
-    padding: var(--space-3) var(--space-5);
-    border: 1px solid var(--black);
+    padding: 12px 23px;
+    border: 2px solid var(--purple);
     color: var(--white);
     transition: background 0.3s ease, color 0.3s ease;
     text-align: center;
     width: 100%;
     background: var(--purple);
-    border-color: var(--purple);
     border-radius: 12px;
     letter-spacing: 0;
     text-transform: none;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    min-height: 50px;
+    line-height: 1.4;
+    min-height: 48px;
     box-sizing: border-box;
 }
 
@@ -148,8 +144,9 @@ body .product-content .is-style-outline--3 .wp-block-button__link.sc-button__lin
 }
 
 body .product-content .is-style-outline--3 .wp-block-button__link.sc-button__link:hover {
-    color: var(--white);
+    color: var(--purple);
     background: var(--peach);
+    border-color: var(--purple);
 }
 
 /* Variant Pills */
@@ -169,8 +166,8 @@ body .product-content .is-style-outline--3 .wp-block-button__link.sc-button__lin
 }
 
 .product-content .sc-pill-option__button:hover {
-    border-color: var(--black);
-    color: var(--black);
+    border-color: var(--purple);
+    color: var(--purple);
 }
 
 body .product-content .sc-pill-option__button--selected {
@@ -180,8 +177,8 @@ body .product-content .sc-pill-option__button--selected {
 }
 
 .product-content .sc-pill-option__button--selected:hover {
-    background: rgba(0, 0, 0, 0.8);
-    border-color: rgba(0, 0, 0, 0.8);
+    background: var(--jw-purple-dark);
+    border-color: var(--jw-purple-dark);
     color: var(--white);
 }
 
@@ -209,7 +206,7 @@ body .product-content .sc-pill-option__button--selected {
 
 .product-content .sc-form-control:focus {
     outline: none;
-    border-color: var(--black);
+    border-color: var(--purple);
 }
 
 /* Image Gallery */
@@ -226,7 +223,7 @@ body .product-content .wp-block-surecart-product-media img {
 }
 
 .product-content .swiper-slide-thumb-active img {
-    border-color: var(--black);
+    border-color: var(--purple);
 }
 
 /* Sale Badge */
@@ -258,7 +255,7 @@ body .product-content .wp-block-surecart-product-media img {
 
 .product-content .wp-block-surecart-product-pagination a {
     border-color: rgba(0, 0, 0, 0.28) !important;
-    border-radius: 0 !important;
+    border-radius: 12px !important;
     transition: border-color 0.3s ease, background 0.3s ease;
 }
 
@@ -272,8 +269,8 @@ body .product-content .wp-block-surecart-product-media img {
 }
 
 .product-content .sc-product-item .wp-block-group.has-border-color {
-    border-color: rgba(0, 0, 0, 0.08) !important;
-    border-radius: 0 !important;
+    border-color: var(--jw-border) !important;
+    border-radius: 20px !important;
     transition: transform 0.3s ease;
 }
 
@@ -282,12 +279,12 @@ body .product-content .wp-block-surecart-product-media img {
 }
 
 .product-content .sc-product-item .wp-block-cover {
-    border-radius: 0 !important;
-    aspect-ratio: 5/3;
+    border-radius: 20px !important;
+    aspect-ratio: 4 / 3;
 }
 
 .product-content .sc-product-item .wp-block-cover img {
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.6s ease;
 }
 
@@ -349,7 +346,7 @@ body .product-content .wp-block-surecart-product-media img {
     text-underline-offset: 4px;
 }
 
-.product-content :is(a, button, input, select):focus-visible {
+.product-content :is(a, button, input, select, [role="radio"], [role="button"]):focus-visible {
     outline: 3px solid var(--purple);
     outline-offset: 4px;
 }
@@ -374,5 +371,5 @@ body .product-content .wp-block-surecart-product-media img {
 }
 
 body .product-content :is(.sc-pill-option__button, .sc-form-control) {
-    border-radius: 10px;
+    border-radius: 12px;
 }
