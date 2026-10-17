@@ -9,6 +9,7 @@ on:
         options:
           - diagnostics
           - import-media
+          - seo-audit
 jobs:
   maintenance:
     runs-on: ubuntu-latest

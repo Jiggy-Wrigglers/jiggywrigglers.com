@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( '_S_VERSION' ) ) {
-	define( '_S_VERSION', '2.3.4' );
+	define( '_S_VERSION', '2.4.0' );
 }
 
 if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
@@ -33,6 +33,7 @@ include get_template_directory() . '/functions/surecart.php';
 include get_template_directory() . '/functions/sureforms.php';
 include get_template_directory() . '/functions/site-migration.php';
 include get_template_directory() . '/functions/sfs.php';
+include get_template_directory() . '/functions/seo.php';
 
 function jiggy_wrigglers_setup() {
 	load_theme_textdomain( 'jiggywrigglers', get_template_directory() . '/languages' );

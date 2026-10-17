@@ -14,7 +14,7 @@
     --jw-radius: 24px;
     --jw-shadow: 0 12px 36px rgba(65, 30, 82, 0.06);
     --black: var(--jw-ink);
-    --peach: #f7f3fa;
+    --peach: #F6E8EA;
     --font-size-h1: clamp(36px, 4.8vw, 64px);
     --font-size-h2: clamp(28px, 3.3vw, 44px);
     --font-size-h3: clamp(23px, 2.6vw, 32px);
@@ -231,33 +231,33 @@ body :is(.button, a.button, span.button, button.button):hover {
 }
 
 body :is(.button-orange, a.button-orange, span.button-orange, button.button-orange) {
-    background: #fa8334;
-    border-color: #fa8334;
+    background: var(--orange);
+    border-color: var(--orange);
     color: #382135;
 }
 
 body :is(.button-orange, a.button-orange, span.button-orange, button.button-orange):hover {
-    background: #ffac70;
-    border-color: #ffac70;
+    background: var(--orange);
+    border-color: var(--orange);
     color: #382135;
 }
 
 body :is(.button-blue, a.button-blue, span.button-blue, button.button-blue) {
-    background: #43b3d9;
-    border-color: #43b3d9;
+    background: var(--blue);
+    border-color: var(--blue);
     color: #153849;
 }
 
 body :is(.button-blue, a.button-blue, span.button-blue, button.button-blue):hover {
-    background: #84cee7;
-    border-color: #84cee7;
+    background: var(--blue);
+    border-color: var(--blue);
     color: #153849;
 }
 
 body :is(.button-pink, a.button-pink, span.button-pink, button.button-pink) {
-    background: #b62460;
-    border-color: #b62460;
-    color: #fff;
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #382135;
 }
 
 body :is(.button-yellow, .button-peach) {
@@ -322,21 +322,21 @@ body .hero-sub-title {
 
 /* A consistent rhythm, generous at desktop sizes and compact on a phone. */
 body :is(.home-introduction, .home-groups, .home-content-1, .home-content-2,
-    .ethos, .gallery, .testimonials, .about-awards, .locations-content,
+    .gallery, .testimonials, .about-awards, .locations-content,
     .locations-franchises, .contact-form, .news-listing, .shop-listing,
     .text-with-3-images-block, .list-block, .jiggy-playlight-footer,
     .policy-content, .article-content) {
     padding-block: clamp(56px, 7vw, 96px);
 }
 
-body :is(.home-introduction, .ethos, .gallery, .home-content-1) {
+body :is(.home-introduction, .gallery, .home-content-1) {
     background: #fff;
     color: var(--jw-ink);
 }
 
-body :is(.home-introduction .heading-2, .ethos-title, .gallery-header .heading-2,
+body :is(.home-introduction .heading-2, .gallery-header .heading-2,
     .home-content-1 .heading-2, .home-content-1 .body-medium,
-    .home-introduction-text p, .journey-text .body-medium) {
+    .home-introduction-text p) {
     color: var(--jw-ink);
 }
 
@@ -424,12 +424,12 @@ body .home-group-logo {
     box-shadow: 0 3px 12px rgba(65, 30, 82, 0.12);
 }
 
-body :is(.home-content-1 .wrap, .home-content-2 .wrap, .single-journey) {
+body :is(.home-content-1 .wrap, .home-content-2 .wrap) {
     gap: clamp(30px, 5vw, 72px);
     align-items: center;
 }
 
-body :is(.home-content-image img, .journey-image-area,
+body :is(.home-content-image img,
     .list-block-image img, .content-columns-2 .image) {
     border-radius: var(--jw-radius);
 }
@@ -438,16 +438,21 @@ body .home-content-2 .heading-5 {
     color: #ffd69c;
 }
 
-body .journey-text {
-    padding-block: 24px;
+/* Ethos keeps the original purple, white copy and illustrated journey trails.
+ * Its component stylesheet supplies the alternating layout and original spacing. */
+body .ethos > .wrap {
+    max-width: 1440px;
+    width: 90vw;
 }
 
-body .single-journey {
-    padding-block: 28px;
+body .ethos-title {
+    font-size: clamp(25px, 3.6vw, 38px);
+    font-weight: 600;
+    letter-spacing: 0;
 }
 
-body .content-trail.before-trail {
-    display: none;
+body .ethos .body-medium {
+    line-height: 1.6;
 }
 
 body :is(.gallery-slide img, .testimonials-slide-inner) {
@@ -1136,7 +1141,7 @@ body .product-content .wp-block-surecart-product-media img {
 
 /* Footer */
 body .footer {
-    background: #44165c;
+    background: var(--purple);
     padding-block: 72px;
 }
 
@@ -1234,19 +1239,6 @@ body .footer-policy-links a {
     body :is(.single-journey, .content-columns) {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
-    }
-
-    body .single-journey {
-        gap: 24px;
-    }
-
-    body .journey-image-area {
-        max-height: 480px;
-        width: 100%;
-    }
-
-    body .journey-text {
-        padding-block: 0;
     }
 }
 

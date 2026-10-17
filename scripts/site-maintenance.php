@@ -3,7 +3,8 @@
 if ( ! defined( 'WP_CLI' ) || ! WP_CLI || ! defined( 'ABSPATH' ) ) { exit; }
 if ( 'jiggywrigglers.on-forge.com' !== wp_parse_url( home_url(), PHP_URL_HOST ) ) { WP_CLI::error( 'This task is restricted to the new Forge site.' ); }
 $operation = $args[0] ?? 'diagnostics';
-if ( ! in_array( $operation, array( 'diagnostics', 'import-media' ), true ) ) { WP_CLI::error( 'Unknown fixed task.' ); }
+if ( ! in_array( $operation, array( 'diagnostics', 'import-media', 'seo-audit' ), true ) ) { WP_CLI::error( 'Unknown fixed task.' ); }
+if ( 'seo-audit' === $operation ) { require __DIR__ . '/seo-audit.php'; return; }
 if ( 'import-media' === $operation ) {
 	for ( $batch = 0; $batch < 16; $batch++ ) {
 		$before = count( get_option( 'jw_legacy_media_map', array() ) );

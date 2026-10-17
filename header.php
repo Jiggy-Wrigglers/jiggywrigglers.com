@@ -67,9 +67,9 @@
 								});
 							}
 						"
-					aria-label="Toggle menu" aria-controls="header-menu" :aria-expanded="menuOpen" type="button">
+					aria-label="Open menu" :aria-label="menuOpen ? 'Close menu' : 'Open menu'" aria-controls="header-menu" aria-expanded="false" :aria-expanded="menuOpen" type="button">
 					<span class="body-small">MENU</span>
-					<div class="nav-icon" :class="{ open: menuOpen }">
+					<div class="nav-icon" :class="{ open: menuOpen }" aria-hidden="true">
 						<span></span>
 						<span></span>
 						<span></span>
