@@ -50,12 +50,14 @@ function jw_seo_default_description( $post ) {
 
 /** Preserve editorial SEO settings; fill missing descriptions and local defaults. */
 function jw_seo_apply_meta( $meta, $post ) {
+	if ( defined( 'WP_CLI' ) && WP_CLI && is_object( $post ) && 'tamborine-blue' === $post->post_name ) { WP_CLI::log( 'JW_SEO_PROBE ' . wp_json_encode( array( 'meta_type' => gettype( $meta ), 'post_type' => $post->post_type, 'wp_post' => $post instanceof WP_Post ) ) ); }
 	if ( ! is_array( $meta ) || ! $post instanceof WP_Post ) { return $meta; }
 	$saved = get_post_meta( $post->ID, 'surerank_settings_general', true );
 	$saved = is_array( $saved ) ? $saved : array();
 	$is_location = 'page' === $post->post_type && (bool) get_post_meta( $post->ID, '_jw_sfs_area', true );
 	$editorial_description = ! empty( $saved['page_description'] ) && ! preg_match( '/%[a-z0-9_.]+%/i', $saved['page_description'] );
 	$is_product_default = 'sc_product' === $post->post_type && ! $editorial_description;
+	if ( defined( 'WP_CLI' ) && WP_CLI && 'tamborine-blue' === $post->post_name ) { WP_CLI::log( 'JW_SEO_BRANCH ' . wp_json_encode( array( 'default' => $is_product_default, 'editorial' => $editorial_description ) ) ); }
 	if ( empty( $meta['page_description'] ) || ( $is_location && ! $editorial_description ) || $is_product_default ) {
 		if ( $is_product_default && ! empty( $meta['page_description'] ) ) {
 			$description = jw_seo_summary( $meta['page_description'] );
