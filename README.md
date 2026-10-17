@@ -59,9 +59,15 @@ All three follow the same principle: **self-contained components with props/argu
 
 ## About Jiggy Wrigglers
 
-At Jiggy Wrigglers, we're more than just a marketing agency; We are a team driven by core values that directly enhance our client relationships and project outcomes. Our foundational values of **Respect**, **Collaboration**, **Drive**, and of course **Fun** are integral to delivering exceptional results.
+Jiggy Wrigglers provides music, movement and sensory development classes for babies, toddlers and preschoolers, alongside parties, nursery sessions and franchise opportunities. Classes began in 2008.
 
-Founded in 2019, with just a team of two, Jiggy Wrigglers has evolved to encompass four key departments - **Design**, **Social**, **Digital**, and **Video** - and now has a team of over twenty.
+## Original content and live location data
+
+The original site's 64 page routes are mapped in `data/legacy-pages.json`. The administrator-only **Appearance → Content migration** screen imports missing local pages and the shop returns policy, restores empty article bodies, and copies original images into the new media library. Imports are resumable and preserve existing editorial content.
+
+Local pages retain `[frank_sfs_api area="Andover" key="venues"]` and the other original public SFS fields through `functions/sfs.php`. This is a live server-side integration, with one request per area, a ten-minute fresh cache and a seven-day last-good fallback. Original captured field content is enclosed in the shortcode as an additional outage fallback. Full-page caching may delay visible updates until that cache expires or is purged.
+
+The prior Simple Custom CSS and JS snippet now lives in `css/surecart.css`; the plugin is no longer required. The responsive visual refresh lives in `css/refresh.css`. Native SureCart handles products, options, cart, checkout validation, payment processing and customer access. Payment providers, delivery rates, stock policy, tax configuration and test orders must be checked before launch.
 
 ## JavaScript Libraries
 

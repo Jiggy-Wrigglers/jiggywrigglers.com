@@ -96,6 +96,11 @@ function jw_migration_run_media() {
 	// historical PNGs can otherwise monopolise the staging PHP workers.
 	$source_formats = function () { return array(); };
 	add_filter( 'image_editor_output_format', $source_formats, PHP_INT_MAX );
+	$bounded_download = function ( $args, $url ) {
+		if ( 0 === strpos( $url, 'https://jiggywrigglers.com/wp-content/uploads/' ) ) { $args['timeout'] = 20; }
+		return $args;
+	};
+	add_filter( 'http_request_args', $bounded_download, PHP_INT_MAX, 2 );
 	$map = get_option( 'jw_legacy_media_map', array() );
 	$messages = array();
 	$count = 0;
@@ -119,7 +124,17 @@ function jw_migration_run_media() {
 		if ( $content !== $page->post_content ) { wp_update_post( wp_slash( array( 'ID' => $page->ID, 'post_content' => $content ) ) ); }
 	}
 	remove_filter( 'image_editor_output_format', $source_formats, PHP_INT_MAX );
+	remove_filter( 'http_request_args', $bounded_download, PHP_INT_MAX );
 	return $messages ?: array( 'All original page images are now in this site’s media library.' );
+}
+
+/** Remove two broken inherited hrefs without inventing replacement contacts. */
+function jw_migration_repair_links() {
+	$bad_hrefs = array( 'href="jiggywrigglerswestlancs"', 'href="franchsie@staging2.jiggywrigglers.com"' );
+	foreach ( jw_migration_pages() as $page ) {
+		$content = str_replace( $bad_hrefs, '', $page->post_content );
+		if ( $content !== $page->post_content ) { wp_update_post( wp_slash( array( 'ID' => $page->ID, 'post_content' => $content ) ) ); }
+	}
 }
 
 function jw_migration_screen() {
