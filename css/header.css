@@ -293,11 +293,11 @@ body .header-menu-sub a {
 
 @media (max-width: 960px) {
 
-    .header-buttons {
+    body .header-buttons {
         display: none;
     }
 
-    .header-logo img {
+    body .header-logo img {
         height: 36px;
     }
 }

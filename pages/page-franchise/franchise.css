@@ -192,7 +192,7 @@ body .list-block-image img {
 
 @media (max-width: 960px) {
 
-    .text-with-images {
+    body .text-with-images {
         grid-template-columns: 1fr;
     }
 

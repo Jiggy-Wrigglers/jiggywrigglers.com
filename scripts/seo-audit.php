@@ -25,6 +25,25 @@ foreach ( get_posts( array( 'post_type' => array( 'page', 'post', 'sc_product' )
 		'sku' => is_array( $product ) && isset( $product['sku'] ) && is_scalar( $product['sku'] ) ? (string) $product['sku'] : '',
 	);
 }
+if ( 'repair-duplicate-descriptions' === ( $operation ?? '' ) ) {
+	$counts = array_count_values( array_column( array_filter( $rows, function ( $row ) { return 'sc_product' === $row['type']; } ), 'description' ) );
+	$updated = 0;
+	foreach ( $rows as $row ) {
+		if ( 'sc_product' !== $row['type'] || empty( $row['description'] ) || ( $counts[ $row['description'] ] ?? 0 ) < 2 ) { continue; }
+		$old = get_post_meta( $row['id'], 'surerank_settings_general', true );
+		if ( ! is_array( $old ) || empty( $old['page_description'] ) || preg_match( '/%[a-z0-9_.]+%/i', $old['page_description'] ) ) { continue; }
+		$new = $old;
+		$title = html_entity_decode( get_the_title( $row['id'] ), ENT_QUOTES, 'UTF-8' );
+		$new['page_description'] = jw_seo_summary( $title . '. ' . $row['description'] );
+		foreach ( array( 'facebook_description', 'twitter_description' ) as $key ) {
+			if ( ! empty( $new[ $key ] ) && $new[ $key ] === $old['page_description'] ) { $new[ $key ] = $new['page_description']; }
+		}
+		add_post_meta( $row['id'], '_jw_previous_seo_general', $old, true );
+		if ( update_post_meta( $row['id'], 'surerank_settings_general', $new, $old ) ) { $updated++; }
+	}
+	WP_CLI::log( 'Product-specific descriptions updated: ' . $updated . '. Previous metadata retained per product.' );
+	return;
+}
 $redirects = json_decode( file_get_contents( get_template_directory() . '/data/legacy-product-redirects.json' ), true );
 $redirect_missing = array();
 foreach ( $redirects['aliases'] ?? array() as $source => $target ) {

@@ -71,6 +71,8 @@ The prior Simple Custom CSS and JS snippet has been incorporated into the theme;
 
 `functions/seo.php` supplies content-aware description defaults without overwriting editorial SEO descriptions, keeps staging and transactional/search views out of search results, and gives catalogue pagination its own canonical URLs. SureRank owns ordinary metadata; SureCart owns product structured data. The fixed `seo-audit` maintenance task reads published content metadata only. Before production launch, verify the final domain, WordPress search visibility, sitemap coverage, legacy redirects, Search Console and real product/shipping/tax data. Google indexing or ranking is not guaranteed by theme changes.
 
+The optional fixed `repair-duplicate-descriptions` task makes repeated product SEO descriptions specific to their product, preserving previous editor metadata in `_jw_previous_seo_general` and using an optimistic update to avoid overwriting concurrent edits. It does not change product copy, prices, stock or payment settings. `rebuild-sitemap` refreshes SureRank's cached sitemap chunks after exclusion changes. Verified old product redirects are stored as relative paths in `data/legacy-product-redirects.json` so they follow the final domain automatically.
+
 ## JavaScript Libraries
 
 The theme loads two libraries globally via `wp_enqueue_script` with `defer`, available on every page:

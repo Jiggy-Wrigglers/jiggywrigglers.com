@@ -310,18 +310,16 @@ body .home-content-image img {
 
 @media (max-width: 1080px) {
 
-    .home-groups-grid {
+    body .home-groups-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .home-introduction-character-1,
-    .home-introduction-character-2 {
+    body .home-introduction-character-1,body .home-introduction-character-2 {
         max-width: 140px;
         opacity: 0.6;
     }
 
-    .home-content-1 .wrap,
-    .home-content-2 .wrap {
+    body .home-content-1 .wrap,body .home-content-2 .wrap {
         grid-template-columns: 1fr;
     }
 
@@ -351,13 +349,12 @@ body .home-content-image img {
         min-height: 490px;
     }
 
-    .home-introduction-character-1,
-    .home-introduction-character-2 {
+    body .home-introduction-character-1,body .home-introduction-character-2 {
         max-width: 90px;
         opacity: 0.4;
     }
 
-    .home-groups-grid {
+    body .home-groups-grid {
         grid-template-columns: 1fr;
     }
 

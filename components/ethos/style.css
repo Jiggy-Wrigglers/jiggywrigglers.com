@@ -109,7 +109,7 @@ body .journey-text {
         grid-row: 2;
     }
 
-    .journey-text {
+    body .journey-text {
         grid-row: 1;
         padding: 20px 0;
     }

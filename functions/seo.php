@@ -54,7 +54,7 @@ function jw_seo_apply_meta( $meta, $post ) {
 	$saved = get_post_meta( $post->ID, 'surerank_settings_general', true );
 	$saved = is_array( $saved ) ? $saved : array();
 	$is_location = 'page' === $post->post_type && (bool) get_post_meta( $post->ID, '_jw_sfs_area', true );
-	$editorial_description = ! empty( $saved['page_description'] ) && ! preg_match( '/%(?:content|excerpt)%/', $saved['page_description'] );
+	$editorial_description = ! empty( $saved['page_description'] ) && ! preg_match( '/%[a-z0-9_.]+%/i', $saved['page_description'] );
 	$is_product_default = 'sc_product' === $post->post_type && ! $editorial_description;
 	if ( empty( $meta['page_description'] ) || ( $is_location && ! $editorial_description ) || $is_product_default ) {
 		if ( $is_product_default && ! empty( $meta['page_description'] ) ) {

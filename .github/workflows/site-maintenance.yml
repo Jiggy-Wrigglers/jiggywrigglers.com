@@ -11,6 +11,7 @@ on:
           - import-media
           - seo-audit
           - rebuild-sitemap
+          - repair-duplicate-descriptions
 jobs:
   maintenance:
     runs-on: ubuntu-latest

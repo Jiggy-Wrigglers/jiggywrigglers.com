@@ -306,7 +306,7 @@ body .shop-listing-card-button {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .shop-listing-header {
+    body .shop-listing-header {
         flex-direction: column;
         gap: 20px;
     }
@@ -319,7 +319,7 @@ body .shop-listing-card-button {
         gap: 20px;
     }
 
-    .shop-listing-search-row {
+    body .shop-listing-search-row {
         padding: 18px;
         border-radius: 18px;
     }
@@ -328,14 +328,14 @@ body .shop-listing-card-button {
         flex-basis: 100%;
     }
 
-    .shop-listing-card-content {
+    body .shop-listing-card-content {
         padding: 20px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
 
-    .shop-listing-card, .shop-listing-card-image img {
+    body .shop-listing-card,body .shop-listing-card-image img {
         transition: none;
     }
 

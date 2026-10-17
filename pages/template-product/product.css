@@ -320,7 +320,7 @@ body .product-content .wp-block-surecart-product-media img {
         padding-block: 40px 64px;
     }
 
-    .product-content .wrap {
+    body .product-content .wrap {
         padding: 0 var(--space-4);
     }
 

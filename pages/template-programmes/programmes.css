@@ -148,7 +148,7 @@ body .content-columns-2 .image {
 
 @media (max-width: 1024px) {
 
-    .key-info-strip {
+    body .key-info-strip {
         grid-template-columns: 1fr 1fr;
     }
 
@@ -159,7 +159,7 @@ body .content-columns-2 .image {
 
 @media (max-width: 960px) {
 
-    .content-columns {
+    body .content-columns {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1.3fr;
     }
@@ -167,7 +167,7 @@ body .content-columns-2 .image {
 
 @media (max-width: 800px) {
 
-    .key-info-strip {
+    body .key-info-strip {
         grid-template-columns: 1fr;
     }
 
