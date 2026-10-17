@@ -29,7 +29,7 @@
 ?>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <!-- Header -->
-<div class="header-shell" x-data="{ menuOpen: false }">
+<div class="header-shell" x-data="{ menuOpen: false }" @keydown.escape.window="if (menuOpen) { $event.preventDefault(); menuOpen = false; $nextTick(() => document.querySelector('.header-menu-toggle')?.focus()); }">
 <header class="header" :class="{ 'menu-open': menuOpen }">
 	<div class="wrap">
 		<div class="header-wrapper">

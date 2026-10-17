@@ -12,9 +12,9 @@ if ( 'import-media' === $operation ) {
 		WP_CLI::log( 'Media: ' . $after . ' / ' . count( jw_migration_media_sources() ) );
 		if ( $after === $before || $after >= count( jw_migration_media_sources() ) ) { break; }
 	}
+	jw_migration_repair_links();
 }
 $imported = jw_migration_pages();
-jw_migration_repair_links();
 $pages = count( array_filter( $imported, function ( $post ) { return 'page' === $post->post_type; } ) );
 WP_CLI::log( wp_json_encode( array(
 	'theme_version' => wp_get_theme()->get( 'Version' ),

@@ -1416,6 +1416,9 @@ body .footer-policy-links a {
     body.admin-bar .header {
         top: 46px;
     }
+    body.admin-bar .header-menu {
+        padding-top: 151px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
