@@ -26,6 +26,8 @@ foreach ( get_posts( array( 'post_type' => array( 'page', 'post', 'sc_product' )
 		'noindex_override' => $meta['post_no_index'] ?? '',
 		'description_storage_type' => gettype( $stored_general ),
 		'stored_description' => is_array( $stored_general ) ? ( $stored_general['page_description'] ?? '' ) : '',
+		'post_class' => get_class( $item ),
+		'is_wp_post' => $item instanceof WP_Post,
 		'sku' => is_array( $product ) && isset( $product['sku'] ) && is_scalar( $product['sku'] ) ? (string) $product['sku'] : '',
 	);
 }
@@ -56,6 +58,8 @@ foreach ( $redirects['aliases'] ?? array() as $source => $target ) {
 	if ( ! $target_post || 'publish' !== $target_post->post_status || $target !== wp_parse_url( get_permalink( $target_post ), PHP_URL_PATH ) ) { $redirect_missing[] = $source; }
 }
 WP_CLI::log( 'JW_SEO_AUDIT ' . wp_json_encode( array(
+	'seo_function_line' => ( new ReflectionFunction( 'jw_seo_apply_meta' ) )->getStartLine(),
+	'seo_function_hash' => hash_file( 'sha256', ( new ReflectionFunction( 'jw_seo_apply_meta' ) )->getFileName() ),
 	'theme' => wp_get_theme()->get( 'Version' ), 'plugins' => $versions,
 	'blog_public' => (int) get_option( 'blog_public' ), 'site_language' => get_locale(),
 	'pretty_permalinks' => (bool) get_option( 'permalink_structure' ),
