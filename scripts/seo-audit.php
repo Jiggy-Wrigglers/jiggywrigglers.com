@@ -62,5 +62,7 @@ WP_CLI::log( 'JW_SEO_AUDIT ' . wp_json_encode( array(
 	'sitemap_enabled' => is_callable( array( $settings, 'get' ) ) ? $settings::get( 'enable_xml_sitemap' ) : null,
 	'sitemap_excluded_ids' => jw_seo_utility_ids(),
 	'verified_product_redirects' => count( $redirects['aliases'] ?? array() ), 'redirect_missing_targets' => $redirect_missing,
-	'rows' => $rows,
+	'row_count' => count( $rows ),
 ) ) );
+// One record per line stays below SSH/GitHub log line limits as the site grows.
+foreach ( $rows as $row ) { WP_CLI::log( 'JW_SEO_ROW ' . wp_json_encode( $row ) ); }
