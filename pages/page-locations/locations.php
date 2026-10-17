@@ -26,6 +26,60 @@ $location_pages = get_posts( array(
     'order'         => 'ASC',
 ) );
 
+// Keep the original ACF directory on this site once its child pages exist.
+$published_location_paths = array();
+foreach ( $location_pages as $location_page ) {
+    $location_path = wp_parse_url( get_permalink( $location_page ), PHP_URL_PATH );
+    if ( is_string( $location_path ) ) {
+        $published_location_paths[ trim( $location_path, '/' ) ] = true;
+    }
+}
+$local_location_url = static function ( $url ) use ( $published_location_paths ) {
+    $parts = wp_parse_url( $url );
+    if ( ! is_array( $parts ) || empty( $parts['host'] )
+        || 'jiggywrigglers.com' !== strtolower( $parts['host'] )
+        || ! empty( $parts['user'] ) || ! empty( $parts['pass'] ) ) {
+        return $url;
+    }
+    $path = isset( $parts['path'] ) ? trim( $parts['path'], '/' ) : '';
+    if ( ! isset( $published_location_paths[ $path ] ) ) {
+        return $url;
+    }
+    $url = home_url( '/' . $path . '/' );
+    if ( isset( $parts['query'] ) && '' !== $parts['query'] ) {
+        $url .= '?' . $parts['query'];
+    }
+    if ( isset( $parts['fragment'] ) && '' !== $parts['fragment'] ) {
+        $url .= '#' . $parts['fragment'];
+    }
+    return $url;
+};
+if ( is_string( $content_text ) && '' !== $content_text ) {
+    if ( class_exists( 'WP_HTML_Tag_Processor' ) ) {
+        $directory_html = new WP_HTML_Tag_Processor( $content_text );
+        while ( $directory_html->next_tag( 'a' ) ) {
+            $href = $directory_html->get_attribute( 'href' );
+            if ( is_string( $href ) ) {
+                $local_href = $local_location_url( $href );
+                if ( $local_href !== $href ) {
+                    $directory_html->set_attribute( 'href', $local_href );
+                }
+            }
+        }
+        $content_text = $directory_html->get_updated_html();
+    } else {
+        $content_text = preg_replace_callback(
+            '/(<a\b[^>]*?\s)href\s*=\s*([\'\"])(.*?)\2/is',
+            static function ( $match ) use ( $local_location_url ) {
+                $href = html_entity_decode( $match[3], ENT_QUOTES, 'UTF-8' );
+                $local_href = $local_location_url( $href );
+                return $local_href === $href ? $match[0] : $match[1] . 'href=' . $match[2] . esc_url( $local_href ) . $match[2];
+            },
+            $content_text
+        );
+    }
+}
+
 // ACF link fields return arrays; only their URL belongs in a link attribute.
 foreach ( is_array( $franchises_repeater ) ? $franchises_repeater : array() as $franchise ) {
     $calendar = isset( $franchise['franchise_calendar'] ) ? $franchise['franchise_calendar'] : '';

@@ -128,11 +128,27 @@ function jw_migration_run_media() {
 	return $messages ?: array( 'All original page images are now in this site’s media library.' );
 }
 
-/** Remove two broken inherited hrefs without inventing replacement contacts. */
+/** Remove confirmed broken source links/images without inventing replacements. */
 function jw_migration_repair_links() {
 	$bad_hrefs = array( 'href="jiggywrigglerswestlancs"', 'href="franchsie@staging2.jiggywrigglers.com"' );
+	// All three originals return 404. Keep the source manifest and WP revisions
+	// intact, but do not show broken image icons on the migrated articles.
+	$missing_images = array(
+		'https://jiggywrigglers.com/wp-content/uploads/2023/04/Jiggy-Wrigglers-Logo-Six-Bugs.png',
+		'https://jiggywrigglers.com/wp-content/uploads/2023/04/Jiggy-Wrigglers-Logo-Six-Bugs-300x300.png',
+		'https://jiggywrigglers.com/wp-content/uploads/2023/03/Screenshot-2023-03-21-at-12.09.51-300x197.png',
+	);
 	foreach ( jw_migration_pages() as $page ) {
 		$content = str_replace( $bad_hrefs, '', $page->post_content );
+		$content = str_replace(
+			array( '<h1>Jiggy Wrigglers Jiggy Wrigglers Fareham and Porchester</h1>', '<h1>Jiggy WrigglersWelshpool, Newtown and Montgomery</h1>' ),
+			array( '<h1>Jiggy Wrigglers Fareham and Porchester</h1>', '<h1>Jiggy Wrigglers Welshpool, Newtown and Montgomery</h1>' ),
+			$content
+		);
+		$content = preg_replace_callback( '/<img\b[^>]*>/i', function ( $match ) use ( $missing_images ) {
+			if ( preg_match( '/\bsrc=[\x22\x27]([^\x22\x27]+)[\x22\x27]/i', $match[0], $source ) && in_array( html_entity_decode( $source[1], ENT_QUOTES, 'UTF-8' ), $missing_images, true ) ) { return ''; }
+			return $match[0];
+		}, $content );
 		if ( $content !== $page->post_content ) { wp_update_post( wp_slash( array( 'ID' => $page->ID, 'post_content' => $content ) ) ); }
 	}
 }

@@ -178,6 +178,11 @@ function jiggy_wrigglers_sfs_shortcode( $atts = array(), $content = null ) {
     }
 
     if ( 'link' === $display_type ) {
+        $value = trim( $value );
+        // WordPress otherwise prefixes bare SFS handles with http://.
+        if ( ! preg_match( '#^https?://#i', $value ) ) {
+            return '';
+        }
         $url = esc_url_raw( $value, array( 'http', 'https' ) );
         $parts = wp_parse_url( $url );
         if ( ! $parts || empty( $parts['host'] ) || empty( $parts['scheme'] )

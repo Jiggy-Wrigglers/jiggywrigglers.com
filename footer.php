@@ -90,11 +90,7 @@ $copyright_link = get_field( 'copyright_link', 'option' );
                 <a href="<?php echo esc_url( home_url( '/' . $slug . '/' ) ); ?>"><?php echo esc_html( $label ); ?></a>
             <?php endforeach; ?>
         </nav>
-        <?php if ( $copyright_link ) : ?>
-            <a href="<?php echo esc_url( $copyright_link['url'] ); ?>"<?php echo ! empty( $copyright_link['target'] ) ? ' target="' . esc_attr( $copyright_link['target'] ) . '"' : ''; ?>>&copy; <?php echo esc_html( $copyright_link['title'] ); ?></a>
-        <?php else : ?>
-            <a href="https://www.modcommslimited.com/privacypolicy.php">&copy; Copyright Jiggy Wrigglers Ltd</a>
-        <?php endif; ?>
+        <p>&copy; <?php echo esc_html( ! empty( $copyright_link['title'] ) ? $copyright_link['title'] : 'Copyright Jiggy Wrigglers Ltd' ); ?></p>
     </div>
 </div>
 
