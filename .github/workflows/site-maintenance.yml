@@ -1,0 +1,25 @@
+name: Verify or finish new site migration
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Fixed migration task on the Forge site
+        required: true
+        type: choice
+        options:
+          - diagnostics
+          - import-media
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run fixed task on Forge
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.FORGE_HOST }}
+          username: ${{ secrets.FORGE_USER }}
+          key: ${{ secrets.FORGE_SSH_KEY }}
+          script: |
+            set -e
+            cd /home/jiggywrigglers/jiggywrigglers.on-forge.com/public/wp-content/themes/jiggy-wrigglers-theme
+            wp eval-file scripts/site-maintenance.php '${{ inputs.operation }}'
