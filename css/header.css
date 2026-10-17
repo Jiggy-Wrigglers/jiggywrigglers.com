@@ -378,6 +378,28 @@ body .header-menu-nav .header-menu-sub {
         max-width: 180px;
     }
 
+    /* Keep the native cart within the header, clear of page copy. */
+    body .wp-block-surecart-cart-icon {
+        --sc-cart-icon-top: 16px;
+        --sc-cart-icon-bottom: auto;
+        --sc-cart-icon-right: 84px;
+        --sc-cart-icon-width: 44px;
+        --sc-cart-icon-height: 44px;
+        --sc-cart-icon-z-index: 1000;
+    }
+
+    body.admin-bar .wp-block-surecart-cart-icon {
+        --sc-cart-icon-top: 62px;
+    }
+
+    body:has(.wp-block-surecart-cart-icon:not([hidden])) .header-logo img {
+        max-width: min(180px, calc(100vw - 166px));
+    }
+
+    body:has(.header.menu-open) .wp-block-surecart-cart-icon {
+        visibility: hidden;
+    }
+
     body .header-right {
         gap: 8px;
     }

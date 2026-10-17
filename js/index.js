@@ -93,3 +93,38 @@ function headerMenuFocusTrap() {
         }
     }
 }
+
+function initContactDropdownLabels() {
+    document.querySelectorAll('.contact-form-shortcode').forEach(formRoot => {
+        const labelDropdowns = () => {
+            formRoot.querySelectorAll('.ts-control input[role="combobox"]').forEach(input => {
+                if (input.getAttribute('aria-label')?.trim() || input.getAttribute('aria-labelledby')?.trim() || input.labels?.length) {
+                    return;
+                }
+
+                const fieldset = input.closest('fieldset');
+                const legend = fieldset?.querySelector(':scope > legend.srfm-block-legend');
+                if (!legend || !formRoot.contains(fieldset) || !legend.textContent.trim()) return;
+
+                if (!legend.id) {
+                    const baseId = `${input.id || 'jw-contact-dropdown'}-label`;
+                    let labelId = baseId;
+                    let suffix = 2;
+                    while (document.getElementById(labelId)) labelId = `${baseId}-${suffix++}`;
+                    legend.id = labelId;
+                }
+                input.setAttribute('aria-labelledby', legend.id);
+            });
+        };
+
+        labelDropdowns();
+        // SureForms may create or replace TomSelect controls after the page is ready.
+        new MutationObserver(labelDropdowns).observe(formRoot, { childList: true, subtree: true });
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactDropdownLabels, { once: true });
+} else {
+    initContactDropdownLabels();
+}
