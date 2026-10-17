@@ -266,9 +266,9 @@ body :is(.button-yellow, .button-peach) {
 
 /* Photography carries the personality; the overlay protects text contrast. */
 body :is(.home-banner, .hero) {
-    height: clamp(470px, 62vw, 650px);
+    height: auto;
     max-height: none;
-    min-height: 0;
+    min-height: clamp(470px, 62vw, 650px);
     background: var(--purple);
 }
 
@@ -277,6 +277,8 @@ body :is(.home-banner, .hero)::before {
 }
 
 body :is(.home-banner, .hero) .wrap {
+    height: auto;
+    min-height: inherit;
     justify-content: center;
     align-items: flex-start;
     padding-block: 70px;
