@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( '_S_VERSION' ) ) {
-	define( '_S_VERSION', '2.5.2' );
+	define( '_S_VERSION', '2.5.3' );
 }
 
 if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {

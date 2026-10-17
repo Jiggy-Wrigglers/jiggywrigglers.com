@@ -171,6 +171,12 @@ function jiggy_wrigglers_sfs_manual_value( $area, $key ) {
         ? $overrides[ $key ] : null;
 }
 
+/** Remove an empty SFS email-signature image while retaining useful source HTML. */
+function jiggy_wrigglers_sfs_clean_html( $html ) {
+    $html = wp_kses_post( $html );
+    return preg_replace( '~<img\b[^>]*\ssrc\s*=\s*([\x22\x27])\s*(?://)?\s*\1[^>]*>~i', '', $html );
+}
+
 /** Render a manually supplied page value, retaining the shortcode's inline/block role. */
 function jiggy_wrigglers_sfs_render_manual( $key, $value, $display_type ) {
     $value = trim( $value );
@@ -179,7 +185,7 @@ function jiggy_wrigglers_sfs_render_manual( $key, $value, $display_type ) {
     }
     $class = 'sfs-result sfs-result--' . $key . ' sfs-result--manual';
     if ( in_array( $key, array( 'about', 'venues' ), true ) ) {
-        return '<div class="' . esc_attr( $class ) . '">' . wp_kses_post( wpautop( $value ) ) . '</div>';
+        return '<div class="' . esc_attr( $class ) . '">' . jiggy_wrigglers_sfs_clean_html( wpautop( $value ) ) . '</div>';
     }
     if ( 'email' === $display_type ) {
         $email = sanitize_email( $value );
@@ -296,7 +302,7 @@ function jiggy_wrigglers_sfs_shortcode( $atts = array(), $content = null ) {
 
     $data = jiggy_wrigglers_sfs_get_group( $atts['area'] );
     if ( is_wp_error( $data ) ) {
-        $fallback = is_string( $content ) ? trim( wp_kses_post( $content ) ) : '';
+        $fallback = is_string( $content ) ? trim( jiggy_wrigglers_sfs_clean_html( $content ) ) : '';
         if ( '' !== $fallback ) {
             $tag = in_array( $key, array( 'about', 'venues', 'services' ), true ) ? 'div' : 'span';
             return '<' . $tag . ' class="sfs-result sfs-result--' . esc_attr( $key ) . ' sfs-result--fallback">'
@@ -341,7 +347,7 @@ function jiggy_wrigglers_sfs_shortcode( $atts = array(), $content = null ) {
 
     // About text intentionally supports paragraphs and links supplied by SFS.
     if ( 'about' === $key ) {
-        return '<div class="' . esc_attr( $class ) . '">' . wp_kses_post( $value ) . '</div>';
+        return '<div class="' . esc_attr( $class ) . '">' . jiggy_wrigglers_sfs_clean_html( $value ) . '</div>';
     }
     return '<span class="' . esc_attr( $class ) . '">' . esc_html( $value ) . '</span>';
 }
