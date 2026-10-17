@@ -61,7 +61,7 @@ function jw_seo_apply_meta( $meta, $post ) {
 			$description = jw_seo_summary( ! empty( $meta['page_description'] ) ? $meta['page_description'] : jw_seo_default_description( $post ) );
 			$title = wp_strip_all_tags( get_the_title( $post ) );
 			if ( 0 !== stripos( $description, $title ) ) { $description = $title . '. ' . $description; }
-			if ( strlen( $description ) < 100 ) { $description .= ' View product details, available options and current pricing in the Jiggy Wrigglers shop.'; }
+			if ( strlen( $description ) < 100 ) { $description .= ( preg_match( '/[.!?…]$/u', $description ) ? ' ' : '. ' ) . 'View product details, available options and current pricing in the Jiggy Wrigglers shop.'; }
 			$meta['page_description'] = jw_seo_summary( $description );
 		} else {
 			$meta['page_description'] = jw_seo_default_description( $post );
