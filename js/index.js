@@ -1,3 +1,4 @@
+if (typeof Lenis !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 window.lenis = new Lenis({
     autoRaf: true,
     autoToggle: true,
@@ -6,6 +7,7 @@ window.lenis = new Lenis({
     naiveDimensions: true,
     stopInertiaOnNavigate: true,
 });
+}
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('parallaxItems', () => ({

@@ -25,7 +25,7 @@
 	$header_menu_button_1 = get_field( 'header_menu_button_1', 'option' );
 	$header_menu_button_2 = get_field( 'header_menu_button_2', 'option' );
 
-	$header_logo = $logo_white ? $logo_white : $company_logo;
+	$header_logo = $company_logo ? $company_logo : $logo_white;
 ?>
 <a class="skip-link" href="#main-content">Skip to content</a>
 <!-- Header -->
@@ -36,9 +36,16 @@
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="header-logo" title="Homepage Link and Company Logo" aria-label="Homepage Link and Company Logo">
 				<?php if ( $header_logo ) : ?>
 					<?php echo wp_get_attachment_image( $header_logo['ID'], 'full' ); ?>
+				<?php else : ?>
+					<span class="heading-4">Jiggy Wrigglers</span>
 				<?php endif; ?>
 			</a>
 			<div class="header-right">
+				<nav class="header-quick-links" aria-label="Quick links">
+					<a href="<?php echo esc_url( home_url( '/locations/' ) ); ?>">Find a class</a>
+					<a href="<?php echo esc_url( home_url( '/book-a-party/' ) ); ?>">Parties</a>
+					<a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>">Shop</a>
+				</nav>
 				<div class="header-buttons">
 					<?php if ( $header_menu_button_1 ) : ?>
 						<a class="button button-blue" href="<?php echo esc_url( $header_menu_button_1['url'] ); ?>"<?php echo ! empty( $header_menu_button_1['target'] ) ? ' target="' . esc_attr( $header_menu_button_1['target'] ) . '"' : ''; ?>>
@@ -60,7 +67,7 @@
 								});
 							}
 						"
-					aria-label="Toggle menu" :aria-expanded="menuOpen">
+					aria-label="Toggle menu" aria-controls="header-menu" :aria-expanded="menuOpen" type="button">
 					<span class="body-small">MENU</span>
 					<div class="nav-icon" :class="{ open: menuOpen }">
 						<span></span>

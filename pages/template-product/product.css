@@ -140,10 +140,6 @@
     color: var(--white);
 }
 
-.product-content .sc-button__link .sc-spinner {
-    display: none;
-}
-
 /* Variant Pills */
 /* ------------------------------------------------- */
 
@@ -316,5 +312,46 @@
 
     .product-content .sc-product-template-columns-3 {
         grid-template-columns: 1fr !important;
+    }
+}
+
+/* Keep the native SureCart purchase states and loading indicators intact. */
+.product-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 32px;
+    color: #65556c;
+    font-size: 14px;
+}
+
+.product-breadcrumb a {
+    color: var(--purple);
+    font-size: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.product-content :is(a, button, input, select):focus-visible {
+    outline: 3px solid var(--purple);
+    outline-offset: 4px;
+}
+
+.product-content .wp-block-surecart-product-media img,
+.product-content .sc-product-item .wp-block-cover {
+    border-radius: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-content *,
+    .product-content *::before,
+    .product-content *::after {
+        transition: none !important;
+    }
+    .product-content .sc-product-item:hover .wp-block-group.has-border-color,
+    .product-content .sc-product-item:hover .wp-block-cover img {
+        transform: none;
     }
 }

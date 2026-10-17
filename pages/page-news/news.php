@@ -13,7 +13,11 @@ get_header(); ?>
 
 <!-- Hero Section -->
 <!-- ------------------------------------------------- -->
-<?php include locate_template( 'components/hero/index.php' ); ?>
+<?php
+$hero_post_id = (int) get_option( 'page_for_posts' );
+$hero_title = get_field( 'hero_title', $hero_post_id ) ?: get_the_title( $hero_post_id );
+include locate_template( 'components/hero/index.php' );
+?>
 
 <!-- News Listing Section -->
 <!-- ------------------------------------------------- -->

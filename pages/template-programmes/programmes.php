@@ -94,6 +94,13 @@ $content_image = get_field( 'content_image' );
 </section>
 
 <!-- Gallery Section -->
+<?php if ( is_page( array( 'book-a-party', 'nurseries-preschools' ) ) ) : ?>
+<section class="programme-local-cta"><div class="wrap">
+    <h2 class="heading-2"><?php esc_html_e( 'Find your local Jiggy Wrigglers team', 'jiggywrigglers' ); ?></h2>
+    <p><?php esc_html_e( 'Explore your local page for venues, party calendars and contact details.', 'jiggywrigglers' ); ?></p>
+    <a class="button button-purple" href="<?php echo esc_url( home_url( '/locations/' ) ); ?>"><?php esc_html_e( 'Choose your area', 'jiggywrigglers' ); ?></a>
+</div></section>
+<?php endif; ?>
 <!-- ------------------------------------------------- -->
 <?php include locate_template( 'components/gallery/index.php' ); ?>
 

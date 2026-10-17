@@ -32,5 +32,9 @@
 .policy-text ul,
 .policy-text ol {
     padding-left: var(--space-5);
-    list-style: disc;
 }
+
+.policy-text ul { list-style: disc; }
+.policy-text ol { list-style: decimal; }
+.policy-text li + li { margin-top: var(--space-2); }
+.policy-text { overflow-wrap: anywhere; }

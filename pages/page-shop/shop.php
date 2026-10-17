@@ -2,244 +2,180 @@
 /**
  * Template Name: Shop
  *
- * Single-use shop listing page. Lists all SureCart products with
- * client-side search, sorting, and pagination via Alpine.js.
+ * Server-rendered SureCart catalogue with accessible search and pagination.
  *
  * @package Jiggy_Wrigglers
  */
-get_header(); ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/pages/page-shop/shop.css">
+get_header();
+include locate_template( 'components/hero/index.php' );
 
-<!-- Hero Section -->
-<!-- ------------------------------------------------- -->
-<?php include locate_template( 'components/hero/index.php' ); ?>
-
-<!-- Shop Listing Section -->
-<!-- ------------------------------------------------- -->
-<?php
-$content_title = get_field('content_title');
-$content_text = get_field('content_text');
-
-$products = array();
-$query = new WP_Query(array(
-    'post_type' => 'sc_product',
-    'posts_per_page' => -1,
-    'post_status' => 'publish',
-));
-
-if ($query->have_posts()) {
-    foreach ($query->posts as $post_obj) {
-        $product_data = array(
-            'id' => $post_obj->ID,
-            'title' => get_the_title($post_obj->ID),
-            'url' => get_permalink($post_obj->ID),
-            'image' => '',
-            'excerpt' => wp_strip_all_tags(get_the_excerpt($post_obj->ID)),
-            'price' => '',
-        );
-
-        $thumb = get_the_post_thumbnail_url($post_obj->ID, 'full');
-        if ($thumb) {
-            $product_data['image'] = $thumb;
-        }
-
-        if (function_exists('sc_get_product')) {
-            $sc_product = sc_get_product($post_obj->ID);
-            if ($sc_product && !is_wp_error($sc_product)) {
-                if (!empty($sc_product->range_display_amount)) {
-                    $product_data['price'] = $sc_product->range_display_amount;
-                } elseif (!empty($sc_product->display_amount)) {
-                    $product_data['price'] = $sc_product->display_amount;
-                }
-            }
-        }
-
-        $products[] = $product_data;
-    }
+$content_title = get_field( 'content_title' );
+$content_text  = get_field( 'content_text' );
+$shop_url      = get_permalink( get_queried_object_id() );
+$search        = isset( $_GET['shop_search'] ) && is_string( $_GET['shop_search'] ) ? sanitize_text_field( wp_unslash( $_GET['shop_search'] ) ) : '';
+$sort          = isset( $_GET['shop_sort'] ) && is_string( $_GET['shop_sort'] ) ? sanitize_key( wp_unslash( $_GET['shop_sort'] ) ) : 'recent';
+$collection    = isset( $_GET['shop_collection'] ) && is_string( $_GET['shop_collection'] ) ? sanitize_title( wp_unslash( $_GET['shop_collection'] ) ) : '';
+$current_page  = isset( $_GET['shop_page'] ) && is_scalar( $_GET['shop_page'] ) ? max( 1, absint( $_GET['shop_page'] ) ) : 1;
+$sorts         = array(
+	'recent'     => __( 'Newest arrivals', 'jiggywrigglers' ),
+	'name-asc'   => __( 'Name: A–Z', 'jiggywrigglers' ),
+	'name-desc'  => __( 'Name: Z–A', 'jiggywrigglers' ),
+	'price-low'  => __( 'Price: Low to high', 'jiggywrigglers' ),
+	'price-high' => __( 'Price: High to low', 'jiggywrigglers' ),
+);
+$sort = isset( $sorts[ $sort ] ) ? $sort : 'recent';
+$query_args = array(
+	'post_type'           => 'sc_product',
+	'post_status'         => 'publish',
+	'posts_per_page'      => 12,
+	'paged'               => $current_page,
+	'ignore_sticky_posts' => true,
+	'orderby'             => 'date',
+	'order'               => 'DESC',
+	's'                   => $search,
+);
+if ( in_array( $sort, array( 'name-asc', 'name-desc' ), true ) ) {
+	$query_args['orderby'] = array( 'title' => 'name-asc' === $sort ? 'ASC' : 'DESC', 'ID' => 'ASC' );
+} elseif ( in_array( $sort, array( 'price-low', 'price-high' ), true ) ) {
+	// SureCart maintains numeric metadata that includes variant price ranges.
+	$query_args['meta_key'] = 'min_price_amount';
+	$query_args['orderby']  = array( 'meta_value_num' => 'price-low' === $sort ? 'ASC' : 'DESC', 'ID' => 'ASC' );
 }
-wp_reset_postdata();
+$collections = taxonomy_exists( 'sc_collection' ) ? get_terms( array( 'taxonomy' => 'sc_collection', 'hide_empty' => true ) ) : array();
+if ( is_wp_error( $collections ) ) {
+	$collections = array();
+}
+if ( $collection && taxonomy_exists( 'sc_collection' ) ) {
+	$query_args['tax_query'] = array(
+		array( 'taxonomy' => 'sc_collection', 'field' => 'slug', 'terms' => $collection ),
+	);
+}
+$products = post_type_exists( 'sc_product' ) ? new WP_Query( $query_args ) : null;
+$total    = $products ? (int) $products->found_posts : 0;
+if ( $total && $current_page > (int) $products->max_num_pages ) {
+	$current_page        = (int) $products->max_num_pages;
+	$query_args['paged'] = $current_page;
+	$products            = new WP_Query( $query_args );
+}
+$filtered = '' !== $search || '' !== $collection;
 ?>
-
-<section class="shop-listing" x-data="shopApp()" x-init="init()">
-    <div class="wrap">
-        <div class="shop-listing-header">
-            <?php if ($content_title) : ?>
-                <h2 class="heading-2"><?php echo wp_kses_post($content_title); ?></h2>
-            <?php endif; ?>
-            <?php if ($content_text) : ?>
-                <p class="body-medium"><?php echo wp_kses_post($content_text); ?></p>
-            <?php endif; ?>
-
-            <div class="shop-listing-search-row">
-                <div class="shop-listing-search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M14.0391 3.45502C12.3152 3.45502 10.6619 4.13984 9.44287 5.35882C8.22388 6.57781 7.53906 8.23111 7.53906 9.95502C7.53906 11.575 8.12906 13.055 9.10906 14.185L3.45906 19.835L4.16906 20.545L9.81906 14.895C10.9938 15.9031 12.4911 16.4566 14.0391 16.455C15.763 16.455 17.4163 15.7702 18.6353 14.5512C19.8542 13.3322 20.5391 11.6789 20.5391 9.95502C20.5391 8.23111 19.8542 6.57781 18.6353 5.35882C17.4163 4.13984 15.763 3.45502 14.0391 3.45502ZM14.0391 4.45502C15.4978 4.45502 16.8967 5.03448 17.9281 6.06593C18.9596 7.09738 19.5391 8.49633 19.5391 9.95502C19.5391 11.4137 18.9596 12.8127 17.9281 13.8441C16.8967 14.8756 15.4978 15.455 14.0391 15.455C13.3168 15.455 12.6016 15.3128 11.9343 15.0364C11.267 14.76 10.6607 14.3548 10.15 13.8441C9.63925 13.3334 9.23413 12.7271 8.95773 12.0598C8.68132 11.3925 8.53906 10.6773 8.53906 9.95502C8.53906 9.23275 8.68132 8.51755 8.95773 7.85026C9.23413 7.18297 9.63925 6.57665 10.15 6.06593C10.6607 5.55521 11.267 5.15008 11.9343 4.87368C12.6016 4.59728 13.3168 4.45502 14.0391 4.45502Z" fill="#6E6E6E"/>
-                    </svg>
-                    <input type="text" x-model="filters.search" @input.debounce.300ms="applyFilters()" placeholder="Search products...">
-                </div>
-                <div class="shop-listing-sort">
-                    <select x-model="filters.sort" @change="applyFilters()">
-                        <option value="recent">Most Recent</option>
-                        <option value="name-asc">Name: A–Z</option>
-                        <option value="name-desc">Name: Z–A</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="shop-listing-count">
-            <span x-text="filteredProducts.length"></span> products available
-        </div>
-
-        <div class="shop-listing-grid" x-show="paginatedProducts.length > 0">
-            <template x-for="product in paginatedProducts" :key="product.id">
-                <a :href="product.url" class="shop-listing-card">
-                    <div class="shop-listing-card-image">
-                        <template x-if="product.image">
-                            <img :src="product.image" :alt="product.title" loading="lazy">
-                        </template>
-                        <template x-if="!product.image">
-                            <div class="shop-listing-card-placeholder">No Image</div>
-                        </template>
-                    </div>
-                    <div class="shop-listing-card-content">
-                        <h3 class="heading-5" x-text="product.title"></h3>
-                        <template x-if="product.price">
-                            <p class="body-medium shop-listing-card-price" x-text="product.price"></p>
-                        </template>
-                        <span class="shop-listing-card-button">
-                            VIEW
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
-                                <path d="M1.42059e-08 6.77966L13.8418 6.77966L7.9096 0.847458L8.65537 -1.81362e-08L16 7.34463L8.65537 14.6893L7.9096 13.8418L13.8418 7.9096L1.65735e-08 7.9096L1.42059e-08 6.77966Z" fill="#000000"/>
-                            </svg>
-                        </span>
-                    </div>
-                </a>
-            </template>
-        </div>
-
-        <div class="shop-listing-empty" x-show="filteredProducts.length === 0">
-            <h3 class="heading-5">No products found</h3>
-            <p class="body-medium">Try adjusting your search terms.</p>
-        </div>
-
-        <div class="shop-listing-pagination" x-show="totalPages > 1">
-            <div class="shop-listing-pagination-nav">
-                <button class="shop-listing-pagination-btn" @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
-                <div class="shop-listing-pagination-pages">
-                    <template x-for="page in getVisiblePages()" :key="page">
-                        <button class="shop-listing-pagination-page" :class="{ 'is-active': page === currentPage }" @click="goToPage(page)" x-text="page"></button>
-                    </template>
-                </div>
-                <button class="shop-listing-pagination-btn" @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages">Next</button>
-            </div>
-            <p class="shop-listing-pagination-info">
-                Showing <span x-text="((currentPage - 1) * perPage) + 1"></span> to <span x-text="Math.min(currentPage * perPage, filteredProducts.length)"></span> of <span x-text="filteredProducts.length"></span>
-            </p>
-        </div>
-    </div>
+<section class="shop-listing" aria-labelledby="shop-heading">
+	<div class="wrap">
+		<div class="shop-listing-header">
+			<div>
+				<p class="shop-eyebrow"><?php esc_html_e( 'A little Jiggy joy', 'jiggywrigglers' ); ?></p>
+				<h2 class="heading-2" id="shop-heading"><?php echo $content_title ? wp_kses_post( $content_title ) : esc_html__( 'Bring the fun home', 'jiggywrigglers' ); ?></h2>
+				<?php if ( $content_text ) : ?>
+					<div class="body-medium shop-intro"><?php echo wp_kses_post( $content_text ); ?></div>
+				<?php endif; ?>
+			</div>
+			<div class="shop-account-links">
+				<?php if ( jiggy_wrigglers_surecart_page_url( 'dashboard' ) ) : ?>
+					<a href="<?php echo esc_url( jiggy_wrigglers_surecart_page_url( 'dashboard' ) ); ?>"><?php esc_html_e( 'My orders & account', 'jiggywrigglers' ); ?> <span aria-hidden="true">↗</span></a>
+				<?php endif; ?>
+				<?php if ( shortcode_exists( 'sc_cart_menu_icon' ) ) : ?>
+					<?php echo do_shortcode( '[sc_cart_menu_icon cart_icon="shopping-bag" cart_menu_always_shown="1"]' ); ?>
+				<?php endif; ?>
+			</div>
+		</div>
+		<form class="shop-listing-search-row" method="get" action="<?php echo esc_url( $shop_url ); ?>" role="search" aria-label="<?php esc_attr_e( 'Search the shop', 'jiggywrigglers' ); ?>">
+			<?php if ( ! get_option( 'permalink_structure' ) ) : ?>
+				<input type="hidden" name="page_id" value="<?php echo esc_attr( get_queried_object_id() ); ?>">
+			<?php endif; ?>
+			<div class="shop-listing-search">
+				<label for="shop-search"><?php esc_html_e( 'Find something fun', 'jiggywrigglers' ); ?></label>
+				<input id="shop-search" type="search" name="shop_search" value="<?php echo esc_attr( $search ); ?>" placeholder="<?php esc_attr_e( 'Search products…', 'jiggywrigglers' ); ?>">
+			</div>
+			<?php if ( $collections ) : ?>
+				<div class="shop-listing-sort">
+					<label for="shop-collection"><?php esc_html_e( 'Collection', 'jiggywrigglers' ); ?></label>
+					<select id="shop-collection" name="shop_collection">
+						<option value=""><?php esc_html_e( 'All collections', 'jiggywrigglers' ); ?></option>
+						<?php foreach ( $collections as $term ) : ?>
+							<option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $collection, $term->slug ); ?>><?php echo esc_html( $term->name ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			<?php endif; ?>
+			<div class="shop-listing-sort">
+				<label for="shop-sort"><?php esc_html_e( 'Sort by', 'jiggywrigglers' ); ?></label>
+				<select id="shop-sort" name="shop_sort">
+					<?php foreach ( $sorts as $value => $label ) : ?>
+						<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $sort, $value ); ?>><?php echo esc_html( $label ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+			<button class="button button-purple shop-filter-button" type="submit"><?php esc_html_e( 'Explore', 'jiggywrigglers' ); ?> <span aria-hidden="true">→</span></button>
+		</form>
+		<div class="shop-listing-summary">
+			<p class="shop-listing-count">
+				<?php
+				/* translators: %s: number of matching products. */
+				printf( esc_html( _n( '%s product', '%s products', $total, 'jiggywrigglers' ) ), esc_html( number_format_i18n( $total ) ) );
+				?>
+			</p>
+			<?php if ( $filtered || 'recent' !== $sort ) : ?>
+				<a class="shop-reset" href="<?php echo esc_url( $shop_url ); ?>"><?php esc_html_e( 'Clear filters', 'jiggywrigglers' ); ?></a>
+			<?php endif; ?>
+		</div>
+		<?php if ( $products && $products->have_posts() ) : ?>
+			<div class="shop-listing-grid">
+				<?php
+				while ( $products->have_posts() ) :
+					$products->the_post();
+					$product = function_exists( 'sc_get_product' ) ? sc_get_product( get_the_ID() ) : null;
+					$price   = $product && ! is_wp_error( $product ) ? ( $product->range_display_amount ?: $product->display_amount ) : '';
+					$image   = $product && ! is_wp_error( $product ) ? $product->featured_image : null;
+					?>
+					<a href="<?php the_permalink(); ?>" class="shop-listing-card">
+						<div class="shop-listing-card-image">
+							<?php if ( $image && is_callable( array( $image, 'html' ) ) ) : ?>
+								<?php echo $image->html( 'medium_large', array( 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SureCart native image renderer. ?>
+							<?php elseif ( has_post_thumbnail() ) : ?>
+								<?php the_post_thumbnail( 'medium_large', array( 'alt' => '', 'loading' => 'lazy' ) ); ?>
+							<?php else : ?>
+								<span class="shop-listing-card-placeholder" aria-hidden="true">Jiggy joy</span>
+							<?php endif; ?>
+						</div>
+						<div class="shop-listing-card-content">
+							<h3 class="heading-5"><?php echo esc_html( get_the_title() ); ?></h3>
+							<?php if ( '' !== $price ) : ?>
+								<p class="shop-listing-card-price"><?php echo esc_html( wp_strip_all_tags( $price ) ); ?></p>
+							<?php endif; ?>
+							<span class="shop-listing-card-button"><?php esc_html_e( 'Take a look', 'jiggywrigglers' ); ?> <span aria-hidden="true">→</span></span>
+						</div>
+					</a>
+				<?php endwhile; ?>
+			</div>
+			<?php if ( $products->max_num_pages > 1 ) : ?>
+				<nav class="shop-listing-pagination" aria-label="<?php esc_attr_e( 'Shop pages', 'jiggywrigglers' ); ?>">
+					<?php
+					$pagination_url = add_query_arg(
+						array_filter( array( 'shop_search' => $search, 'shop_sort' => $sort, 'shop_collection' => $collection ), function( $value ) { return '' !== $value; } ),
+						$shop_url
+					);
+					echo wp_kses_post( paginate_links( array(
+						'base'      => str_replace( '999999999', '%#%', esc_url( add_query_arg( 'shop_page', 999999999, $pagination_url ) ) ),
+						'format'    => '',
+						'current'   => $current_page,
+						'total'     => (int) $products->max_num_pages,
+						'type'      => 'list',
+						'prev_text' => __( '← Previous', 'jiggywrigglers' ),
+						'next_text' => __( 'Next →', 'jiggywrigglers' ),
+						'add_args'  => false,
+					) ) );
+					?>
+				</nav>
+			<?php endif; ?>
+		<?php else : ?>
+			<div class="shop-listing-empty">
+				<span class="shop-empty-icon" aria-hidden="true">✦</span>
+				<h3 class="heading-4"><?php echo $filtered ? esc_html__( 'No matches just yet', 'jiggywrigglers' ) : esc_html__( 'More Jiggy joy is on its way', 'jiggywrigglers' ); ?></h3>
+				<p><?php echo $filtered ? esc_html__( 'Try another search or explore all our products.', 'jiggywrigglers' ) : esc_html__( 'Please check back soon, or get in touch with our friendly team.', 'jiggywrigglers' ); ?></p>
+				<a class="button button-purple" href="<?php echo esc_url( $filtered ? $shop_url : home_url( '/contact-us/' ) ); ?>"><?php echo $filtered ? esc_html__( 'View all products', 'jiggywrigglers' ) : esc_html__( 'Get in touch', 'jiggywrigglers' ); ?></a>
+			</div>
+		<?php endif; ?>
+		<?php wp_reset_postdata(); ?>
+	</div>
 </section>
-
-<script>
-function shopApp() {
-    return {
-        allProducts: <?php echo json_encode($products); ?>,
-        filteredProducts: [],
-        paginatedProducts: [],
-        currentPage: 1,
-        perPage: 9,
-        totalPages: 0,
-        filters: {
-            search: '',
-            sort: 'recent'
-        },
-
-        init() {
-            this.loadFromUrl();
-            this.applyFilters();
-            window.addEventListener('popstate', () => {
-                this.loadFromUrl();
-                this.applyFilters();
-            });
-        },
-
-        loadFromUrl() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('search')) this.filters.search = params.get('search');
-            if (params.get('sort')) this.filters.sort = params.get('sort');
-            const page = parseInt(params.get('page'));
-            if (page > 0) this.currentPage = page;
-        },
-
-        updateUrl() {
-            const params = new URLSearchParams();
-            if (this.filters.search) params.set('search', this.filters.search);
-            if (this.filters.sort !== 'recent') params.set('sort', this.filters.sort);
-            if (this.currentPage > 1) params.set('page', this.currentPage);
-            const newUrl = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
-            window.history.pushState({ filters: JSON.parse(JSON.stringify(this.filters)), page: this.currentPage }, '', newUrl);
-        },
-
-        parsePrice(str) {
-            if (!str) return 0;
-            const match = str.match(/[\d,.]+/);
-            return match ? parseFloat(match[0].replace(/,/g, '')) : 0;
-        },
-
-        applyFilters() {
-            let results = [...this.allProducts];
-            if (this.filters.search && this.filters.search.trim()) {
-                const s = this.filters.search.toLowerCase().trim();
-                results = results.filter(product => {
-                    const fields = [product.title || '', product.excerpt || '', product.price || ''].join(' ').toLowerCase();
-                    return fields.includes(s);
-                });
-            }
-            switch (this.filters.sort) {
-                case 'name-asc': results.sort((a, b) => (a.title || '').localeCompare(b.title || '')); break;
-                case 'name-desc': results.sort((a, b) => (b.title || '').localeCompare(a.title || '')); break;
-                case 'price-low': results.sort((a, b) => this.parsePrice(a.price) - this.parsePrice(b.price)); break;
-                case 'price-high': results.sort((a, b) => this.parsePrice(b.price) - this.parsePrice(a.price)); break;
-                default: break;
-            }
-            this.filteredProducts = results;
-            this.totalPages = Math.ceil(results.length / this.perPage);
-            if (this.currentPage > this.totalPages || this.currentPage < 1) this.currentPage = 1;
-            this.updatePagination();
-            this.updateUrl();
-        },
-
-        updatePagination() {
-            const start = (this.currentPage - 1) * this.perPage;
-            this.paginatedProducts = this.filteredProducts.slice(start, start + this.perPage);
-        },
-
-        goToPage(page) {
-            if (page >= 1 && page <= this.totalPages) {
-                this.currentPage = page;
-                this.updatePagination();
-                this.updateUrl();
-                document.querySelector('.shop-listing').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        },
-
-        getVisiblePages() {
-            const pages = [];
-            const max = 5;
-            if (this.totalPages <= max) {
-                for (let i = 1; i <= this.totalPages; i++) pages.push(i);
-            } else {
-                let start = Math.max(1, this.currentPage - Math.floor(max / 2));
-                let end = Math.min(this.totalPages, start + max - 1);
-                if (end - start < max - 1) start = Math.max(1, end - max + 1);
-                for (let i = start; i <= end; i++) pages.push(i);
-            }
-            return pages;
-        }
-    };
-}
-</script>
-
 <?php get_footer(); ?>

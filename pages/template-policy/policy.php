@@ -9,11 +9,16 @@
  */
 
 get_header(); ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/pages/template-policy/policy.css">
+<link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/pages/template-policy/policy.css">
+
+<?php while ( have_posts() ) : the_post(); ?>
 
 <!-- Hero Section -->
 <!-- ------------------------------------------------- -->
-<?php include locate_template( 'components/hero/index.php' ); ?>
+<?php
+$hero_title = get_field( 'hero_title' ) ?: get_the_title();
+include locate_template( 'components/hero/index.php' );
+?>
 
 <?php $policy_content = get_field( 'content_text' ); ?>
 
@@ -21,10 +26,20 @@ get_header(); ?>
 <!-- ------------------------------------------------- -->
 <section class="policy-content">
     <div class="wrap">
-        <?php if ( $policy_content ) : ?>
-            <div class="policy-text"><?php echo wp_kses_post( $policy_content ); ?></div>
-        <?php endif; ?>
+        <div class="policy-text">
+            <?php
+            if ( $policy_content ) {
+                echo wp_kses_post( $policy_content );
+            } else {
+                // Preserve native policy content when this page has not been migrated to ACF.
+                the_content();
+                wp_link_pages();
+            }
+            ?>
+        </div>
     </div>
 </section>
+
+<?php endwhile; ?>
 
 <?php get_footer(); ?>

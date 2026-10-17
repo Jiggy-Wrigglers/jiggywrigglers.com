@@ -6,28 +6,43 @@
  */
 
 get_header(); ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/pages/page-locations/locations.css">
-
-<!-- Hero Section -->
-<!-- ------------------------------------------------- -->
-<?php include locate_template( 'components/hero/index.php' ); ?>
+<link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/pages/page-locations/locations.css">
 
 <?php
-// Content
+$hero_title = get_field( 'hero_title' ) ?: get_the_title();
+include locate_template( 'components/hero/index.php' );
+
 $content_sup_title = get_field( 'content_sup_title' );
 $content_title = get_field( 'content_title' );
 $content_text = get_field( 'content_text' );
-
-// Franchises
 $franchises_repeater = get_field( 'franchises_repeater' );
+$franchises = array();
+$location_pages = get_posts( array(
+    'post_type'      => 'page',
+    'post_status'    => 'publish',
+    'posts_per_page' => -1,
+    'post_parent'   => get_queried_object_id(),
+    'orderby'       => 'title',
+    'order'         => 'ASC',
+) );
+
+// ACF link fields return arrays; only their URL belongs in a link attribute.
+foreach ( is_array( $franchises_repeater ) ? $franchises_repeater : array() as $franchise ) {
+    $calendar = isset( $franchise['franchise_calendar'] ) ? $franchise['franchise_calendar'] : '';
+    $franchises[] = array(
+        'name'     => isset( $franchise['franchise_name'] ) ? $franchise['franchise_name'] : '',
+        'area'     => isset( $franchise['franchise_area'] ) ? $franchise['franchise_area'] : '',
+        'email'    => sanitize_email( isset( $franchise['franchise_email'] ) ? $franchise['franchise_email'] : '' ),
+        'calendar' => esc_url_raw( is_array( $calendar ) ? ( isset( $calendar['url'] ) ? $calendar['url'] : '' ) : $calendar ),
+    );
+}
 ?>
 
-<!-- Content Section -->
-<!-- ------------------------------------------------- -->
-<section class="locations-content" x-data="{ shown: false }" x-intersect:enter.threshold.0.2="shown = true">
+<?php if ( $content_sup_title || $content_title || $content_text ) : ?>
+<section class="locations-content">
     <div class="wrap">
         <?php if ( $content_sup_title ) : ?>
-            <h3 class="heading-5"><?php echo wp_kses_post( $content_sup_title ); ?></h3>
+            <p class="heading-5"><?php echo wp_kses_post( $content_sup_title ); ?></p>
         <?php endif; ?>
         <?php if ( $content_title ) : ?>
             <h2 class="heading-2"><?php echo wp_kses_post( $content_title ); ?></h2>
@@ -37,68 +52,113 @@ $franchises_repeater = get_field( 'franchises_repeater' );
         <?php endif; ?>
     </div>
 </section>
+<?php endif; ?>
 
-<!-- Franchises Section -->
-<!-- ------------------------------------------------- -->
-<?php if ( $franchises_repeater ) : ?>
-<section class="locations-franchises" x-data="locationsApp()">
+<?php if ( $franchises || $location_pages ) : ?>
+<section class="locations-franchises" aria-labelledby="locations-franchises-title">
     <div class="wrap">
-        <div class="locations-franchises-search" @click.away="open = false">
-            <p class="body-medium">Select your area to view party calendars or contact your local franchise.</p>
+        <div class="locations-franchises-search">
+            <h2 id="locations-franchises-title" class="heading-3"><?php esc_html_e( 'Find your local Jiggy Wrigglers', 'jiggywrigglers' ); ?></h2>
+            <?php if ( $franchises ) : ?>
+            <p id="locations-area-help" class="body-medium"><?php esc_html_e( 'Choose your area to view party calendars or contact your local franchise. You can also browse all areas below.', 'jiggywrigglers' ); ?></p>
             <div class="locations-franchises-select">
-                <button class="locations-franchises-toggle" type="button" @click="open = !open">
-                    <span x-text="selected ? selected.franchise_area : 'Select Your Area'"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
-                <div class="locations-franchises-dropdown" x-show="open" x-transition.opacity.duration.200ms>
-                    <?php foreach ( $franchises_repeater as $franchise ) : ?>
-                        <button type="button"
-                                @click="select(<?php echo esc_attr( wp_json_encode( array(
-                                    'area'     => $franchise['franchise_area'],
-                                    'email'    => $franchise['franchise_email'],
-                                    'calendar' => ! empty( $franchise['franchise_calendar'] ) ? $franchise['franchise_calendar'] : '',
-                                ) ) ) ?>)">
-                            <?php echo esc_html( $franchise['franchise_area'] ); ?>
-                        </button>
+                <label for="locations-area"><?php esc_html_e( 'Your area', 'jiggywrigglers' ); ?></label>
+                <select id="locations-area" class="locations-franchises-toggle" aria-describedby="locations-area-help">
+                    <option value=""><?php esc_html_e( 'Select your area', 'jiggywrigglers' ); ?></option>
+                    <?php foreach ( $franchises as $i => $franchise ) : ?>
+                        <option value="<?php echo esc_attr( $i ); ?>" data-calendar="<?php echo esc_url( $franchise['calendar'] ); ?>" data-email="<?php echo esc_attr( $franchise['email'] ); ?>">
+                            <?php echo esc_html( $franchise['area'] ?: $franchise['name'] ); ?>
+                        </option>
                     <?php endforeach; ?>
-                </div>
+                </select>
             </div>
-            <div class="locations-franchises-actions">
-                <a class="button button-blue" :href="selected ? selected.calendar : '#'" :target="selected && selected.calendar ? '_blank' : '_self'" :class="{ 'is-disabled': !selected }" @click.prevent="!selected">
-                    View Party Calendar
-                </a>
-                <a class="button button-purple" :href="selected ? 'mailto:' + selected.email : '#'" :class="{ 'is-disabled': !selected }" @click.prevent="!selected">
-                    Email Franchise
-                </a>
+            <div class="locations-franchises-actions" id="locations-selected-actions" hidden>
+                <a class="button button-blue" id="locations-calendar" target="_blank" rel="noopener noreferrer" hidden><?php esc_html_e( 'View party calendar', 'jiggywrigglers' ); ?></a>
+                <a class="button button-purple" id="locations-email" hidden><?php esc_html_e( 'Email franchise', 'jiggywrigglers' ); ?></a>
             </div>
+            <p class="locations-selection-status" id="locations-selection-status" role="status" aria-live="polite"></p>
+            <?php endif; ?>
+
+            <div class="locations-directory-search">
+                <label for="locations-search"><?php esc_html_e( 'Search by town or area', 'jiggywrigglers' ); ?></label>
+                <input id="locations-search" type="search" placeholder="<?php echo esc_attr__( 'Start typing your town or area…', 'jiggywrigglers' ); ?>" aria-controls="locations-directory" autocomplete="off">
+            </div>
+            <p id="locations-search-status" class="body-medium" role="status" aria-live="polite"></p>
         </div>
 
-        <div class="locations-franchises-grid">
-            <?php foreach ( $franchises_repeater as $i => $franchise ) : ?>
-                <div class="locations-franchise" data-animate="fade-up" data-animate-delay="<?php echo esc_attr( ( $i % 3 ) + 1 ); ?>" :class="shown && 'is-visible'">
-                    <h3 class="heading-5"><?php echo esc_html( $franchise['franchise_name'] ); ?></h3>
-                    <p class="body-medium"><?php echo esc_html( $franchise['franchise_area'] ); ?></p>
-                    <?php if ( ! empty( $franchise['franchise_email'] ) ) : ?>
-                        <a class="body-medium" href="mailto:<?php echo esc_attr( $franchise['franchise_email'] ); ?>"><?php echo esc_html( $franchise['franchise_email'] ); ?></a>
+        <div class="locations-franchises-grid" id="locations-directory">
+            <?php if ( $location_pages ) : ?>
+                <?php foreach ( $location_pages as $location_page ) : ?>
+                    <article class="locations-franchise" data-location-search="<?php echo esc_attr( get_the_title( $location_page ) ); ?>">
+                        <h3 class="heading-5"><a href="<?php echo esc_url( get_permalink( $location_page ) ); ?>"><?php echo esc_html( get_the_title( $location_page ) ); ?></a></h3>
+                        <p class="body-medium"><?php esc_html_e( 'Explore local classes, venues and birthday parties.', 'jiggywrigglers' ); ?></p>
+                        <a class="locations-franchise-link" href="<?php echo esc_url( get_permalink( $location_page ) ); ?>"><?php esc_html_e( 'View local classes and details', 'jiggywrigglers' ); ?><span aria-hidden="true"> →</span></a>
+                    </article>
+                <?php endforeach; ?>
+            <?php else : ?>
+            <?php foreach ( $franchises as $franchise ) : ?>
+                <article class="locations-franchise" data-location-search="<?php echo esc_attr( $franchise['area'] . ' ' . $franchise['name'] ); ?>">
+                    <h3 class="heading-5"><?php echo esc_html( $franchise['area'] ?: $franchise['name'] ); ?></h3>
+                    <?php if ( $franchise['name'] && $franchise['name'] !== $franchise['area'] ) : ?>
+                        <p class="body-medium"><?php echo esc_html( $franchise['name'] ); ?></p>
                     <?php endif; ?>
-                </div>
+                    <?php if ( $franchise['email'] ) : ?>
+                        <a class="body-medium" href="<?php echo esc_url( 'mailto:' . $franchise['email'] ); ?>"><?php echo esc_html( $franchise['email'] ); ?></a>
+                    <?php endif; ?>
+                    <?php if ( $franchise['calendar'] ) : ?>
+                        <a href="<?php echo esc_url( $franchise['calendar'] ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View party calendar', 'jiggywrigglers' ); ?></a>
+                    <?php endif; ?>
+                </article>
             <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </section>
-<?php endif; ?>
-
 <script>
-function locationsApp() {
-    return {
-        open: false,
-        selected: null,
-        select(franchise) {
-            this.selected = franchise;
-            this.open = false;
-        },
-    };
-}
+(function () {
+    const select = document.getElementById('locations-area');
+    const actions = document.getElementById('locations-selected-actions');
+    const calendar = document.getElementById('locations-calendar');
+    const email = document.getElementById('locations-email');
+    const status = document.getElementById('locations-selection-status');
+    function updateSelection() {
+        const option = select.options[select.selectedIndex];
+        const hasSelection = select.value !== '';
+        const calendarUrl = hasSelection ? option.dataset.calendar : '';
+        const emailAddress = hasSelection ? option.dataset.email : '';
+        calendar.hidden = !calendarUrl;
+        email.hidden = !emailAddress;
+        actions.hidden = !calendarUrl && !emailAddress;
+        if (calendarUrl) calendar.href = calendarUrl;
+        else calendar.removeAttribute('href');
+        if (emailAddress) email.href = 'mailto:' + emailAddress;
+        else email.removeAttribute('href');
+        status.textContent = hasSelection ? option.textContent.trim() : '';
+    }
+    if (select && actions && calendar && email && status) {
+        select.addEventListener('change', updateSelection);
+        updateSelection();
+    }
+
+    const search = document.getElementById('locations-search');
+    const searchStatus = document.getElementById('locations-search-status');
+    const cards = Array.from(document.querySelectorAll('#locations-directory [data-location-search]'));
+    if (!search || !searchStatus) return;
+
+    function filterLocations() {
+        const query = search.value.trim().toLocaleLowerCase();
+        let visible = 0;
+        cards.forEach(function (card) {
+            const matches = card.dataset.locationSearch.toLocaleLowerCase().includes(query);
+            card.hidden = !matches;
+            if (matches) visible++;
+        });
+        searchStatus.textContent = visible ? visible + ' / ' + cards.length : <?php echo wp_json_encode( __( 'No areas found. Try a nearby town or browse all areas by clearing your search.', 'jiggywrigglers' ) ); ?>;
+    }
+    search.addEventListener('input', filterLocations);
+    filterLocations();
+}());
 </script>
+<?php endif; ?>
 
 <?php get_footer(); ?>

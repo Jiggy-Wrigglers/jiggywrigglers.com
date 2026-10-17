@@ -1,0 +1,37 @@
+/* Loaded only on the configured checkout. Native SureCart owns the fields,
+   payment methods, validation, shipping choices and loading states. */
+body .site-commerce-page .prose {
+    --sc-font-sans: var(--font-body);
+    --sc-input-font-family: var(--font-body);
+    --sc-color-primary: 282;
+    --sc-color-primary-saturation: 57%;
+    --sc-color-primary-luminance: 33%;
+    --sc-color-primary-50: #faf5fc;
+    --sc-color-primary-100: #f1e5f7;
+    --sc-color-primary-200: #e0c6eb;
+    --sc-color-primary-300: #c79bd8;
+    --sc-color-primary-400: #a465bc;
+    --sc-color-primary-500: #662483;
+    --sc-color-primary-600: #581e70;
+    --sc-color-primary-700: #49175f;
+    --sc-color-primary-800: #391249;
+    --sc-color-primary-900: #2b0e3a;
+    --sc-color-primary-950: #1e0928;
+    --sc-color-primary-text: #fff;
+    --sc-input-background-color: #fff;
+    --sc-input-background-color-focus: #fff;
+    --sc-input-border-color: #cfc4d5;
+    --sc-input-border-color-hover: #a58dad;
+    --sc-input-border-color-focus: #662483;
+    --sc-input-label-color: #413547;
+    --sc-input-color: #302036;
+    --sc-input-height-medium: 3em;
+    --sc-border-radius-small: 8px;
+    --sc-border-radius-medium: 12px;
+    --sc-border-radius-large: 18px;
+    --sc-input-border-radius-small: 8px;
+    --sc-input-border-radius-medium: 12px;
+    --sc-input-border-radius-large: 12px;
+    --sc-focus-ring-color-primary: rgba(102, 36, 131, .3);
+    --sc-focus-ring-width: 3px;
+}

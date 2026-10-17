@@ -85,6 +85,11 @@ $copyright_link = get_field( 'copyright_link', 'option' );
 
 <div class="footer-copyright">
     <div class="wrap">
+        <nav class="footer-policy-links" aria-label="Policies and customer help">
+            <?php foreach ( array( 'shop' => 'Shop', 'returns-refunds-exchanges' => 'Returns and refunds', 'safeguarding-policy' => 'Safeguarding', 'private-bookings-terms-and-conditions' => 'Private booking terms', 'cookie-policy' => 'Cookies', 'privacy-policy' => 'Privacy', 'customer-dashboard' => 'My account' ) as $slug => $label ) : ?>
+                <a href="<?php echo esc_url( home_url( '/' . $slug . '/' ) ); ?>"><?php echo esc_html( $label ); ?></a>
+            <?php endforeach; ?>
+        </nav>
         <?php if ( $copyright_link ) : ?>
             <a href="<?php echo esc_url( $copyright_link['url'] ); ?>"<?php echo ! empty( $copyright_link['target'] ) ? ' target="' . esc_attr( $copyright_link['target'] ) . '"' : ''; ?>>&copy; <?php echo esc_html( $copyright_link['title'] ); ?></a>
         <?php else : ?>

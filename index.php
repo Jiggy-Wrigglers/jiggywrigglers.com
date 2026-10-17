@@ -13,4 +13,15 @@
  */
 
 get_header();
+?>
+<section class="site-content-page"><div class="wrap prose">
+<?php while ( have_posts() ) : the_post(); ?>
+	<article>
+		<h1 class="heading-1"><?php the_title(); ?></h1>
+		<?php the_content(); ?>
+	</article>
+<?php endwhile; ?>
+<?php the_posts_pagination(); ?>
+</div></section>
+<?php
 get_footer();
