@@ -92,6 +92,10 @@ function jw_migration_run_media() {
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/media.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';
+	// Keep migration uploads in their source format. AVIF conversion of many
+	// historical PNGs can otherwise monopolise the staging PHP workers.
+	$source_formats = function () { return array(); };
+	add_filter( 'image_editor_output_format', $source_formats, PHP_INT_MAX );
 	$map = get_option( 'jw_legacy_media_map', array() );
 	$messages = array();
 	$count = 0;
@@ -114,6 +118,7 @@ function jw_migration_run_media() {
 		}
 		if ( $content !== $page->post_content ) { wp_update_post( wp_slash( array( 'ID' => $page->ID, 'post_content' => $content ) ) ); }
 	}
+	remove_filter( 'image_editor_output_format', $source_formats, PHP_INT_MAX );
 	return $messages ?: array( 'All original page images are now in this site’s media library.' );
 }
 
