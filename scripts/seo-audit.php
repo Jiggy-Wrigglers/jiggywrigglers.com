@@ -2,6 +2,7 @@
 /** Read-only metadata inventory, called only by the fixed Forge CLI task. */
 if ( ! defined( 'WP_CLI' ) || ! WP_CLI || ! defined( 'ABSPATH' ) ) { exit; }
 if ( 'jiggywrigglers.on-forge.com' !== wp_parse_url( home_url(), PHP_URL_HOST ) ) { WP_CLI::error( 'New Forge site only.' ); }
+WP_CLI::log( 'JW_SEO_START ' . substr( hash_file( 'sha256', __FILE__ ), 0, 12 ) );
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 $versions = array();
 foreach ( get_plugins() as $file => $plugin ) {
@@ -28,6 +29,7 @@ foreach ( get_posts( array( 'post_type' => array( 'page', 'post', 'sc_product' )
 		'sku' => is_array( $product ) && isset( $product['sku'] ) && is_scalar( $product['sku'] ) ? (string) $product['sku'] : '',
 	);
 }
+WP_CLI::log( 'JW_SEO_ROWS ' . count( $rows ) );
 if ( 'repair-duplicate-descriptions' === ( $operation ?? '' ) ) {
 	$counts = array_count_values( array_column( array_filter( $rows, function ( $row ) { return 'sc_product' === $row['type']; } ), 'description' ) );
 	$updated = 0;
