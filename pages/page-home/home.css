@@ -217,10 +217,11 @@ body .home-group-content {
 body .home-group-content .body-medium {
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    display: block;
-    overflow: visible;
+    display: -webkit-box;
+    overflow: hidden;
     color: var(--jw-muted);
-    -webkit-line-clamp: unset;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
 }
 
 body .home-group-content .button {

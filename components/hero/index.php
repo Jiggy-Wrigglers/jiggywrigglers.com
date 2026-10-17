@@ -16,6 +16,8 @@
     $hero_images = isset( $hero_images ) ? $hero_images : get_field( 'hero_images', $hero_post_id );
     $hero_title = isset( $hero_title ) ? $hero_title : get_field( 'hero_title', $hero_post_id );
     $hero_title = $hero_title ?: get_the_title( $hero_post_id );
+    // Keep imported SEO suffixes out of the visible banner heading.
+    $hero_visible_title = preg_replace( '/\s*\| Jiggy Wrigglers\s*$/u', '', (string) $hero_title );
     $hero_sub_title = isset( $hero_sub_title ) ? $hero_sub_title : get_field( 'hero_sub_title', $hero_post_id );
     $hero_text = isset( $hero_text ) ? $hero_text : get_field( 'hero_text', $hero_post_id );
     $hero_buttons = isset( $hero_buttons ) ? $hero_buttons : get_field( 'hero_buttons', $hero_post_id );
@@ -35,8 +37,8 @@
         <?php echo wp_get_attachment_image( $hero_image['ID'], 'full' ); ?>
     <?php endif; ?>
     <div class="wrap">
-        <?php if ( $hero_title ) : ?>
-            <h1 class="heading-1" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $hero_title ); ?></h1>
+        <?php if ( $hero_visible_title ) : ?>
+            <h1 class="heading-1" data-animate="fade-up" :class="shown && 'is-visible'"><?php echo wp_kses_post( $hero_visible_title ); ?></h1>
         <?php endif; ?>
         <?php if ( $hero_text ) : ?>
             <p class="body-medium hero-text" data-animate="fade-up" data-animate-delay="1" :class="shown && 'is-visible'"><?php echo wp_kses_post( $hero_text ); ?></p>
