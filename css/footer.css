@@ -1,16 +1,17 @@
-﻿/* Footer CSS file */
+/* Footer CSS file */
 /* ------------------------------------------------- */
 
-.footer {
-    background: var(--blue);
+body .footer {
     color: var(--white);
     padding: var(--space-10) 0;
+    background: var(--purple);
+    padding-block: 72px;
 }
 
-.footer-grid {
+body .footer-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: var(--space-7);
+    grid-template-columns: 1.25fr 0.9fr 1fr 1fr;
+    gap: 42px;
 }
 
 .footer-section {
@@ -51,8 +52,10 @@
     margin-top: var(--space-2);
 }
 
-.footer-menu a {
-    color: var(--white);
+body .footer-menu a {
+    display: inline-block;
+    padding-block: 3px;
+    color: #f1e8f6;
 }
 
 .footer-menu a:hover {
@@ -62,14 +65,16 @@
 /* Copyright Bar */
 /* ------------------------------------------------- */
 
-.footer-copyright {
-    background: var(--white);
+body .footer-copyright {
     padding: var(--space-4) 0;
     text-align: left;
+    background: var(--peach);
+    padding-block: 20px;
 }
 
-.footer-copyright a {
+body .footer-copyright a {
     color: var(--purple);
+    font-size: 13px;
 }
 
 .footer-copyright a:hover {
@@ -80,13 +85,72 @@
 /* ------------------------------------------------- */
 
 @media (max-width: 1080px) {
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
+
+    body .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 650px) {
-    .footer-grid {
+
+    body .footer-grid {
         grid-template-columns: 1fr;
+        gap: 32px;
     }
+
+    body .footer {
+        padding-block: 52px;
+    }
+}
+
+body .footer :is(a, button):focus-visible {
+    outline-color: #ffdb83;
+}
+
+body .footer :is(.heading-4, .footer-text h2) {
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+
+body .footer :is(p, a, li) {
+    line-height: 1.75;
+}
+
+body .footer-text p {
+    color: #f1e8f6;
+}
+
+body .footer-section-4 .button-purple {
+    background: #fff;
+    border-color: #fff;
+    color: var(--purple);
+}
+
+body .footer-section-4 .button-purple:hover {
+    background: #f0e6f5;
+    border-color: #f0e6f5;
+}
+
+body .footer-copyright .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+body .footer-policy-links {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 0;
+    align-items: center;
+}
+
+body .footer-policy-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }

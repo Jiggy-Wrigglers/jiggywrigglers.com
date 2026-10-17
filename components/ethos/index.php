@@ -9,7 +9,7 @@
  * @package Jiggy_Wrigglers
  */
 ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/ethos/style.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/ethos/style.css?ver=<?php echo esc_attr( _S_VERSION ); ?>">
 <!-- Ethos Component -->
 <?php
     $ethos_title = get_field( 'ethos_title', 'option' );

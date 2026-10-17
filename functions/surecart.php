@@ -63,7 +63,7 @@ add_action( 'wp_enqueue_scripts', function() {
 	}
 	$checkout_id = class_exists( 'SureCart' ) ? SureCart::pages()->getId( 'checkout' ) : 0;
 	if ( $checkout_id && is_page( $checkout_id ) ) {
-		wp_enqueue_style( 'jiggywrigglers-checkout', get_theme_file_uri( '/css/surecart-checkout.css' ), array( 'theme-refresh' ), _S_VERSION );
+		wp_enqueue_style( 'jiggywrigglers-checkout', get_theme_file_uri( '/pages/page-checkout/checkout.css' ), array( 'jiggywrigglers-style' ), _S_VERSION );
 	}
 }, 20 );
 

@@ -1,23 +1,65 @@
 /* Contact Page CSS file */
 /* ------------------------------------------------- */
 
-.contact-form {
-    background: var(--peach);
+body .contact-form {
     color: var(--purple);
     padding: var(--space-10) 0;
+    padding-block: clamp(56px, 7vw, 96px);
+    background: var(--peach);
 }
 
-.contact-form .wrap {
+body .contact-form .wrap {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    max-width: 900px;
+    max-width: 860px;
 }
 
 .contact-form .heading-2 {
     color: var(--purple);
 }
 
-.contact-form-shortcode {
+body .contact-form-shortcode {
     margin-top: var(--space-5);
+    background: #fff;
+    border: 1px solid var(--jw-border);
+    border-radius: var(--jw-radius);
+    padding: clamp(22px, 4vw, 44px);
+    box-shadow: var(--jw-shadow);
+}
+
+body .contact-form-shortcode :is(input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="hidden"]), select, textarea) {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: 50px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--jw-ink);
+    background-color: #fff;
+    border: 1px solid #cdbdd7;
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+body .contact-form-shortcode textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+body .contact-form-shortcode :is(label, legend) {
+    color: var(--jw-ink);
+    font-weight: 600;
+}
+
+body .contact-form-shortcode :is(button[type="submit"], input[type="submit"]) {
+    min-height: 50px;
+    background: var(--purple);
+    color: #fff;
+    border: 2px solid var(--purple);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
 }

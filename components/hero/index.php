@@ -9,7 +9,7 @@
  * @package Jiggy_Wrigglers
  */
 ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/hero/style.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/hero/style.css?ver=<?php echo esc_attr( _S_VERSION ); ?>">
 <!-- Hero Section -->
 <?php
     $hero_post_id = isset( $hero_post_id ) ? $hero_post_id : null;

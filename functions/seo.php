@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /** A short summary of visible content, without executing feeds or form blocks. */
 function jw_seo_summary( $text ) {
 	$text = preg_replace( '#<(script|style)\b[^>]*>.*?</\1>#is', '', (string) $text );
+	$text = preg_replace( '#</(?:p|div|li|h[1-6])\s*>|<br\s*/?>#i', ' ', $text );
 	$text = strip_shortcodes( $text );
 	$text = html_entity_decode( wp_strip_all_tags( $text ), ENT_QUOTES, 'UTF-8' );
 	$text = trim( preg_replace( '/\s+/u', ' ', $text ) );
@@ -20,6 +21,13 @@ function jw_seo_summary( $text ) {
 function jw_seo_default_description( $post ) {
 	if ( ! $post instanceof WP_Post ) { return ''; }
 	$title = wp_strip_all_tags( get_the_title( $post ) );
+	$utility = array(
+		'checkout' => 'Review your Jiggy Wrigglers shop order and complete checkout securely.',
+		'customer-dashboard' => 'Manage your Jiggy Wrigglers shop account, orders, invoices and downloads.',
+		'thank-you' => 'Your Jiggy Wrigglers enquiry confirmation and next steps.',
+		'affiliate-dashboard' => 'Contact Jiggy Wrigglers Head Office for help with an affiliate account, referral links or existing commission.',
+	);
+	if ( 'page' === $post->post_type && isset( $utility[ $post->post_name ] ) ) { return $utility[ $post->post_name ]; }
 	if ( 'page' === $post->post_type && get_post_meta( $post->ID, '_jw_sfs_area', true ) ) {
 		$area = trim( preg_replace( '/^Jiggy Wrigglers\s*/i', '', $title ) );
 		return jw_seo_summary( 'Find Jiggy Wrigglers classes, venues and birthday parties in ' . $area . '. View local booking links and contact your local team.' );
@@ -46,8 +54,18 @@ function jw_seo_apply_meta( $meta, $post ) {
 	$saved = get_post_meta( $post->ID, 'surerank_settings_general', true );
 	$saved = is_array( $saved ) ? $saved : array();
 	$is_location = 'page' === $post->post_type && (bool) get_post_meta( $post->ID, '_jw_sfs_area', true );
-	if ( empty( $meta['page_description'] ) || ( $is_location && empty( $saved['page_description'] ) ) ) {
-		$meta['page_description'] = jw_seo_default_description( $post );
+	$editorial_description = ! empty( $saved['page_description'] ) && ! preg_match( '/%(?:content|excerpt)%/', $saved['page_description'] );
+	$is_product_default = 'sc_product' === $post->post_type && ! $editorial_description;
+	if ( empty( $meta['page_description'] ) || ( $is_location && ! $editorial_description ) || $is_product_default ) {
+		if ( $is_product_default && ! empty( $meta['page_description'] ) ) {
+			$description = jw_seo_summary( $meta['page_description'] );
+			$title = wp_strip_all_tags( get_the_title( $post ) );
+			if ( 0 !== stripos( $description, $title ) ) { $description = $title . '. ' . $description; }
+			if ( strlen( $description ) < 100 ) { $description .= ' View product details, available options and current pricing in the Jiggy Wrigglers shop.'; }
+			$meta['page_description'] = jw_seo_summary( $description );
+		} else {
+			$meta['page_description'] = jw_seo_default_description( $post );
+		}
 		foreach ( array( 'facebook_description', 'twitter_description' ) as $key ) {
 			if ( empty( $saved[ $key ] ) ) { $meta[ $key ] = $meta['page_description']; }
 		}
@@ -74,6 +92,11 @@ function jw_seo_should_noindex() {
 	if ( 'jiggywrigglers.on-forge.com' === wp_parse_url( home_url(), PHP_URL_HOST ) ) { return true; }
 	if ( is_search() || is_404() || is_attachment() || is_author() || is_date() ) { return true; }
 	if ( is_page( array( 'checkout', 'cart', 'customer-dashboard', 'my-account', 'order-confirmation', 'thank-you', 'affiliate-dashboard' ) ) || is_single( 'test-jiggy-post' ) ) { return true; }
+	if ( is_page() && class_exists( 'SureCart' ) ) {
+		foreach ( array( 'checkout', 'dashboard', 'order-confirmation' ) as $key ) {
+			if ( (int) get_queried_object_id() === (int) SureCart::pages()->getId( $key ) ) { return true; }
+		}
+	}
 	if ( jw_seo_is_shop() ) {
 		foreach ( array( 'shop_search', 'shop_collection', 'shop_sort' ) as $key ) {
 			if ( isset( $_GET[ $key ] ) && is_string( $_GET[ $key ] ) && '' !== trim( wp_unslash( $_GET[ $key ] ) ) && ( 'shop_sort' !== $key || 'recent' !== $_GET[ $key ] ) ) { return true; }
@@ -91,6 +114,25 @@ add_filter( 'surerank_robots_meta_array', function ( $robots ) {
 add_filter( 'wp_robots', function ( $robots ) {
 	if ( jw_seo_should_noindex() ) { unset( $robots['index'] ); $robots['noindex'] = true; }
 	return $robots;
+} );
+
+/** Keep persistent utility pages out of sitemap chunks as well as robots meta. */
+function jw_seo_utility_ids() {
+	static $ids;
+	if ( null !== $ids ) { return $ids; }
+	$ids = get_posts( array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids', 'post_name__in' => array( 'checkout', 'cart', 'customer-dashboard', 'my-account', 'order-confirmation', 'thank-you', 'affiliate-dashboard' ) ) );
+	$ids = array_merge( $ids, get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'name' => 'test-jiggy-post', 'fields' => 'ids', 'posts_per_page' => 1 ) ) );
+	if ( class_exists( 'SureCart' ) ) {
+		foreach ( array( 'checkout', 'dashboard', 'order-confirmation' ) as $key ) { $ids[] = (int) SureCart::pages()->getId( $key ); }
+	}
+	return $ids = array_values( array_unique( array_filter( array_map( 'absint', $ids ) ) ) );
+}
+add_filter( 'surerank_exclude_posts_from_sitemap', function ( $ids ) {
+	return array_values( array_unique( array_merge( wp_parse_id_list( $ids ), jw_seo_utility_ids() ) ) );
+} );
+add_filter( 'wp_sitemaps_posts_query_args', function ( $args ) {
+	$args['post__not_in'] = array_values( array_unique( array_merge( $args['post__not_in'] ?? array(), jw_seo_utility_ids() ) ) );
+	return $args;
 } );
 
 /** Custom catalogue page 2+ needs its own canonical, not page one's URL. */

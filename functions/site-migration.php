@@ -20,6 +20,18 @@ add_action( 'template_redirect', function () {
 		wp_safe_redirect( home_url( $aliases[ $path ] ), 301 );
 		exit;
 	}
+	if ( '/shop/' !== $path && 0 === strpos( $path, '/shop/' ) ) {
+		$product_map = get_template_directory() . '/data/legacy-product-redirects.json';
+		$products = file_exists( $product_map ) ? json_decode( file_get_contents( $product_map ), true ) : array();
+		$destination = $products['aliases'][ $path ] ?? '';
+		if ( $destination ) {
+			$matches = get_posts( array( 'post_type' => 'sc_product', 'post_status' => 'publish', 'name' => basename( trim( $destination, '/' ) ), 'posts_per_page' => 1 ) );
+			if ( $matches ) {
+				$url = get_permalink( $matches[0] );
+				if ( $destination === wp_parse_url( $url, PHP_URL_PATH ) ) { wp_safe_redirect( $url, 301 ); exit; }
+			}
+		}
+	}
 }, 1 );
 
 function jw_migration_pages() {

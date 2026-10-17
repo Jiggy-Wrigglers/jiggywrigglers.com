@@ -1,20 +1,28 @@
 /* Single Product CSS file */
 /* ------------------------------------------------- */
 
-.product-content {
-    padding: calc(var(--space-9) * 2) 0 var(--space-11);
+body .product-content {
+    padding: 64px 0 90px;
+    --sc-color-primary-500: #662483;
+    --sc-color-primary: #662483;
+    --sc-color-primary-hover: #49175f;
+    --sc-focus-ring-color-primary: #873fa2;
+    --sc-input-border-color-focus: #662483;
+    --sc-border-radius: 12px;
 }
 
-.product-content .wrap {
+body .product-content .wrap {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 var(--space-5);
+    box-sizing: border-box;
+    padding-inline: 0;
 }
 
 /* SureCart Brand Overrides */
 /* ------------------------------------------------- */
 
-.product-content {
+body .product-content {
     --sc-color-primary-500: var(--black);
     --sc-color-primary: var(--black);
     --sc-color-primary-hover: rgba(0, 0, 0, 0.8);
@@ -45,12 +53,12 @@
 /* Product Title */
 /* ------------------------------------------------- */
 
-.product-content h1.wp-block-surecart-product-title {
+body .product-content h1.wp-block-surecart-product-title {
     font-family: var(--font-heading);
-    font-size: clamp(28px, 5.6vw, 40px);
     font-weight: 600;
     line-height: 1.2;
-    color: var(--black);
+    color: var(--purple);
+    font-size: clamp(30px, 3.6vw, 46px);
 }
 
 /* Product Price */
@@ -104,25 +112,29 @@
     gap: var(--space-3);
 }
 
-.product-content .wp-block-button__link.sc-button__link {
+body .product-content .wp-block-button__link.sc-button__link {
     font-family: var(--font-body);
-    font-size: var(--font-size-14);
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
     padding: var(--space-3) var(--space-5);
-    border-radius: 0;
     border: 1px solid var(--black);
-    background: var(--black);
     color: var(--white);
     transition: background 0.3s ease, color 0.3s ease;
     text-align: center;
     width: 100%;
+    background: var(--purple);
+    border-color: var(--purple);
+    border-radius: 12px;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 16px;
+    font-weight: 700;
+    min-height: 50px;
+    box-sizing: border-box;
 }
 
-.product-content .wp-block-button__link.sc-button__link:hover {
-    background: transparent;
-    color: var(--black);
+body .product-content .wp-block-button__link.sc-button__link:hover {
+    background: var(--jw-purple-dark);
+    border-color: var(--jw-purple-dark);
+    color: #fff;
 }
 
 .product-content .wp-block-button__link.sc-button__link:disabled {
@@ -130,14 +142,14 @@
     cursor: not-allowed;
 }
 
-.product-content .is-style-outline--3 .wp-block-button__link.sc-button__link {
-    background: transparent;
-    color: var(--black);
+body .product-content .is-style-outline--3 .wp-block-button__link.sc-button__link {
+    color: var(--purple);
+    background: #fff;
 }
 
-.product-content .is-style-outline--3 .wp-block-button__link.sc-button__link:hover {
-    background: var(--black);
+body .product-content .is-style-outline--3 .wp-block-button__link.sc-button__link:hover {
     color: var(--white);
+    background: var(--peach);
 }
 
 /* Variant Pills */
@@ -161,10 +173,10 @@
     color: var(--black);
 }
 
-.product-content .sc-pill-option__button--selected {
-    border-color: var(--black);
-    background: var(--black);
-    color: var(--white);
+body .product-content .sc-pill-option__button--selected {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: #fff;
 }
 
 .product-content .sc-pill-option__button--selected:hover {
@@ -203,8 +215,8 @@
 /* Image Gallery */
 /* ------------------------------------------------- */
 
-.product-content .wp-block-surecart-product-media img {
-    border-radius: 0;
+body .product-content .wp-block-surecart-product-media img {
+    border-radius: 20px;
 }
 
 .product-content .sc-image-slider__thumbs img {
@@ -302,8 +314,10 @@
 /* ------------------------------------------------- */
 
 @media (max-width: 650px) {
-    .product-content {
+
+    body .product-content {
         padding: var(--space-5) 0 var(--space-8);
+        padding-block: 40px 64px;
     }
 
     .product-content .wrap {
@@ -316,6 +330,7 @@
 }
 
 /* Keep the native SureCart purchase states and loading indicators intact. */
+
 .product-breadcrumb {
     display: flex;
     flex-wrap: wrap;
@@ -345,13 +360,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .product-content *,
     .product-content *::before,
     .product-content *::after {
         transition: none !important;
     }
+
     .product-content .sc-product-item:hover .wp-block-group.has-border-color,
     .product-content .sc-product-item:hover .wp-block-cover img {
         transform: none;
     }
+}
+
+body .product-content :is(.sc-pill-option__button, .sc-form-control) {
+    border-radius: 10px;
 }

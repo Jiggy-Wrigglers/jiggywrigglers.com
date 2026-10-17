@@ -10,6 +10,7 @@ on:
           - diagnostics
           - import-media
           - seo-audit
+          - rebuild-sitemap
 jobs:
   maintenance:
     runs-on: ubuntu-latest

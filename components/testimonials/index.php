@@ -9,7 +9,7 @@
  * @package Jiggy_Wrigglers
  */
 ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/testimonials/style.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/testimonials/style.css?ver=<?php echo esc_attr( _S_VERSION ); ?>">
 <script defer src="<?php echo get_template_directory_uri(); ?>/components/testimonials/index.js"></script>
 <!-- Testimonials Component -->
 <?php

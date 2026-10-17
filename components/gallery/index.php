@@ -7,7 +7,7 @@
  * @package Jiggy_Wrigglers
  */
 ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/gallery/style.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/components/gallery/style.css?ver=<?php echo esc_attr( _S_VERSION ); ?>">
 <script defer src="<?php echo get_template_directory_uri(); ?>/components/gallery/index.js"></script>
 <!-- Gallery Component -->
 <?php

@@ -9,7 +9,7 @@
  */
 
 get_header(); ?>
-<link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/pages/template-policy/policy.css">
+<link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/pages/template-policy/policy.css?ver=<?php echo esc_attr( _S_VERSION ); ?>">
 
 <?php while ( have_posts() ) : the_post(); ?>
 

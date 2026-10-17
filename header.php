@@ -113,7 +113,7 @@
 								</a>
 								<?php if ( have_rows( 'sub_menu' ) ) : ?>
 									<button class="header-menu-arrow" :class="{ 'is-open': subOpen }" @click="subOpen = !subOpen" aria-label="Toggle sub menu" :aria-expanded="subOpen" type="button">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="<?php echo esc_attr( '#662483' ); ?>" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
 									</button>
 								<?php endif; ?>
 							</div>

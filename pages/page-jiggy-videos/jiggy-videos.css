@@ -1,188 +1,724 @@
-﻿/* Jiggy Videos Page CSS file */
-/* Styled like the old site's video-block-1 and video-block-2. */
-/* ------------------------------------------------- */
-
-/* Video Block 1 */
-/* ------------------------------------------------- */
-
-.video-block-1 {
-    background: var(--peach);
-    color: var(--purple);
-    padding: var(--space-8) 0;
+/* Jiggy Videos & Music: page layout, media frames and consent placeholders. */
+.jiggy-video-page {
+    color: var(--purple, #662483);
+    background: var(--white, #fff);
 }
 
-.video-block-1 .wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-5);
-    text-align: center;
+.jiggy-video-page,
+.jiggy-video-page * {
+    box-sizing: border-box;
 }
 
-.video-block-1 .heading-3 {
-    color: var(--purple);
+.jiggy-video-page .wrap {
+    width: min(90%, 1200px);
+    max-width: 1200px;
 }
 
-.video-block-1-embed,
-.video-block-1-embed iframe,
-.video-block-1-embed embed,
-.video-block-1-embed video {
-    width: 100%;
-    max-width: 800px;
+.jiggy-video-page :is(h1, h2, h3) {
+    margin: 0;
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 800;
+    line-height: 1.16;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    overflow-wrap: break-word;
 }
 
-.video-block-1-embed iframe,
-.video-block-1-embed embed,
-.video-block-1-embed video {
-    height: 400px;
-    border-radius: 40px;
-    display: block;
-    margin: 0 auto;
+.jiggy-video-page :is(p, a) {
+    line-height: 1.65;
 }
 
-/* Video Block 2 */
-/* ------------------------------------------------- */
-
-.video-block-2 {
-    background: var(--purple);
-    color: var(--white);
-    padding: var(--space-10) 0;
+.jiggy-video-page :is(a, button):focus-visible {
+    outline: 3px solid var(--purple, #662483);
+    outline-offset: 5px;
 }
 
-.video-block-2 .wrap {
+.jiggy-video-page :is(#jiggy-videos, #jiggy-music) {
+    scroll-margin-top: 115px;
+}
+
+.jiggy-video-intro {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(40px, 5.5vw, 76px) 0;
+    background: var(--purple, #662483);
+}
+
+.jiggy-video-intro::after {
+    content: "";
+    position: absolute;
+    right: -100px;
+    bottom: -190px;
+    width: 450px;
+    height: 450px;
+    border: 45px solid rgba(255, 255, 255, 0.07);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.jiggy-video-intro-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-5);
+    grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.8fr);
+    align-items: center;
+    gap: clamp(24px, 5vw, 64px);
 }
 
-.video-block-2-item {
-    height: 100%;
+.jiggy-video-intro-copy {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    gap: var(--space-4);
-    text-align: center;
+    align-items: flex-start;
+    gap: 20px;
 }
 
-.video-block-2-item .heading-3 {
-    color: var(--white);
-}
-
-.video-block-2-embed,
-.video-block-2-embed iframe,
-.video-block-2-embed embed,
-.video-block-2-embed video {
-    width: 100%;
-    max-width: 800px;
-}
-
-.video-block-2-embed iframe,
-.video-block-2-embed embed,
-.video-block-2-embed video {
-    height: 30vh;
-    min-height: 250px;
-    max-height: 350px;
-    border-radius: 40px;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Playlist (jiggy-playlight-footer) */
-/* ------------------------------------------------- */
-
-.jiggy-playlight-footer {
-    padding: var(--space-10) 0;
-    background: var(--pink);
-    color: var(--white);
-}
-
-.jiggy-playlight-footer .wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-7);
-}
-
-.header-jpl {
-    display: flex;
-    gap: var(--space-5);
-    align-items: center;
-}
-
-.header-jpl .playlist-note {
-    width: 60px;
-    height: 60px;
-    color: var(--white);
-    opacity: 0.5;
-    flex-shrink: 0;
-}
-
-.header-jpl .playlist-note:first-child {
-    margin-top: auto;
-}
-
-.header-jpl .playlist-title {
-    color: var(--white);
-}
-
-.linkd-jpl {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    justify-content: center;
-    align-items: center;
-}
-
-.linkd-jpl a {
-    background: var(--white);
-    border-radius: 20px;
-    border: solid 1px var(--black);
-    padding: 15px;
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-3);
-    align-items: center;
-    color: var(--black);
-    text-decoration: none;
-    font-family: var(--font-heading);
-    font-size: var(--font-size-18, 18px);
-    font-weight: 600;
+.jiggy-video-page .jiggy-video-eyebrow {
+    color: var(--purple, #662483);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
     text-transform: uppercase;
-    width: fit-content;
-    transition: ease 0.4s;
 }
 
-.linkd-jpl a svg {
-    width: 24px;
-    height: 24px;
-    color: var(--black);
+.jiggy-video-intro .jiggy-video-eyebrow {
+    color: var(--yellow, #F6EE2D);
 }
 
-.linkd-jpl a:hover {
-    background: var(--purple);
-    border-color: var(--purple);
-    color: var(--white);
+.jiggy-video-intro h1 {
+    max-width: 14ch;
+    color: var(--white, #fff);
+    font-size: clamp(38px, 5.1vw, 66px);
 }
 
-.linkd-jpl a:hover svg {
-    color: var(--white);
+.jiggy-video-intro .jiggy-video-intro-text,
+.jiggy-video-intro .jiggy-video-subtitle {
+    max-width: 580px;
+    color: var(--white, #fff);
+    font-size: clamp(16px, 1.5vw, 19px);
 }
 
-/* Responsive */
-/* ------------------------------------------------- */
+.jiggy-video-intro .jiggy-video-subtitle {
+    font-weight: 700;
+}
 
-@media (max-width: 960px) {
-    .jiggy-playlight-footer .wrap {
+.jiggy-video-jump-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.jiggy-video-page .jiggy-video-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 12px 20px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.jiggy-video-button svg {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+}
+
+.jiggy-video-page .jiggy-video-button-orange {
+    color: #40204e;
+    background: var(--orange, #FA8334);
+}
+
+.jiggy-video-page .jiggy-video-button-light {
+    color: var(--purple, #662483);
+    background: var(--white, #fff);
+}
+
+.jiggy-video-page .jiggy-video-button-purple {
+    color: var(--white, #fff);
+    background: var(--purple, #662483);
+}
+
+.jiggy-video-page .jiggy-video-button:hover {
+    transform: translateY(-2px);
+}
+
+.jiggy-video-extra-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+}
+
+.jiggy-video-extra-links a {
+    color: var(--white, #fff);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.jiggy-video-intro :is(a, button):focus-visible,
+.jiggy-music :is(a, button):focus-visible {
+    outline-color: var(--yellow, #F6EE2D);
+}
+
+.jiggy-video-intro-art {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 270px;
+    margin-inline: auto;
+}
+
+.jiggy-video-intro-art.has-photo {
+    height: clamp(230px, 26vw, 350px);
+    border: 8px solid var(--white, #fff);
+    border-radius: 42% 35% 38% 30%;
+    transform: rotate(3deg);
+    overflow: hidden;
+}
+
+.jiggy-video-intro-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.jiggy-video-play {
+    position: absolute;
+    top: 40px;
+    left: calc(50% - 86px);
+    display: grid;
+    place-items: center;
+    width: 172px;
+    height: 172px;
+    border: 8px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    color: var(--purple, #662483);
+    background: var(--yellow, #F6EE2D);
+    transform: rotate(-9deg);
+    box-shadow: 10px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.jiggy-video-play svg {
+    width: 90px;
+    height: 90px;
+    margin-left: 8px;
+}
+
+.jiggy-video-note {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 28px;
+    color: var(--purple, #662483);
+}
+
+.jiggy-video-note svg {
+    width: 58px;
+    height: 58px;
+}
+
+.jiggy-video-note-blue {
+    top: 0;
+    left: 0;
+    background: var(--blue, #43B3D9);
+    transform: rotate(-12deg);
+}
+
+.jiggy-video-note-pink {
+    right: 0;
+    bottom: 10px;
+    color: var(--white, #fff);
+    background: var(--pink, #FF4D80);
+    transform: rotate(12deg);
+}
+
+.jiggy-video-art-dot {
+    position: absolute;
+    bottom: 14px;
+    left: 50px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--orange, #FA8334);
+}
+
+.jiggy-video-library {
+    padding: clamp(44px, 6vw, 80px) 0;
+    background: var(--peach, #F6E8EA);
+}
+
+.jiggy-video-section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 780px;
+}
+
+.jiggy-video-section-heading h2,
+.jiggy-music h2 {
+    font-size: clamp(28px, 3.5vw, 42px);
+}
+
+.jiggy-video-section-heading p {
+    color: #493451;
+    max-width: 700px;
+}
+
+.jiggy-video-page .jiggy-video-consent-note {
+    max-width: 900px;
+    margin: 24px 0;
+    padding: 14px 18px;
+    border-left: 4px solid var(--blue, #43B3D9);
+    border-radius: 0 12px 12px 0;
+    color: #493451;
+    background: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+}
+
+.jiggy-video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.jiggy-video-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(102, 36, 131, 0.12);
+    border-radius: 24px;
+    background: var(--white, #fff);
+    box-shadow: 0 6px 0 rgba(102, 36, 131, 0.05);
+}
+
+.jiggy-video-card-featured {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: center;
+    padding: 16px;
+}
+
+.jiggy-video-card-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: clamp(22px, 3vw, 34px);
+}
+
+.jiggy-video-card h3 {
+    color: var(--purple, #662483);
+    font-size: clamp(22px, 2.4vw, 28px);
+}
+
+.jiggy-video-card p {
+    color: #493451;
+    font-size: 15px;
+}
+
+.jiggy-video-page .jiggy-video-card-label {
+    color: var(--purple, #662483);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+}
+
+.jiggy-video-frame {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #fff9fb;
+}
+
+.jiggy-video-card-featured .jiggy-video-frame {
+    border-radius: 16px;
+}
+
+.jiggy-video-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px;
+    text-align: center;
+}
+
+.jiggy-video-fallback p {
+    color: var(--purple, #662483);
+    font-size: clamp(12px, 1.3vw, 15px);
+    line-height: 1.4;
+}
+
+.jiggy-video-fallback-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    padding-left: 3px;
+    border-radius: 50%;
+    color: var(--purple, #662483);
+    background: var(--blue, #43B3D9);
+    font-size: 22px;
+}
+
+.jiggy-video-frame :is(iframe, embed, video, object) {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+/* Resize the consent panel, never override an iframe's hidden display state. */
+.jiggy-video-frame .surecookie-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.jiggy-video-frame .surecookie-placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    padding: clamp(12px, 3vw, 28px);
+    box-sizing: border-box;
+    background: #fff9fb !important;
+}
+
+.jiggy-video-frame .surecookie-placeholder-text {
+    max-width: 400px;
+    color: var(--purple, #662483) !important;
+    text-align: center;
+}
+
+.jiggy-video-frame .surecookie-placeholder-text p {
+    color: var(--purple, #662483);
+    font-size: clamp(12px, 1.3vw, 15px);
+    line-height: 1.5;
+}
+
+.jiggy-video-frame .surecookie-placeholder-button {
+    min-height: 44px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--white, #fff) !important;
+    background: var(--purple, #662483) !important;
+    font-family: var(--font-body, sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.jiggy-video-page .jiggy-video-watch-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--purple, #662483);
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.jiggy-video-channel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 24px;
+    margin-top: 36px;
+}
+
+.jiggy-video-channel p {
+    color: var(--purple, #662483);
+    font-weight: 700;
+}
+
+.jiggy-music {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(48px, 6vw, 84px) 0;
+    color: var(--white, #fff);
+    background: var(--purple, #662483);
+}
+
+.jiggy-music-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    align-items: center;
+    gap: clamp(30px, 6vw, 80px);
+}
+
+.jiggy-music-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.jiggy-music h2,
+.jiggy-music-copy p {
+    color: var(--white, #fff);
+}
+
+.jiggy-music .jiggy-video-eyebrow {
+    color: var(--yellow, #F6EE2D);
+}
+
+.jiggy-music-note {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    color: var(--purple, #662483);
+    background: var(--blue, #43B3D9);
+    transform: rotate(-8deg);
+}
+
+.jiggy-music-note svg {
+    width: 42px;
+    height: 42px;
+}
+
+.jiggy-music-platforms {
+    display: grid;
+    gap: 18px;
+}
+
+.jiggy-video-page .jiggy-music-platform {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+    padding: 24px;
+    border: 2px solid transparent;
+    border-radius: 22px;
+    color: var(--purple, #662483);
+    background: var(--white, #fff);
+    text-decoration: none;
+    transition: transform 160ms ease;
+}
+
+.jiggy-music-platform:hover {
+    transform: translateY(-3px);
+}
+
+.jiggy-music-platform-icon {
+    display: grid;
+    flex: 0 0 54px;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+}
+
+.jiggy-music-platform-icon svg {
+    width: 36px;
+    height: 36px;
+}
+
+.jiggy-music-spotify {
+    color: #16883e;
+    background: #e7f5e9;
+}
+
+.jiggy-music-apple {
+    color: var(--pink, #FF4D80);
+    background: var(--peach, #F6E8EA);
+}
+
+.jiggy-music-platform-small {
+    display: block;
+    color: #493451;
+    font-size: 13px;
+}
+
+.jiggy-music-platform strong {
+    display: block;
+    color: var(--purple, #662483);
+    font-family: var(--font-heading, sans-serif);
+    font-size: clamp(21px, 2.2vw, 27px);
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.jiggy-music-platform-arrow {
+    margin-left: auto;
+    color: var(--purple, #662483);
+    font-size: 26px;
+}
+
+@supports not (aspect-ratio: 16 / 9) {
+    .jiggy-video-frame {
+        height: 0;
+        padding-top: 56.25%;
+    }
+}
+
+@media (max-width: 820px) {
+    .jiggy-video-intro-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(200px, 0.65fr);
+        gap: 24px;
+    }
+
+    .jiggy-video-intro-art {
+        height: 230px;
+        transform: scale(0.85);
+        transform-origin: center;
+    }
+
+    .jiggy-video-play {
+        width: 148px;
+        height: 148px;
+        left: calc(50% - 74px);
+    }
+
+    .jiggy-video-note {
+        width: 76px;
+        height: 76px;
+        border-radius: 22px;
+    }
+
+    .jiggy-video-note svg {
+        width: 46px;
+        height: 46px;
+    }
+
+    .jiggy-video-card-featured {
         grid-template-columns: 1fr;
     }
 
-    .header-jpl {
-        justify-content: center;
+    .jiggy-video-card-featured .jiggy-video-card-copy {
+        padding: 24px 10px 12px;
+    }
+
+    .jiggy-music-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jiggy-music-platforms {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .jiggy-video-page .jiggy-music-platform {
+        padding: 20px;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 620px) {
+    .jiggy-video-intro-grid,
+    .jiggy-video-grid,
+    .jiggy-music-platforms {
+        grid-template-columns: 1fr;
+    }
+
+    .jiggy-video-intro-art {
+        display: none;
+    }
+
+    .jiggy-video-intro-art.has-photo {
+        display: block;
+        max-width: 360px;
+        height: 240px;
+        transform: rotate(2deg);
+    }
+
+    .jiggy-video-intro-copy {
+        gap: 18px;
+    }
+
+    .jiggy-video-intro h1 {
+        max-width: 16ch;
+    }
+
+    .jiggy-video-jump-links {
+        width: 100%;
+    }
+
+    .jiggy-video-page .jiggy-video-jump-links a {
+        flex: 1 1 180px;
+    }
+
+    .jiggy-video-card-featured {
+        padding: 10px;
+    }
+
+    .jiggy-video-card-copy {
+        padding: 22px;
+    }
+
+    .jiggy-video-frame .surecookie-placeholder-content {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .jiggy-video-fallback {
+        gap: 6px;
+        padding: 12px;
+    }
+
+    .jiggy-video-fallback-icon {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+        font-size: 16px;
+    }
+
+    .jiggy-video-channel {
+        align-items: stretch;
+        flex-direction: column;
         text-align: center;
     }
+
+    .jiggy-video-page .jiggy-music-platform {
+        padding: 22px;
+    }
 }
 
-@media (max-width: 800px) {
-    .video-block-2 .wrap {
-        grid-template-columns: 1fr;
+@media (prefers-reduced-motion: reduce) {
+    .jiggy-video-page :is(a, button) {
+        transition: none;
+    }
+
+    .jiggy-video-page :is(.jiggy-video-button, .jiggy-music-platform):hover {
+        transform: none;
     }
 }

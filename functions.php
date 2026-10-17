@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( '_S_VERSION' ) ) {
-	define( '_S_VERSION', '2.4.0' );
+	define( '_S_VERSION', '2.4.1' );
 }
 
 if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
@@ -102,8 +102,6 @@ function jiggy_wrigglers_scripts() {
 
 	wp_enqueue_style( 'theme-header', get_template_directory_uri() . '/css/header.css', array(), _S_VERSION );
 	wp_enqueue_style( 'theme-footer', get_template_directory_uri() . '/css/footer.css', array(), _S_VERSION );
-	wp_enqueue_style( 'theme-surecart', get_template_directory_uri() . '/css/surecart.css', array( 'jiggywrigglers-style' ), _S_VERSION );
-	wp_enqueue_style( 'theme-refresh', get_template_directory_uri() . '/css/refresh.css', array( 'jiggywrigglers-style', 'theme-header', 'theme-footer', 'theme-surecart' ), _S_VERSION );
 
 	wp_enqueue_style( 'splide-css', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css', array(), null );
 	wp_enqueue_script( 'splide', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js', array(), null, false );

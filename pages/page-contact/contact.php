@@ -6,7 +6,7 @@
  */
 
 get_header(); ?>
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/pages/page-contact/contact.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/pages/page-contact/contact.css?ver=<?php echo esc_attr( _S_VERSION ); ?>">
 
 <!-- Hero Section -->
 <!-- ------------------------------------------------- -->

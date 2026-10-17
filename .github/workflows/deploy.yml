@@ -22,11 +22,6 @@ jobs:
             git fetch origin
             git reset --hard origin/main
             git clean -fd
-            if command -v wp >/dev/null 2>&1; then
-              wp eval-file scripts/migrate-custom-css.php
-            else
-              echo "WP-CLI unavailable; custom CSS plugin removal still needs attention."
-            fi
             echo "Deployed: $(date)"
 
       - name: Purge Cloudflare cache

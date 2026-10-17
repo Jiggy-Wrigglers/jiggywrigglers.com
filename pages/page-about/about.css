@@ -5,10 +5,11 @@
 /* Awards */
 /* ------------------------------------------------- */
 
-.about-awards {
+body .about-awards {
     background: var(--white);
     color: var(--black);
     padding: var(--space-10) 0;
+    padding-block: clamp(56px, 7vw, 96px);
 }
 
 .about-awards-title {
@@ -22,18 +23,23 @@
     gap: var(--space-5);
 }
 
-.about-award {
+body .about-award {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
     align-items: center;
     text-align: center;
+    padding: 22px;
+    border: 1px solid var(--jw-border);
+    border-radius: 20px;
+    background: #fff;
 }
 
-.about-award img {
+body .about-award img {
     width: 100%;
     aspect-ratio: 1;
     object-fit: contain;
+    max-height: 200px;
 }
 
 .about-award .heading-6 {
@@ -44,12 +50,14 @@
 /* ------------------------------------------------- */
 
 @media (max-width: 1080px) {
+
     .about-awards-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 650px) {
+
     .about-awards-grid {
         grid-template-columns: 1fr;
     }

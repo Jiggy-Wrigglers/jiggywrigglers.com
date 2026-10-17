@@ -4,7 +4,7 @@ Theme URI: https://jiggywrigglers.com
 Author: Jiggy Wrigglers
 Author URI: https://jiggywrigglers.com
 Description: Welcome to Jiggy Wrigglers, award-winning, pay-as-you-go, music, movement and sensory developmental classes for babies, toddlers and preschoolers. Our classes opened in 2008 and today we are one of the leading baby and pre-school development providers in the UK. Jiggy Wrigglers Children music classes also offer sensory and development support we offer an engaging combination of upbeat music, dance and creative toddler activities, designed to stimulate and entertain adults and children.
-Version: 2.4.0
+Version: 2.4.1
 Requires PHP: 7.4+
 Text Domain: jiggywrigglers
 License: GNU General Public License v2 or later
@@ -18,9 +18,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     --blue: #43B3D9;
     --pink: #FF4D80;
     --yellow: #F6EE2D;
-    --peach: #F6E8EA;
     --white: #fff;
-    --black: #000;
 
     /* Spacing */
     --space-1: 4px;
@@ -46,18 +44,25 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     /* Typography */
     --font-heading: 'M PLUS Rounded 1c', sans-serif;
     --font-body: 'Open Sans', sans-serif;
-
     --font-size-12: 12px;
     --font-size-14: 14px;
     --font-size-16: 16px;
-
-    --font-size-h1: clamp(30px, 4.5vw, 46px);
-    --font-size-h2: clamp(25px, 3.6vw, 38px);
-    --font-size-h3: clamp(21px, 2.8vw, 30px);
     --font-size-h4: clamp(18px, 2.2vw, 24px);
     --font-size-h5: clamp(16px, 1.9vw, 20px);
     --font-size-h6: clamp(15px, 1.5vw, 18px);
-    --font-size-body: clamp(15px, 1.1vw, 17px);
+    --jw-ink: #30263f;
+    --jw-muted: #665d72;
+    --jw-purple: #662483;
+    --jw-purple-dark: #49175f;
+    --jw-border: #e8deee;
+    --jw-radius: 24px;
+    --jw-shadow: 0 12px 36px rgba(65, 30, 82, 0.06);
+    --black: var(--jw-ink);
+    --peach: #F6E8EA;
+    --font-size-h1: clamp(36px, 4.8vw, 64px);
+    --font-size-h2: clamp(28px, 3.3vw, 44px);
+    --font-size-h3: clamp(23px, 2.6vw, 32px);
+    --font-size-body: clamp(16px, 1.1vw, 17px);
 }
 
 html {
@@ -66,6 +71,7 @@ html {
     font-family: var(--font-body);
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 110px;
 }
 
 body {
@@ -75,14 +81,15 @@ body {
     font-family: var(--font-body);
     font-size: var(--font-size-body);
     line-height: 1.6;
-    color: var(--black);
     background: var(--white);
+    color: var(--jw-ink);
+    -webkit-font-smoothing: antialiased;
 }
 
-.wrap {
+body .wrap {
     max-width: 1440px;
     margin: auto;
-    width: 90vw;
+    width: min(90%, 1280px);
 }
 
 /* Element Defaults */
@@ -187,56 +194,52 @@ img {
 /* Buttons */
 /* ------------------------------------------------- */
 
-.button,
-a.button,
-span.button,
-button.button {
+body :is(.button, a.button, span.button, button.button) {
     background: var(--purple);
-    border-radius: 6px;
-    padding: 10px 15px;
     color: var(--white);
     text-decoration: none;
-    font-weight: 600;
     font-family: inherit;
     width: fit-content;
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    transition: ease 0.4s;
     cursor: pointer;
     border: solid 2px var(--purple);
+    min-height: 48px;
+    box-sizing: border-box;
+    padding: 12px 23px;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
 
-.button:hover,
-a.button:hover,
-span.button:hover,
-button.button:hover {
-    background: transparent;
-    color: var(--purple);
+body :is(.button, a.button, span.button, button.button):hover {
+    background: var(--jw-purple-dark);
+    border-color: var(--jw-purple-dark);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(65, 30, 82, 0.14);
 }
 
-.button-blue,
-a.button-blue,
-span.button-blue,
-button.button-blue {
+body :is(.button-blue, a.button-blue, span.button-blue, button.button-blue) {
     background: var(--blue);
     border-color: var(--blue);
+    color: #153849;
 }
 
-.button-blue:hover,
-a.button-blue:hover,
-span.button-blue:hover,
-button.button-blue:hover {
-    background: transparent;
-    color: var(--blue);
+body :is(.button-blue, a.button-blue, span.button-blue, button.button-blue):hover {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #153849;
 }
 
-.button-pink,
-a.button-pink,
-span.button-pink,
-button.button-pink {
+body :is(.button-pink, a.button-pink, span.button-pink, button.button-pink) {
     background: var(--pink);
     border-color: var(--pink);
+    color: #382135;
 }
 
 .button-pink:hover,
@@ -263,20 +266,16 @@ button.button-purple:hover {
     color: var(--purple);
 }
 
-.button-orange,
-a.button-orange,
-span.button-orange,
-button.button-orange {
+body :is(.button-orange, a.button-orange, span.button-orange, button.button-orange) {
     background: var(--orange);
     border-color: var(--orange);
+    color: #382135;
 }
 
-.button-orange:hover,
-a.button-orange:hover,
-span.button-orange:hover,
-button.button-orange:hover {
-    background: transparent;
-    color: var(--orange);
+body :is(.button-orange, a.button-orange, span.button-orange, button.button-orange):hover {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #382135;
 }
 
 .button-yellow,
@@ -357,12 +356,29 @@ button.button-peach:hover {
     transform: none;
 }
 
-[data-animate-delay="1"] { transition-delay: calc(var(--animation-delay-step) * 1); }
-[data-animate-delay="2"] { transition-delay: calc(var(--animation-delay-step) * 2); }
-[data-animate-delay="3"] { transition-delay: calc(var(--animation-delay-step) * 3); }
-[data-animate-delay="4"] { transition-delay: calc(var(--animation-delay-step) * 4); }
-[data-animate-delay="5"] { transition-delay: calc(var(--animation-delay-step) * 5); }
-[data-animate-delay="6"] { transition-delay: calc(var(--animation-delay-step) * 6); }
+[data-animate-delay="1"] {
+    transition-delay: calc(var(--animation-delay-step) * 1);
+}
+
+[data-animate-delay="2"] {
+    transition-delay: calc(var(--animation-delay-step) * 2);
+}
+
+[data-animate-delay="3"] {
+    transition-delay: calc(var(--animation-delay-step) * 3);
+}
+
+[data-animate-delay="4"] {
+    transition-delay: calc(var(--animation-delay-step) * 4);
+}
+
+[data-animate-delay="5"] {
+    transition-delay: calc(var(--animation-delay-step) * 5);
+}
+
+[data-animate-delay="6"] {
+    transition-delay: calc(var(--animation-delay-step) * 6);
+}
 
 [data-parallax] {
     will-change: transform;
@@ -451,4 +467,439 @@ button.button-peach:hover {
 .pagination-info {
     color: rgba(0, 0, 0, 0.55);
     font-size: var(--font-size-14);
+}
+
+body :is(.heading-1, .heading-2, .heading-3, .heading-4, .heading-5, .heading-6) {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+body p {
+    line-height: 1.8;
+}
+
+body .body-medium {
+    overflow-wrap: break-word;
+}
+
+body :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 3px solid #873fa2;
+    outline-offset: 4px;
+}
+
+body [data-animate],
+body [data-animate].is-visible {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+}
+
+body .splide:not(.is-initialized) {
+    visibility: visible;
+}
+
+body :is(.button-yellow, .button-peach) {
+    color: var(--jw-ink);
+}
+
+body :is(.pagination-btn, .pagination-page) {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 11px;
+    border-color: var(--jw-border);
+}
+
+body .site-content-page {
+    padding-bottom: clamp(56px, 7vw, 90px);
+}
+
+body .site-page-heading {
+    padding-block: clamp(42px, 6vw, 76px) 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+body .site-page-heading .heading-1 {
+    color: var(--purple);
+}
+
+body .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--purple);
+}
+
+body .prose {
+    overflow-wrap: anywhere;
+}
+
+body .prose > * + * {
+    margin-top: 22px;
+}
+
+body .prose :is(h2, h3, h4, h5, h6) {
+    color: var(--purple);
+    font-family: var(--font-heading);
+    line-height: 1.3;
+    margin-top: 32px;
+}
+
+body .prose h2 {
+    font-size: var(--font-size-h2);
+}
+
+body .prose h3 {
+    font-size: var(--font-size-h3);
+}
+
+body .prose :is(ul, ol) {
+    padding-left: 24px;
+}
+
+body .prose ul {
+    list-style: disc;
+}
+
+body .prose ol {
+    list-style: decimal;
+}
+
+body .prose li + li {
+    margin-top: 8px;
+}
+
+body .prose a:not(.button):not(.wp-block-button__link):not(.sc-button__link) {
+    color: var(--purple);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+body .prose :is(iframe, video) {
+    max-width: 100%;
+}
+
+body .legacy-page {
+    margin-bottom: calc(clamp(56px, 7vw, 90px) * -1);
+    overflow-wrap: anywhere;
+}
+
+body .legacy-hero {
+    position: relative;
+    isolation: isolate;
+    background: var(--purple);
+    color: #fff;
+    overflow: hidden;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+}
+
+body .legacy-hero > img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body .legacy-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(43, 14, 58, 0.86), rgba(43, 14, 58, 0.45));
+}
+
+body .legacy-hero .wrap {
+    padding-block: 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+}
+
+body .legacy-hero > div:not(.wrap) {
+    display: none;
+}
+
+body .legacy-hero .wrap > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+body .legacy-hero .wrap > div > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+body .legacy-hero :is(h1, h2, h3, p) {
+    color: #fff;
+    max-width: 840px;
+}
+
+body .legacy-hero h1 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h1);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+body .legacy-hero h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(19px, 2vw, 25px);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+body .legacy-section {
+    padding-block: clamp(48px, 6vw, 80px);
+    background: #fff;
+}
+
+body .legacy-section:nth-of-type(even) {
+    background: var(--peach);
+}
+
+body .legacy-section > .wrap {
+    max-width: 1000px;
+}
+
+body .legacy-section :is(h2, h3, h4, h5, h6) {
+    color: var(--purple);
+    font-family: var(--font-heading);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-wrap: balance;
+}
+
+body .legacy-section h2 {
+    font-size: var(--font-size-h2);
+}
+
+body .legacy-section h3 {
+    font-size: var(--font-size-h3);
+}
+
+body .legacy-section h4 {
+    font-size: var(--font-size-h4);
+}
+
+body .legacy-section li h3,
+body .legacy-section h3:has(ul, ol) {
+    font-size: 18px;
+    line-height: 1.65;
+    font-weight: 600;
+    text-wrap: initial;
+    margin-bottom: 10px;
+}
+
+body .legacy-section :is(p, ul, ol, blockquote, figure) + :is(p, ul, ol, h2, h3, h4, figure) {
+    margin-top: 20px;
+}
+
+body .legacy-section p {
+    color: var(--jw-muted);
+}
+
+body .legacy-section :is(ul, ol) {
+    padding-left: 24px;
+}
+
+body .legacy-section ul {
+    list-style: disc;
+}
+
+body .legacy-section ol {
+    list-style: decimal;
+}
+
+body .legacy-section li + li {
+    margin-top: 9px;
+}
+
+body .legacy-section a:not(.button) {
+    color: var(--purple);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+body .legacy-section img {
+    max-width: min(100%, 680px);
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 20px;
+    margin-block: 24px;
+}
+
+body .legacy-section :is(iframe, embed, video) {
+    max-width: 100%;
+    border: 0;
+    border-radius: 16px;
+}
+
+body .legacy-action-list {
+    box-sizing: border-box;
+    width: min(90%, 1000px);
+    margin-inline: auto;
+    padding-block: 32px 56px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+body .legacy-section .legacy-action-list {
+    width: 100%;
+    margin-inline: 0;
+    padding-block: 24px 0;
+}
+
+body .site-commerce-page .prose {
+    max-width: 1200px;
+    --sc-color-primary-500: #662483;
+    --sc-color-primary: #662483;
+    --sc-color-primary-hover: #49175f;
+    --sc-focus-ring-color-primary: #873fa2;
+    --sc-input-border-color-focus: #662483;
+}
+
+@media (max-width: 650px) {
+
+    html {
+        scroll-padding-top: 90px;
+    }
+
+    body .wrap {
+        width: calc(100% - 40px);
+    }
+
+    body .legacy-hero .wrap > div > div {
+        width: 100%;
+    }
+
+    body .legacy-hero .button,
+body .legacy-action-list .button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    body *,
+body *::before,
+body *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.wp-block-surecart-product-page,.wp-block-surecart-product-list,.wp-block-surecart-product-list-related {
+    --sc-color-primary-500: #662483;
+    --sc-color-primary-600: #54206c;
+    --sc-color-primary-700: #431956;
+    --sc-focus-ring-color: rgba(67,179,217,.4);
+    --sc-input-border-color-focus: #662483;
+    --sc-input-border-color-hover: #662483;
+    --sc-pill-selected-background-color: #662483;
+    --sc-pill-selected-color: #fff;
+}
+
+.wp-block-surecart-product-title,.wp-block-surecart-product-title a,.wp-block-surecart-product-list-related h3 {
+    color: #662483!important;
+}
+
+.wp-block-surecart-product-selected-price-amount,.wp-block-surecart-product-list-price {
+    color: #662483!important;
+}
+
+.wp-block-surecart-product-buy-button .sc-button__link {
+    background: #662483!important;
+    border: 2px solid #662483!important;
+    color: #fff!important;
+    border-radius: 6px!important;
+}
+
+.wp-block-surecart-product-buy-button .sc-button__link:hover {
+    background: #54206c!important;
+    border-color: #54206c!important;
+}
+
+.wp-block-surecart-product-buy-button.is-style-outline .sc-button__link {
+    background: #fa8334!important;
+    border-color: #fa8334!important;
+    color: #3b174b!important;
+}
+
+.wp-block-surecart-product-buy-button.is-style-outline .sc-button__link:hover {
+    background: var(--orange)!important;
+    border-color: var(--orange)!important;
+}
+
+.wp-block-surecart-product-buy-button .sc-button__link-text {
+    color: inherit!important;
+}
+
+.wp-block-surecart-product-variant-pill {
+    border: 1px solid #ccb7d6!important;
+    border-radius: 6px!important;
+    color: #662483!important;
+    background: #fff!important;
+}
+
+.wp-block-surecart-product-variant-pill:hover {
+    background: var(--peach)!important;
+    border-color: #662483!important;
+}
+
+.wp-block-surecart-product-variant-pill[aria-checked="true"],.wp-block-surecart-product-variant-pill.sc-pill-option__button--selected {
+    background: #662483!important;
+    border-color: #662483!important;
+    color: #fff!important;
+}
+
+.wp-block-surecart-product-quantity .sc-quantity-selector {
+    border-color: #ccb7d6!important;
+    border-radius: 6px!important;
+}
+
+.wp-block-surecart-product-quantity .sc-input-group-text {
+    color: #662483!important;
+    background: var(--peach)!important;
+}
+
+.wp-block-surecart-product-buy-button button:focus-visible,.wp-block-surecart-product-variant-pill:focus-visible,.wp-block-surecart-product-quantity [role="button"]:focus-visible {
+    outline: 3px solid #43b3d9!important;
+    outline-offset: 3px;
+}
+
+.wp-block-surecart-product-pagination-next,.wp-block-surecart-product-pagination-previous {
+    color: #662483!important;
+    border-color: #ccb7d6!important;
+}
+
+.wp-block-surecart-product-pagination-next:hover,.wp-block-surecart-product-pagination-previous:hover {
+    background: var(--peach)!important;
+}
+
+.wp-block-surecart-product-sale-badge {
+    background: #43b3d9!important;
+    color: #163c49!important;
 }
