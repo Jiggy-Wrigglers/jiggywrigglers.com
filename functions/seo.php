@@ -65,6 +65,7 @@ function jw_seo_apply_meta( $meta, $post ) {
 			if ( 0 !== stripos( $description, $title ) ) { $description = $title . '. ' . $description; }
 			if ( strlen( $description ) < 100 ) { $description .= ' View product details, available options and current pricing in the Jiggy Wrigglers shop.'; }
 			$meta['page_description'] = jw_seo_summary( $description );
+			if ( defined( 'WP_CLI' ) && WP_CLI && 'tamborine-blue' === $post->post_name ) { WP_CLI::log( 'JW_SEO_RESULT ' . wp_json_encode( array( 'title' => $title, 'candidate' => $description, 'result' => $meta['page_description'] ) ) ); }
 		} else {
 			$meta['page_description'] = jw_seo_default_description( $post );
 		}
